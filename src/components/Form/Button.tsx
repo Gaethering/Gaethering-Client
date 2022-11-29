@@ -5,7 +5,7 @@ type ButtonProp = {
   btnTheme: 'main' | 'sub';
   type: 'button' | 'submit';
   children: ReactNode;
-  className: string;
+  className?: string;
 };
 
 function Button({
@@ -28,9 +28,13 @@ interface StyledButtonProp {
 }
 
 const StyledButton = styled.button<StyledButtonProp>`
-  padding: 1.6rem auto;
-  font-size: 2.4rem;
+  padding: 1rem 2.4rem;
+  font-size: 2rem;
   font-weight: ${({ btnTheme }) => (btnTheme === 'main' ? '700' : '600')};
   color: ${({ btnTheme, theme: { color } }) =>
     btnTheme === 'main' ? color.white : color.black};
+
+  border-radius: 1.6rem;
+  background-color: ${({ btnTheme, theme: { color } }) =>
+    btnTheme === 'main' ? color.main : color.gray3};
 `;

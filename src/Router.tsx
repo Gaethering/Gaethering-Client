@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import Chat from './pages/Chat';
 import Community from './pages/Community';
 import Profile from './pages/Profile';
-import Root from './pages/Root/Root';
+import Root from './pages/Root';
 import GlobalStyle from './themes/GlobalStyle.style';
 import mainTheme from './themes/theme';
 

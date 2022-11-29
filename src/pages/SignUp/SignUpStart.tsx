@@ -1,5 +1,66 @@
+import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
+import Button from '../../components/Form/Button';
+import Input from '../../components/Form/Input';
+import { StyledSignUpForm as Form } from './SignUp.style';
+
 function SignUpStart() {
-  return ( <div></div> );
+  const { register } = useForm();
+  return (
+    <StyledSignUpStart>
+      <Form>
+      <h1>개더링 가입하기</h1>
+        <div className="email-area">
+          <Input
+            name="id"
+            register={register}
+            label="이메일(아이디)"
+            plHolder="expample@email.com"
+          />
+          <Button btnTheme="main" type="button">
+            이메일 인증
+          </Button>
+        </div>
+        <Input
+          name="pw"
+          type="password"
+          register={register}
+          label="비밀번호"
+          plHolder="특수문자 포함 8자리 이상"
+        />
+        <Input
+          name="pwCheck"
+          type="password"
+          register={register}
+          plHolder="비밀번호 확인"
+        />
+        <Button type="submit" btnTheme="sub" className="submit-btn">
+          다음
+        </Button>
+      </Form>
+    </StyledSignUpStart>
+  );
 }
 
 export default SignUpStart;
+
+const StyledSignUpStart = styled.div`
+
+  .email-area {
+    display: flex;
+    align-items: flex-end;
+
+    .input-container {
+      flex: 1;
+    }
+
+    button {
+      flex-shrink: 0;
+      margin-left: 2rem;
+    }
+
+    & + .input-container + .input-container {
+      margin-top: 1rem;
+    }
+  }
+`;

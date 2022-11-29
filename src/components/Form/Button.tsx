@@ -1,10 +1,11 @@
-import { ReactNode } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 import styled from 'styled-components';
 
 type ButtonProp = {
   btnTheme: 'main' | 'sub';
   type: 'button' | 'submit';
   children: ReactNode;
+  onClick?: MouseEventHandler;
   className?: string;
 };
 
@@ -13,9 +14,15 @@ function Button({
   type = 'button',
   children,
   className,
+  onClick,
 }: ButtonProp) {
   return (
-    <StyledButton btnTheme={btnTheme} type={type} className={className}>
+    <StyledButton
+      btnTheme={btnTheme}
+      type={type}
+      className={className}
+      onClick={onClick}
+    >
       {children}
     </StyledButton>
   );
@@ -28,6 +35,8 @@ interface StyledButtonProp {
 }
 
 const StyledButton = styled.button<StyledButtonProp>`
+  box-sizing: content-box;
+  height: 2.4rem;
   padding: 1rem 2.4rem;
   font-size: 2rem;
   font-weight: ${({ btnTheme }) => (btnTheme === 'main' ? '700' : '600')};

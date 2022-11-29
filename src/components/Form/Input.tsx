@@ -40,7 +40,7 @@ export default Input;
 
 const StyledInput = styled.div`
   label {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 1rem;
   }
@@ -49,7 +49,7 @@ const StyledInput = styled.div`
     width: 100%;
     box-sizing: border-box;
     padding-left: 1rem;
-    font-size: 2rem;
+    font-size: 1.6rem;
     border: 0;
     border-bottom: 1px solid ${({ theme }) => theme.color.gray2};
 

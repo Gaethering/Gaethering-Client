@@ -3,7 +3,7 @@ import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-  * {
+  div * {
     font-family: SUIT;
     font-weight: 400;
     line-height: 2.4rem;

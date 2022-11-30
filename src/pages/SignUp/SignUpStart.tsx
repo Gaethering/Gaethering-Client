@@ -5,8 +5,17 @@ import Input from '../../components/Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
 import { StyledSignUpForm as Form } from './SignUp.style';
 
+interface SignUpStartType {
+  id: string;
+  pw: string;
+  pwCheck: string;
+}
+
 function SignUpStart() {
-  const { register, formState: {errors} } = useForm();
+  const {
+    register,
+    formState: { errors },
+  } = useForm<SignUpStartType>();
   return (
     <StyledSignUpStart>
       <Form>
@@ -58,8 +67,8 @@ function SignUpStart() {
             },
           }}
         />
-        {errors.id && <p className="login-error">{errors.id.message}</p>}
-        {errors.pw && <p className="login-error">{errors.pw.message}</p>}
+        {errors.id && <p className="signin-error">{errors.id.message}</p>}
+        {errors.pw && <p className="signin-error">{errors.pw.message}</p>}
         <Button type="submit" btnTheme="sub" className="submit-btn">
           다음
         </Button>

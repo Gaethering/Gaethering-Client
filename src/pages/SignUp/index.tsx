@@ -10,7 +10,7 @@ import SignProfile from './SignUpProfile';
 import Start from './SignUpStart';
 
 function SignUp() {
-  const [step, setStep] = useState<SignUpStep>(1);
+  const [step, setStep] = useState<SignUpStep>(2);
   const navigate = useNavigate();
 
   useEffect(() => {

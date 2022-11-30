@@ -12,6 +12,16 @@ export const StyledSignUpForm = styled.form`
     margin-bottom: 4rem;
   }
 
+  .signup-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 3rem;
+
+    .input-container {
+      flex: 1;
+    }
+  }
+
   .input-container {
     margin-top: 3rem;
     margin-left: 0.2rem;

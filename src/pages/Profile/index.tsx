@@ -1,5 +1,11 @@
+import User from './User';
+
 function Profile() {
-  return <div></div>;
+  return (
+    <div>
+      <User />
+    </div>
+  );
 }
 
 export default Profile;

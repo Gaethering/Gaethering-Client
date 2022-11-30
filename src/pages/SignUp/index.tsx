@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledSignUp } from './SignUp.style';
 import { SignUpStep } from './SignUp.type';
@@ -11,6 +11,12 @@ import Start from './SignUpStart';
 
 function SignUp() {
   const [step, setStep] = useState<SignUpStep>(1);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate(`${step}`);
+  }, [navigate, step]);
+
   return (
     <StyledSignUp>
       <Nav step={step} />
@@ -28,5 +34,3 @@ function SignUp() {
 
 export default SignUp;
 export { Start, End, Pet, SignProfile };
-
-

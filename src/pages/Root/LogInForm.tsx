@@ -56,7 +56,7 @@ function LogInForm() {
         <Button type="submit" btnTheme="main">
           시작하기
         </Button>
-        <Link to="/signUp" className="to-signup">
+        <Link to="/signUp/1" className="to-signup">
           개더링 회원가입하기
         </Link>
       </StyledLogInForm>

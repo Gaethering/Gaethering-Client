@@ -26,7 +26,9 @@ export const StyledSignUpForm = styled.form`
     margin-top: 3rem;
     margin-left: 0.2rem;
 
-    label {
+    .label {
+      font-size: 1.6rem;
+      font-weight: 600;
       margin-bottom: 1rem;
     }
 
@@ -41,7 +43,9 @@ export const StyledSignUpForm = styled.form`
   }
 
   .submit-btn {
+    box-sizing: border-box;
     width: 100%;
+    height: 4rem;
     margin-top: 9rem;
   }
 `;

@@ -25,13 +25,15 @@ function Input<T extends FieldValues>({
 }: InputProp<T>) {
   return (
     <StyledInput className="input-container">
-      {label && <label>{label}</label>}
-      <input
-        {...register(name, options)}
-        placeholder={plHolder}
-        autoComplete="off"
-        type={type}
-      />
+      <label>
+        {label && <div className="label">{label}</div>}
+        <input
+          {...register(name, options)}
+          placeholder={plHolder}
+          autoComplete="off"
+          type={type}
+        />
+      </label>
     </StyledInput>
   );
 }
@@ -39,12 +41,6 @@ function Input<T extends FieldValues>({
 export default Input;
 
 const StyledInput = styled.div`
-  label {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-
   input {
     width: 100%;
     box-sizing: border-box;

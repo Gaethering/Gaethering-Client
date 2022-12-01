@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
@@ -15,10 +15,16 @@ function SignUpStart() {
   const {
     register,
     formState: { errors },
+    handleSubmit,
   } = useForm<SignUpStartType>();
+
+  const onSubmit: SubmitHandler<SignUpStartType> = (data) => {
+    console.log(data);
+  };
+
   return (
     <StyledSignUpStart>
-      <Form>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <h1>개더링 가입하기</h1>
         <div className="email-area">
           <Input

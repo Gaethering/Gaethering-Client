@@ -1,7 +1,8 @@
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
+import SelectInput from '../../components/Form/SelectInput';
 import { BIRTH_REGEX } from '../../data/regExp';
 import { StyledSignUpForm as Form } from './SignUp.style';
 
@@ -15,11 +16,17 @@ interface SignUpProfileType {
 function SignUpProfile() {
   const {
     register,
+    handleSubmit,
     formState: { errors },
   } = useForm<SignUpProfileType>();
+
+  const onSubmit: SubmitHandler<SignUpProfileType> = (data) => {
+    console.log(data);
+  };
+
   return (
     <StyledSignUpProfile>
-      <Form>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <h1>프로필 등록</h1>
         <Input
           name="userName"
@@ -43,7 +50,12 @@ function SignUpProfile() {
               },
             }}
           />
-          <Input name="gender" register={register} label="성별" />
+          <SelectInput
+            name="gender"
+            register={register}
+            label="성별"
+            values={['여성', '남성']}
+          />
         </div>
         <Input
           name="nickname"

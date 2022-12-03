@@ -4,7 +4,7 @@ import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import SelectInput from '../../components/Form/SelectInput';
 import { BIRTH_REGEX } from '../../data/regExp';
-import { StyledSignUpForm as Form } from './SignUp.style';
+import Form from './SignUp.style';
 
 interface SignUpProfileType {
   userName: string;

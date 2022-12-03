@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
-import { StyledSignUpForm as Form } from './SignUp.style';
+import Form from './SignUp.style';
 
 interface SignUpStartType {
   id: string;

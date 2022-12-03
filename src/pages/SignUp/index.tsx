@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { StyledSignUp } from './SignUp.style';
 import { SignUpStep } from './SignUp.type';

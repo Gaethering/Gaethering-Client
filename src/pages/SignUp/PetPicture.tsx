@@ -1,5 +1,6 @@
 import { ChangeEventHandler, useState } from 'react';
 import styled from 'styled-components';
+import PetSignUpPicture from './PetSignUpPicture';
 
 const CameraImg = () => (
   <img
@@ -28,15 +29,6 @@ function PetPicture() {
     reader.readAsDataURL(target.files[0]);
   };
 
-  // 프로필 이미지
-  const PetPicture = () => (
-    <img
-      src={image ? image : '/src/assets/defaultProfilePicture.svg'}
-      alt="반려동물 프로필"
-      className="pet-picture"
-    />
-  );
-
   return (
     <StyledPetPicture>
       <label className="picture-area">
@@ -47,7 +39,10 @@ function PetPicture() {
           onChange={handleFile}
         />
         <PictureButton>
-          <PetPicture />
+          <PetSignUpPicture
+            defaultSrc="/src/assets/defaultProfilePicture.svg"
+            image={image}
+          />
           <CameraImg />
         </PictureButton>
       </label>
@@ -78,6 +73,7 @@ const PictureButton = styled.div`
 
   .pet-picture {
     width: 25rem;
+    height: 25rem;
     border-radius: 100%;
   }
 

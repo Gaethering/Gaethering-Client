@@ -52,3 +52,5 @@ export const StyledSignUpForm = styled.form`
     margin-top: 9rem;
   }
 `;
+
+export default StyledSignUpForm;

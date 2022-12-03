@@ -3,7 +3,7 @@ import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-  * {
+  div * {
     font-family: SUIT;
     font-weight: 400;
     line-height: 2.4rem;
@@ -36,6 +36,14 @@ const GlobalStyle = createGlobalStyle`
   .arrow-button {
     font-feature-settings: "ss18";
   }
+
+  .hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
 `;
 
 export default GlobalStyle;

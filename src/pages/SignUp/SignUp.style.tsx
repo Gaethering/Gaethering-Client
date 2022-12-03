@@ -37,12 +37,15 @@ export const StyledSignUpForm = styled.form`
     }
   }
 
-  button {
+  button.form-btn {
     font-size: 1.6rem;
     padding: 0.8rem 2rem;
   }
 
   .submit-btn {
+    font-size: 1.6rem;
+    padding: 0.8rem 2rem;
+
     box-sizing: border-box;
     width: 100%;
     height: 4rem;

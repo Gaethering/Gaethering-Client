@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import SelectInput from '../../components/Form/SelectInput';
+import PetPicture from './PetPicture';
 import { StyledSignUpForm as Form } from './SignUp.style';
 
 interface SignUpPetType {
@@ -29,7 +30,7 @@ function SignUpPet() {
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h1>반려동물 등록</h1>
-        <div>사진 등록</div>
+        <PetPicture />
         <Input
           name="petName"
           register={register}

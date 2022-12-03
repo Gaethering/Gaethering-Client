@@ -40,7 +40,7 @@ function SignUpStart() {
               },
             }}
           />
-          <Button btnTheme="main" type="button">
+          <Button btnTheme="main" type="button" className="form-btn">
             이메일 인증
           </Button>
         </div>

@@ -4,7 +4,7 @@ import Chat from './pages/Chat';
 import Community from './pages/Community';
 import Profile from './pages/Profile';
 import Root from './pages/Root';
-import SignUp from './pages/SignUp';
+import SignUp, { End, Pet, SignProfile, Start } from './pages/SignUp';
 import GlobalStyle from './themes/GlobalStyle.style';
 import mainTheme from './themes/theme';
 
@@ -18,7 +18,16 @@ const router = createBrowserRouter([
       { path: 'profile', element: <Profile /> },
     ],
   },
-  { path: '/signUp', element: <SignUp /> },
+  {
+    path: '/signUp',
+    element: <SignUp />,
+    children: [
+      { path: '1', element: <Start /> },
+      { path: '2', element: <SignProfile /> },
+      { path: '3', element: <Pet /> },
+      { path: '4', element: <End /> },
+    ],
+  },
 ]);
 
 function Router() {

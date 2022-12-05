@@ -1,7 +1,7 @@
 {
   "name": "gaethering-client",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,6 +14,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.7",
+    "react-query": "^3.39.2",
     "react-router-dom": "^6.4.3",
     "recoil": "^0.7.6",
     "styled-components": "^5.3.6",
@@ -36,7 +37,11 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "msw": "^0.49.1",
     "typescript": "^4.6.4",
     "vite": "^3.2.3"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

@@ -1,23 +1,39 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import { postLogOut } from '../../api/authAPI';
+import { AuthApiUrl } from '../../api/authAPI.type';
 import LogoWithTitle from '../../assets/LogoWithTitle';
 import Input from '../../components/Form/Input';
 import LogInForm from './LogInForm';
 
 function Root() {
   //! mock API
-  const [user, setUser] = useState(false);
+  const [auth, setAuth] = useState(false);
+
+  const getAuth = () => {
+    const user = !!sessionStorage.getItem('is-auth');
+    console.log(user);
+    setAuth(user);
+  };
+
+  useEffect(() => {
+    getAuth();
+  }, []);
 
   return (
     <StyledRoot>
-      {user ? <Outlet /> : <LogInForm />}
+      {auth ? <Outlet /> : <LogInForm getAuth={getAuth} />}
       <button
-        className="mock-login"
+        className="mock-logout"
         type="button"
-        onClick={() => setUser(!user)}
+        onClick={async () => {
+          await postLogOut();
+          getAuth();
+        }}
       >
-        {user ? 'Log Out' : 'Log In'}
+        {auth ? 'Log Out' : ''}
       </button>
     </StyledRoot>
   );
@@ -30,7 +46,7 @@ const StyledRoot = styled.div`
   min-width: 390px;
   margin: 0 auto;
 
-  .mock-login {
+  .mock-logout {
     margin: 3rem;
     padding: 0.4rem 1.4rem;
     background-color: #000;

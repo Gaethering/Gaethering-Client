@@ -6,7 +6,8 @@ export const postLogIn = async (data: LogInRequest) => {
   return response;
 };
 
-export const postLogOut = async (data: string) => {
+export const postLogOut = async (data?: string) => {
   const response = await postRequest(Auth.LogOut, data);
+  return response;
 };
 

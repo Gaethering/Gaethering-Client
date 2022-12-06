@@ -10,7 +10,7 @@ export const NavURL = {
   프로필: '/profile',
 } as const;
 
-type ServiceType = keyof typeof NavURL;
+export type ServiceType = keyof typeof NavURL;
 export type SetServiceType = Dispatch<ServiceType>;
 
 // Components
@@ -20,7 +20,7 @@ const Logo = () => <img src="/src/assets/logo-horizontal.svg" alt="개더링" />
 function NavBar() {
   const [serviceName, setServiceName] = useState<ServiceType>('개모임');
   const [isPending, setIsPending] = useState(false);
-  const [showNav, setShowNav] = useState(true);
+  const [showNav, setShowNav] = useState(false);
 
   return (
     <>
@@ -29,7 +29,11 @@ function NavBar() {
           <Logo />
         </div>
         <div className="service-name">
-          <button className="nav-button" type="button">
+          <button
+            className="nav-button"
+            type="button"
+            onClick={() => setShowNav((prev) => !prev)}
+          >
             <Arrow />
             <span>{serviceName}</span>
           </button>
@@ -93,7 +97,7 @@ const StyledNavBar = styled.header`
       padding: 0;
 
       cursor: pointer;
-      
+
       span {
         margin-left: 1.4rem;
 
@@ -109,6 +113,12 @@ const StyledArrow = styled.div`
   font-weight: 600;
   transform: rotate(90deg) translateX(0.05rem);
   color: ${({ theme }) => theme.color.black};
+
+  transition: transform 0.2s ease-in-out;
+
+  &.view-nav {
+    transform: rotate(270deg);
+  }
 `;
 
 const NavSpace = styled.div`

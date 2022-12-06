@@ -38,6 +38,7 @@ function NavBar() {
           setServiceName={setServiceName}
           setIsPending={setIsPending}
           showNav={showNav}
+          setShowNav={setShowNav}
         />
         <NavProfile />
       </StyledNavBar>

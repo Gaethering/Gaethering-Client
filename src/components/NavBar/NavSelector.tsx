@@ -1,7 +1,7 @@
 import React, { Dispatch, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { NavURL, ServiceType, SetServiceType } from '.';
+import { NavURL, SetServiceType } from './NavBar.type';
 
 interface Props {
   setServiceName: SetServiceType;

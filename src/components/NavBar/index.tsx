@@ -1,17 +1,8 @@
-import { Dispatch, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import NavProfile from '../../pages/Root/NavProfile';
+import { ServiceType } from './NavBar.type';
 import NavSelector from './NavSelector';
-
-export const NavURL = {
-  개모임: '/chat',
-  동네소식: '/community',
-  멍그램: '/sns',
-  프로필: '/profile',
-} as const;
-
-export type ServiceType = keyof typeof NavURL;
-export type SetServiceType = Dispatch<ServiceType>;
 
 // Components
 const Arrow = () => <StyledArrow>{'>'}</StyledArrow>;

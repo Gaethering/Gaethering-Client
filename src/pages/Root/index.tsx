@@ -6,6 +6,7 @@ import { postLogOut } from '../../api/authAPI';
 import { AuthApiUrl } from '../../api/authAPI.type';
 import LogoWithTitle from '../../assets/LogoWithTitle';
 import Input from '../../components/Form/Input';
+import NavBar from '../../components/NavBar';
 import LogInForm from './LogInForm';
 
 function Root() {
@@ -18,23 +19,34 @@ function Root() {
     setAuth(user);
   };
 
+  const MockLogout = () => (
+    <button
+      className="mock-logout"
+      type="button"
+      onClick={async () => {
+        await postLogOut();
+        getAuth();
+      }}
+    >
+      Log out
+    </button>
+  );
+
   useEffect(() => {
     getAuth();
   }, []);
 
   return (
     <StyledRoot>
-      {auth ? <Outlet /> : <LogInForm getAuth={getAuth} />}
-      <button
-        className="mock-logout"
-        type="button"
-        onClick={async () => {
-          await postLogOut();
-          getAuth();
-        }}
-      >
-        {auth ? 'Log Out' : ''}
-      </button>
+      {auth ? (
+        <>
+          <NavBar />
+          <Outlet />
+          <MockLogout />
+        </>
+      ) : (
+        <LogInForm getAuth={getAuth} />
+      )}
     </StyledRoot>
   );
 }

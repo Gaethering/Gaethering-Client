@@ -10,6 +10,7 @@ import SignUp, {
   SignProfile,
   SignStart,
 } from './pages/SignUp';
+import SNS from './pages/SNS';
 import GlobalStyle from './themes/GlobalStyle.style';
 import mainTheme from './themes/theme';
 
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: 'chat', element: <Chat /> },
       { path: 'community', element: <Community /> },
       { path: 'profile', element: <Profile /> },
+      { path: 'sns', element: <SNS /> },
     ],
   },
   {

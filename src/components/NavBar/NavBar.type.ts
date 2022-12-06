@@ -9,11 +9,3 @@ export const NavURL = {
 
 export type ServiceType = keyof typeof NavURL;
 export type SetServiceType = Dispatch<ServiceType>;
-
-for (const key in NavURL) {
-  if (Object.prototype.hasOwnProperty.call(NavURL, key)) {
-    const k = key as unknown as typeof NavURL;
-    const elem = NavURL[k];
-    
-  }
-}

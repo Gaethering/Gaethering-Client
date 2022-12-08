@@ -1,7 +1,7 @@
 import { Children, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import PetImage from './PetImage';
-import StyledUserPet from './UserPet.style';
+import { StyledUserPet } from './User.style';
 
 interface UserPetProp {
   children: ReactNode;
@@ -14,7 +14,7 @@ interface UserPetProp {
 function UserPet({ src, id, className, isDelegate, children }: UserPetProp) {
   return (
     <StyledUserPet isDelegate={isDelegate}>
-      <Link to="/pet" className='link'>
+      <Link to="/pet" className="link">
         <div className="container">
           <PetImage src={src} id={id} className={className} />
         </div>

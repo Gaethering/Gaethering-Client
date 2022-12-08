@@ -12,6 +12,9 @@ const main: DefaultTheme = {
     gray3: '#E6E6E6',
     gray4: '#F6F6F6',
   },
+  size: {
+    navHeight: '6rem',
+  },
 };
 
 declare module 'styled-components' {
@@ -26,6 +29,9 @@ declare module 'styled-components' {
       gray2: string;
       gray3: string;
       gray4: string;
+    };
+    size: {
+      navHeight: string;
     };
   }
 }

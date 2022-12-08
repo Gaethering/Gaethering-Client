@@ -1,4 +1,4 @@
-import UserPetListStyle from './UserPetList.style';
+import { UserPetListStyle } from './User.style';
 import UserPet from './UserPet';
 
 interface UserPetListProp {

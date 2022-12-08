@@ -1,25 +1,30 @@
+import axios from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useMutation, useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { postLogIn } from '../../api/authAPI';
+import { AuthApiUrl, LogInRequest } from '../../api/authAPI.type';
 import LogoWithTitle from '../../assets/LogoWithTitle';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
 
-interface LogInType {
-  id: string;
-  pw: string;
-}
-
-function LogInForm() {
+function LogInForm({ getAuth }: { getAuth: () => void }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LogInType>();
+  } = useForm<LogInRequest>();
 
-  const onSubmit: SubmitHandler<LogInType> = (data) => {
+  const login = useMutation(async (loginData: LogInRequest) => {
+    await postLogIn(loginData);
+    getAuth();
+  });
+
+  const onSubmit: SubmitHandler<LogInRequest> = (data) => {
     console.log('LogIn', data);
+    login.mutate(data);
   };
 
   return (

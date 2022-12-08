@@ -1,4 +1,4 @@
-import StyledUserProfile from './UserProfile.style';
+import { StyledUserProfile } from './User.style';
 import Button from '../../components/Form/Button';
 import PetImage from './PetImage';
 
@@ -13,9 +13,9 @@ function UserProfile({ userName, userLocal, userTemp, petImg }: UserProp) {
   return (
     <StyledUserProfile>
       <div className="user_profile_container">
-        <PetImage src={petImg} id='pet' className='user_img'/>
+        <PetImage src={petImg} id="pet" className="user_img" />
         <div className="user_profile_detail">
-          <div className='user_info'>
+          <div className="user_info">
             <h2 className="user_name">{userName}</h2>
             <p className="user_local">{userLocal}</p>
           </div>

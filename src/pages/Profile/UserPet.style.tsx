@@ -6,13 +6,16 @@ interface StyledUserPetProp {
 }
 
 const StyledUserPet = styled.div<StyledUserPetProp>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.2rem;
-  width: 10rem;
-  font-size: 1.5rem;
-  font-weight: 700;
+  .link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    width: 10rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
 
   ${({ isDelegate }) =>
     isDelegate &&

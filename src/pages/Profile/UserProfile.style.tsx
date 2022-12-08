@@ -59,12 +59,13 @@ const StyledUserProfile = styled.div`
   .button_container {
     display: flex;
     justify-content: space-between;
-    margin: 3% 0;
+    gap: 1rem;
+    margin: 3rem 0;
     .go_my_article,
     .edit_profile {
-      width: 49%;
-      min-width: 150px;
-      /* font-size: 1.5rem; */
+      width: 45%;
+      min-width: 140px;
+      font-size: 1.7rem;
     }
   }
 `;

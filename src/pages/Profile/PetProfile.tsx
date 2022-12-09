@@ -1,5 +1,4 @@
 import Button from '../../components/Form/Button';
-import InputProfile from '../../components/Form/InputProfile';
 import { StyledPetProfile } from './Pet.style';
 
 interface PetProfileProp {

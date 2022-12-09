@@ -4,6 +4,7 @@ import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
 import Form from './SignUp.style';
+import StyledSignUpStart from './SignUpStart.style';
 
 interface SignUpStartType {
   id: string;
@@ -84,23 +85,3 @@ function SignUpStart() {
 }
 
 export default SignUpStart;
-
-const StyledSignUpStart = styled.div`
-  .email-area {
-    display: flex;
-    align-items: flex-end;
-
-    .input-container {
-      flex: 1;
-    }
-
-    button {
-      flex-shrink: 0;
-      margin-left: 2rem;
-    }
-
-    & + .input-container + .input-container {
-      margin-top: 1rem;
-    }
-  }
-`;

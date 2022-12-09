@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import Button from '../../components/Form/Button';
 import PetSignUpPicture from './PetSignUpPicture';
-import Form from './SignUp.style';
+import StyledEnd from './SignUpEnd.style';
 
 function SignUpEnd() {
   const [petName, setPetName] = useState('뽀삐');
@@ -25,17 +24,3 @@ function SignUpEnd() {
 }
 
 export default SignUpEnd;
-
-const StyledEnd = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  .greeting {
-    margin-top: 4rem;
-    
-    font-size: 3rem;
-    font-weight: 600;
-  }
-`;

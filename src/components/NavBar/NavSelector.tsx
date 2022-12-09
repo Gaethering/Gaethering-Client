@@ -43,6 +43,7 @@ function NavSelector({
           </li>
         </ul>
       </StyledNavSelector>
+      {/* 이름 overlay 수정 */}
       <StyledModalBlur
         className={showNav ? 'view-nav' : 'hidden'}
         onClick={() => setShowNav((prev) => !prev)}

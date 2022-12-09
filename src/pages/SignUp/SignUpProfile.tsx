@@ -83,4 +83,5 @@ function SignUpProfile() {
 
 export default SignUpProfile;
 
-const StyledSignUpProfile = styled.div``;
+const StyledSignUpProfile = styled.div`
+`;

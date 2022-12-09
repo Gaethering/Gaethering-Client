@@ -1,13 +1,9 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import styled from 'styled-components';
 import { postLogOut } from '../../api/authAPI';
-import { AuthApiUrl } from '../../api/authAPI.type';
-import LogoWithTitle from '../../assets/LogoWithTitle';
-import Input from '../../components/Form/Input';
 import NavBar from '../../components/NavBar';
 import LogInForm from './LogInForm';
+import StyledRoot from './Root.style';
 
 function Root() {
   //! mock API
@@ -52,17 +48,3 @@ function Root() {
 }
 
 export default Root;
-
-const StyledRoot = styled.div`
-  width: 80vw;
-  min-width: 390px;
-  margin: 0 auto;
-
-  .mock-logout {
-    margin: 3rem;
-    padding: 0.4rem 1.4rem;
-    background-color: #000;
-    color: #fff;
-    font-weight: 700;
-  }
-`;

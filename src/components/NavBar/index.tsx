@@ -16,6 +16,7 @@ function NavBar() {
   return (
     <>
       <StyledNavBar>
+        {/* 스타일드 컴포넌트로 하는게 깔끔할듯 */}
         <div className="logo">
           <Logo />
         </div>

@@ -1,14 +1,13 @@
-import axios from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { postLogIn } from '../../api/authAPI';
-import { AuthApiUrl, LogInRequest } from '../../api/authAPI.type';
+import { LogInRequest } from '../../api/authAPI.type';
 import LogoWithTitle from '../../assets/LogoWithTitle';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
+import StyledLogInForm from './LogInForm.style';
 
 function LogInForm({ getAuth }: { getAuth: () => void }) {
   const {
@@ -70,55 +69,3 @@ function LogInForm({ getAuth }: { getAuth: () => void }) {
 }
 
 export default LogInForm;
-
-const StyledLogInForm = styled.form`
-  display: flex;
-  align-items: center;
-  margin-top: 10vh;
-  flex-direction: column;
-
-  svg + .input-container {
-    margin-top: 7.2rem;
-  }
-
-  .input-container {
-    width: 80vw;
-    max-width: 50rem;
-    min-width: 30rem;
-
-    margin-top: 1.2rem;
-
-    + .input-container {
-      margin-bottom: 2rem;
-    }
-
-    input {
-      height: 5.2rem;
-      padding-left: 3rem;
-      background-color: ${({ theme: { color } }) => color.gray4};
-      border: 0;
-      border-radius: 1.6rem;
-
-      ::placeholder {
-        color: ${({ theme: { color } }) => color.black};
-      }
-    }
-  }
-
-  p.login-error {
-    margin: 0.4rem;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: ${({ theme: { color } }) => color.redPint};
-  }
-
-  button {
-    margin-top: 1rem;
-  }
-
-  .to-signup {
-    margin-top: 3rem;
-    font-size: 1.6rem;
-    font-weight: 700;
-  }
-`;

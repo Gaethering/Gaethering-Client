@@ -2,10 +2,10 @@ import React from 'react'
 
 type Props = {}
 
-function FindChatRoom({}: Props) {
+function FindChatSection({}: Props) {
   return (
-    <div>FindChatRoom</div>
+    <div>FindChatSection</div>
   )
 }
 
-export default FindChatRoom
+export default FindChatSection

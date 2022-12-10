@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Dispatch } from 'react'
+import { ChatState } from '../../pages/Chat'
 
-type Props = {}
+type Props = {setChatState: Dispatch<ChatState>}
 
-function ChatNav({}: Props) {
+function ChatNav({setChatState}: Props) {
   return (
     <div>ChatNav</div>
   )

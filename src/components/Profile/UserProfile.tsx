@@ -1,5 +1,5 @@
 import { StyledUserProfile } from './User.style';
-import Button from '../../components/Form/Button';
+import Button from '../Form/Button';
 import PetImage from './PetImage';
 
 interface UserProp {

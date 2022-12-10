@@ -2,8 +2,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import SelectInput from '../../components/Form/SelectInput';
-import PetPicture from './PetPicture';
-import Form from './SignUp.style';
+import PetPicture from '../../components/SignUp/PetPicture';
+import Form from '../SignUp.style';
 
 interface SignUpPetType {
   petName: string;

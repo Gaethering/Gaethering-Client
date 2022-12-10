@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { postLogIn } from '../../api/authAPI';
 import { LogInRequest } from '../../api/authAPI.type';
 import LogoWithTitle from '../../assets/LogoWithTitle';
-import Button from '../../components/Form/Button';
-import Input from '../../components/Form/Input';
+import Button from '../Form/Button';
+import Input from '../Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
 import StyledLogInForm from './LogInForm.style';
 

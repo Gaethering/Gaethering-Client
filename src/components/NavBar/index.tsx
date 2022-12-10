@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import NavProfile from '../../pages/Root/NavProfile';
+import NavProfile from '../Root/NavProfile';
 import { NavSpace, StyledArrow, StyledNavBar } from './index.style';
 import { ServiceType } from './NavBar.type';
 import NavSelector from './NavSelector';

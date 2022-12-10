@@ -4,12 +4,8 @@ import Chat from './pages/Chat';
 import Community from './pages/Community';
 import Profile from './pages/Profile';
 import Root from './pages/Root';
-import SignUp, {
-  SignEnd,
-  SignPet,
-  SignProfile,
-  SignStart,
-} from './pages/SignUp';
+import SignUp from './pages/SignUp';
+import { SignStart, SignProfile, SignPet, SignEnd } from './pages/SignUpPages';
 import SNS from './pages/SNS';
 import GlobalStyle from './themes/GlobalStyle.style';
 import mainTheme from './themes/theme';

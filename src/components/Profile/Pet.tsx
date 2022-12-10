@@ -1,7 +1,7 @@
 import PetImage from './PetImage';
 import PetProfile from './PetProfile';
 import { StyledPet } from './Pet.style';
-import Button from '../../components/Form/Button';
+import Button from '../Form/Button';
 import { Link } from 'react-router-dom';
 
 function Pet() {

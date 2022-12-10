@@ -1,4 +1,4 @@
-import Button from '../../components/Form/Button';
+import Button from '../Form/Button';
 import { StyledPetProfile } from './Pet.style';
 
 interface PetProfileProp {

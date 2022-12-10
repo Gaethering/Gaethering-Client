@@ -1,9 +1,9 @@
 import PetImage from './PetImage';
 import { StyledPet } from './Pet.style';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Button from '../../components/Form/Button';
-import Input from '../../components/Form/Input';
-import SelectInput from '../../components/Form/SelectInput';
+import Button from '../Form/Button';
+import Input from '../Form/Input';
+import SelectInput from '../Form/SelectInput';
 import { StyledEditForm } from './Pet.style';
 
 interface EditPetType {

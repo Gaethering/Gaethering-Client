@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { postLogOut } from '../../api/authAPI';
-import NavBar from '../../components/NavBar';
-import LogInForm from './LogInForm';
+import { postLogOut } from '../api/authAPI';
+import NavBar from '../components/NavBar';
+import LogInForm from '../components/Root/LogInForm';
 import StyledRoot from './Root.style';
 
 function Root() {

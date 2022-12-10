@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import StyledSignUpForm from './SignUp.style';
+import StyledSignUpForm from '../SignUp.style';
 
 const StyledEnd = styled(StyledSignUpForm)`
   display: flex;

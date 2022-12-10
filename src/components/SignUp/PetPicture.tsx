@@ -1,4 +1,5 @@
 import { ChangeEventHandler, useState } from 'react';
+import { PictureButton, StyledPetPicture } from './PetPicture.style';
 import PetSignUpPicture from './PetSignUpPicture';
 
 const CameraImg = () => (

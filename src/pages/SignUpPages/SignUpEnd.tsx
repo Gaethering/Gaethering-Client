@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button from '../../components/Form/Button';
-import PetSignUpPicture from './PetSignUpPicture';
+import PetSignUpPicture from '../../components/SignUp/PetSignUpPicture';
 import StyledEnd from './SignUpEnd.style';
 
 function SignUpEnd() {

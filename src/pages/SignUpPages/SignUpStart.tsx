@@ -1,9 +1,8 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import styled from 'styled-components';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
-import Form from './SignUp.style';
+import Form from '../SignUp.style';
 import StyledSignUpStart from './SignUpStart.style';
 
 interface SignUpStartType {

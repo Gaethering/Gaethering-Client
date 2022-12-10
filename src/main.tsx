@@ -4,10 +4,27 @@ import { RecoilRoot } from 'recoil';
 import Router from './Router';
 import './assets/index.css';
 
+//! Mock API
+import { worker } from './mocks/browser';
+import { QueryClient, QueryClientProvider } from 'react-query';
+worker.start();
+////
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+      staleTime: Infinity,
+    },
+  },
+});
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RecoilRoot>
-      <Router />
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <Router />
+      </RecoilRoot>
+    </QueryClientProvider>
   </React.StrictMode>
 );

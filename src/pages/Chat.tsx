@@ -9,7 +9,7 @@ function Chat() {
   const [chatState, setChatState] = useState<ChatState>('findChat');
   return (
     <div>
-      <ChatNav setChatState={setChatState} />
+      <ChatNav chatState={chatState} setChatState={setChatState} />
       {chatState === 'findChat' ? <FindChatSection /> : <MyChatSection />}
     </div>
   );

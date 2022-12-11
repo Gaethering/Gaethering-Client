@@ -20,7 +20,7 @@ type ClickHandler = PointerEventHandler<HTMLButtonElement>;
 type Props = {};
 
 function DaySelectFilter({}: Props) {
-  const [filter, setFilter] = useState<DaysType[]>([]);
+  const [filter, setFilter] = useState<DaysType[]>(['all']);
   console.log(filter);
 
   const handleFilterClick: ClickHandler = ({ currentTarget: target }) => {
@@ -56,6 +56,10 @@ function DaySelectFilter({}: Props) {
   };
 
   const removeFilter = (day: DaysType, target: HTMLButtonElement) => {
+    if (day === 'all') {
+      return;
+    }
+
     const filterArray = filter.filter((value) => value !== day);
 
     setFilter([...filterArray]);
@@ -76,7 +80,7 @@ function DaySelectFilter({}: Props) {
       ))}
       <DaySelectButton
         type="button"
-        className="filter-all"
+        className="filter-all active"
         name={'all'}
         key={'all'}
         onClick={handleFilterClick}

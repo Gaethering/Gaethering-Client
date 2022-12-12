@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import searchIcon from '../../assets/searchIcon.svg';
 
-type Props = {};
+// type Props = {};
 
 const Icon = () => <img src={searchIcon} alt="검색" />;
 
-function ChatSearchBar({}: Props) {
+function ChatSearchBar() {
   return (
     <StyledSearchBar>
       <input className="search-input" />

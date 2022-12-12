@@ -1,4 +1,4 @@
-import React, { PointerEventHandler, useState } from 'react';
+import { PointerEventHandler, useState } from 'react';
 import styled from 'styled-components';
 
 const Days = {
@@ -17,9 +17,9 @@ type DaysType = keyof typeof Days | 'all';
 
 type ClickHandler = PointerEventHandler<HTMLButtonElement>;
 
-type Props = {};
+// type Props = {};
 
-function DaySelectFilter({}: Props) {
+function DaySelectFilter() {
   const [filter, setFilter] = useState<DaysType[]>(['all']);
   console.log(filter);
 

@@ -3,9 +3,9 @@ import ChatSearchBar from './ChatSearchBar'
 import DaySelectFilter from './DaySelectFilter'
 import LocalChatRoomList from './LocalChatRoomList'
 
-type Props = {}
+// type Props = {}
 
-function FindChatSection({}: Props) {
+function FindChatSection() {
   return (
     <section>
       <DaySelectFilter />

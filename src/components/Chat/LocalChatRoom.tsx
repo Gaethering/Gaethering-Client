@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import useRelativeTime from '../../Hooks/useRelativeTime';
 import Button from '../Form/Button.style';
-import { ChatRoomInfo } from './LocalChatRoomList';
+import { ChatRoomInfo } from './Chat.type';
 
 function LocalChatRoom({
   roomName,
   roomKey,
   description,
-  lastChat,
+  lastChatTime,
   participants,
   maxParticipants,
   walkingTime,
@@ -20,7 +20,7 @@ function LocalChatRoom({
       <div className="chatroom-participants">
         참여: {participants} / {maxParticipants}
       </div>
-      <div className="chatroom-last-chat">{useRelativeTime(lastChat)}</div>
+      <div className="chatroom-last-chat">{useRelativeTime(lastChatTime)}</div>
       <p className="chatroom-walkingTime">
         {walkingTime.map((elem) => (
           <div key={elem}>{elem}</div>

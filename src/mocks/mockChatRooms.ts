@@ -10,7 +10,7 @@ export const mockChatRoom: ChatRoomInfo[] = [
     participants: 4,
     roomKey: '3a8cb1',
     walkingTime: ['월', '화'],
-    unReadMesseges: 12,
+    unreadMesseges: 12,
   },
   {
     roomName: 'ㅂㅂ공원 주말 오후 산책 모임',
@@ -21,6 +21,6 @@ export const mockChatRoom: ChatRoomInfo[] = [
     participants: 3,
     roomKey: 'efadc2',
     walkingTime: ['월', '목', '토'],
-    unReadMesseges: 0,
+    unreadMesseges: 0,
   },
 ];

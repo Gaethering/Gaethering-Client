@@ -7,5 +7,5 @@ export interface ChatRoomInfo {
   lastChatTime: string;
   lastChat: string;
   walkingTime: string[];
-  unReadMesseges: number;
+  unreadMesseges: number;
 }

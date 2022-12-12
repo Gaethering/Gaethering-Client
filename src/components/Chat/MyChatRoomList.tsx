@@ -1,11 +1,18 @@
-import React from 'react'
+import { mockChatRoom } from '../../mocks/mockChatRooms';
+import MyChatRoom from './MyChatRoom';
 
-type Props = {}
+// type Props = {}
 
-function MyChatRoomList({}: Props) {
+function MyChatRoomList() {
   return (
-    <div>MyChatRoomList</div>
-  )
+    <div>
+      {mockChatRoom
+        .sort((x, y) => parseInt(y.lastChatTime) - parseInt(x.lastChatTime))
+        .map((elem) => (
+          <MyChatRoom {...elem} key={elem.roomKey} />
+        ))}
+    </div>
+  );
 }
 
-export default MyChatRoomList
+export default MyChatRoomList;

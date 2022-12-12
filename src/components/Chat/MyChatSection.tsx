@@ -2,9 +2,9 @@ import React from 'react';
 import ChatSearchBar from './ChatSearchBar';
 import MyChatRoomList from './MyChatRoomList';
 
-type Props = {};
+// type Props = {};
 
-function MyChatSection({}: Props) {
+function MyChatSection() {
   return (
     <section>
       <ChatSearchBar />

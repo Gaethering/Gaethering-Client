@@ -5,9 +5,9 @@ const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
 
-const isDay = (time: number) => time >= DAY;
-const isHour = (time: number) => time >= HOUR;
-const isMinute = (time: number) => time >= MINUTE;
+const isDay = (time: number) => Math.abs(time) >= DAY;
+const isHour = (time: number) => Math.abs(time) >= HOUR;
+const isMinute = (time: number) => Math.abs(time) >= MINUTE;
 
 const getDays = (time: number) => Math.round(time / DAY);
 const getHours = (time: number) => Math.round(time / HOUR);
@@ -19,8 +19,8 @@ function useRelativeTime(time: string, locale = 'ko-KR'): string {
   const now = Date.now();
   const relativeTime = date - now;
 
-  const timeFormat = new Intl.RelativeTimeFormat(locale, { style: 'short' })
-    .format;
+  const timeFormat = (value: number, unit: Intl.RelativeTimeFormatUnit) =>
+    new Intl.RelativeTimeFormat(locale, { style: 'short' }).format(value, unit);
 
   if (isDay(relativeTime)) {
     return timeFormat(getDays(relativeTime), 'day');

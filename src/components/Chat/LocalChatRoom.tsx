@@ -17,16 +17,22 @@ function LocalChatRoom({
     <StyledLocalChatRoom>
       <h2 className="chatroom-title">{roomName}</h2>
       <p className="chatroom-description">{description}</p>
-      <div className="chatroom-participants">
-        참여: {participants} / {maxParticipants}
-      </div>
-      <div className="chatroom-last-chat">{useRelativeTime(lastChatTime)}</div>
-      <p className="chatroom-walkingTime">
-        {walkingTime.map((elem) => (
-          <div key={elem}>{elem}</div>
-        ))}
-      </p>
-      <Button btnTheme="main">참여</Button>
+
+      <Info>
+        <div className="chatroom-participants">
+          참여: {participants} / {maxParticipants}
+        </div>
+        <span>{useRelativeTime(lastChatTime)}</span>
+      </Info>
+
+      <Bottom>
+        <p className="chatroom-walking-time">
+          {walkingTime.map((elem) => (
+            <span key={elem}>{elem}</span>
+          ))}
+        </p>
+        <Button btnTheme="main">참여</Button>
+      </Bottom>
     </StyledLocalChatRoom>
   );
 }
@@ -40,4 +46,49 @@ const StyledLocalChatRoom = styled.div`
   background-color: ${({ theme: { color } }) => color.white};
   border-radius: 1.6rem;
   box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.1);
+
+  p.chatroom-walking-time {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+  }
+`;
+
+const Info = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  height: 4rem;
+
+  margin: 2rem 0;
+
+  div {
+    padding: 0.2rem 1.4rem;
+
+    border: 0.15rem solid ${({ theme: { color } }) => color.main};
+    border-radius: 1rem;
+
+    color: ${({ theme: { color } }) => color.main};
+    font-weight: 700;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+
+    height: 1.6rem;
+    box-sizing: border-box;
+
+    padding-left: 2rem;
+    border-left: 0.1rem solid ${({ theme: { color } }) => color.gray3};
+
+    color: ${({ theme: { color } }) => color.gray1};
+  }
+`;
+
+const Bottom = styled.div`
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
 `;

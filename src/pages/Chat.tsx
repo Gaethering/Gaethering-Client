@@ -6,7 +6,7 @@ import MyChatSection from '../components/Chat/MyChatSection';
 export type ChatState = 'findChat' | 'myChat';
 
 function Chat() {
-  const [chatState, setChatState] = useState<ChatState>('myChat');
+  const [chatState, setChatState] = useState<ChatState>('findChat');
   return (
     <div>
       <ChatNav chatState={chatState} setChatState={setChatState} />

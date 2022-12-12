@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import useRelativeTime from '../../Hooks/useRelativeTime';
+import Button from '../Form/Button.style';
 import { ChatRoomInfo } from './LocalChatRoomList';
 
 function LocalChatRoom({
@@ -14,17 +16,17 @@ function LocalChatRoom({
   return (
     <StyledLocalChatRoom>
       <h2 className="chatroom-title">{roomName}</h2>
-      <div className="chatroom-description">{description}</div>
+      <p className="chatroom-description">{description}</p>
       <div className="chatroom-participants">
-        {participants} / {maxParticipants}
+        참여: {participants} / {maxParticipants}
       </div>
-      <div className="chatroom-last-chat">{lastChat.toISOString()}</div>
-      <div className="chatroom-walkingTime">
+      <div className="chatroom-last-chat">{useRelativeTime(lastChat)}</div>
+      <p className="chatroom-walkingTime">
         {walkingTime.map((elem) => (
-          <div>{elem}</div>
+          <div key={elem}>{elem}</div>
         ))}
-      </div>
-      <button type="button">참여</button>
+      </p>
+      <Button btnTheme="main">참여</Button>
     </StyledLocalChatRoom>
   );
 }

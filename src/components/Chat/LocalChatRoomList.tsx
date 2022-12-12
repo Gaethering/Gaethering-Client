@@ -8,7 +8,7 @@ export interface ChatRoomInfo {
   description: string;
   participants: number;
   maxParticipants: number;
-  lastChat: Date;
+  lastChat: string;
   walkingTime: string[];
 }
 

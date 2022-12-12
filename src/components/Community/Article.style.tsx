@@ -8,6 +8,7 @@ export const StyledArticleList = styled.div`
 
 export const StyledArticle = styled.div`
   position: relative;
+  margin: 1rem 0;
   display: flex;
   flex-direction: column;
   height: 200px;

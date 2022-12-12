@@ -36,7 +36,7 @@ function Root() {
     if (auth && pathname === '/') {
       navigate('/chat');
     }
-  }, [auth, pathname]);
+  }, [auth, navigate, pathname]);
 
   return (
     <StyledRoot>

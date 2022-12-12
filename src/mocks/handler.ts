@@ -1,5 +1,6 @@
 import { rest } from 'msw';
 import { AuthApiUrl } from '../api/authAPI.type';
+import { mockChatRoom } from './mockChatRooms';
 
 interface LoginBody {
   userID: string;
@@ -37,5 +38,10 @@ export const handlers = [
     sessionStorage.setItem('is-auth', '');
 
     return res(ctx.status(200), ctx.json(auth));
+  }),
+
+  rest.get('chatrooms', (req, res, ctx) => {
+    console.log(ctx.json(mockChatRoom));
+    return res(ctx.status(200), ctx.json(mockChatRoom));
   }),
 ];

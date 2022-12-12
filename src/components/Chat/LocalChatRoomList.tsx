@@ -1,14 +1,19 @@
 import { useState } from 'react';
+import { useQuery } from 'react-query';
+import { getRequest } from '../../api/requests';
 import { mockChatRoom } from '../../mocks/mockChatRooms';
 import { ChatRoomInfo } from './Chat.type';
 import LocalChatRoom from './LocalChatRoom';
 
 function LocalChatRoomList() {
-  const [chatRooms, setChatRooms] = useState<ChatRoomInfo[]>(mockChatRoom);
+  const { data: query } = useQuery('chatrooms', () =>
+    getRequest<ChatRoomInfo[]>('chatrooms')
+  );
+  const chatRooms = query?.data;
 
   return (
     <div>
-      {chatRooms.map((room) => (
+      {chatRooms?.map((room) => (
         <LocalChatRoom {...room} key={room.roomKey} />
       ))}
     </div>

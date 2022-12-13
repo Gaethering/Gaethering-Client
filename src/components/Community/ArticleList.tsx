@@ -38,7 +38,7 @@ function ArticleList() {
 
   return (
   <StyledArticleList>
-    {articles.map((article) => <Article key={article.memberId} title={article.title} contents={article.contents} viewCnt={article.viewCnt} likeCnt={article.likeCnt}/>)}
+    {articles.map((article, index) => <Article key={index} title={article.title} contents={article.contents} viewCnt={article.viewCnt} likeCnt={article.likeCnt}/>)}
   </StyledArticleList>
   )
 }

@@ -2,6 +2,7 @@ import UserPetList from './UserPetList';
 import UserProfile from './UserProfile';
 import { StyledUser } from './User.style';
 import { useState } from 'react';
+import PetImageDefault from '../../assets/PetImageDefault.svg'
 
 function User() {
   //temporary state

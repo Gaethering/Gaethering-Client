@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import StyledNavProfile from './NavProfile.style';
-import defaultImg from '/src/assets/defaultProfilePicture.svg';
+import defaultImg from '../../assets/defaultProfilePicture.svg';
 
 export default function NavProfile() {
   const [profileImg, setProfileImg] = useState('');

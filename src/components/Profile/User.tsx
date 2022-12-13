@@ -10,7 +10,7 @@ function User() {
     {
       name: '예삐',
       isDelegate: true,
-      imageUrl: '/src/assets/PetImageDefault.svg',
+      imageUrl: PetImageDefault,
     },
     {
       name: '뽀삐',

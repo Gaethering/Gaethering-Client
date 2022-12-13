@@ -1,13 +1,11 @@
 import { ChangeEventHandler, useState } from 'react';
 import { PictureButton, StyledPetPicture } from './PetPicture.style';
 import PetSignUpPicture from './PetSignUpPicture';
+import camera from '../../assets/camera.svg';
+import defaultProfilePicture from '../../assets/defaultProfilePicture.svg';
 
 const CameraImg = () => (
-  <img
-    src="/src/assets/camera.svg"
-    alt="프로필 사진 등록"
-    className="camera-img"
-  />
+  <img src={camera} alt="프로필 사진 등록" className="camera-img" />
 );
 
 function PetPicture() {
@@ -39,10 +37,7 @@ function PetPicture() {
           onChange={handleFile}
         />
         <PictureButton>
-          <PetSignUpPicture
-            defaultSrc="/src/assets/defaultProfilePicture.svg"
-            image={image}
-          />
+          <PetSignUpPicture defaultSrc={defaultProfilePicture} image={image} />
           <CameraImg />
         </PictureButton>
       </label>

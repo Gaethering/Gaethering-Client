@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import NavProfile from '../../pages/Root/NavProfile';
+import NavProfile from '../Root/NavProfile';
 import { NavSpace, StyledArrow, StyledNavBar } from './index.style';
 import { ServiceType } from './NavBar.type';
 import NavSelector from './NavSelector';
+import logoHorizontal from '../../assets/logo-horizontal.svg';
 
 // Components
 const Arrow = () => <StyledArrow>{'>'}</StyledArrow>;
-const Logo = () => <img src="/src/assets/logo-horizontal.svg" alt="개더링" />;
+const Logo = () => <img src={logoHorizontal} alt="개더링" />;
 
 function NavBar() {
   const [serviceName, setServiceName] = useState<ServiceType>('개모임');

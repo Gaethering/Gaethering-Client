@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Button from '../../components/Form/Button';
-import PetSignUpPicture from './PetSignUpPicture';
+import PetSignUpPicture from '../../components/SignUp/PetSignUpPicture';
 import StyledEnd from './SignUpEnd.style';
+import defaultProfilePicture from '../../assets/defaultProfilePicture.svg';
 
 function SignUpEnd() {
   const [petName, setPetName] = useState('뽀삐');
@@ -10,10 +11,7 @@ function SignUpEnd() {
     <div>
       <StyledEnd as="div">
         <h1>가입 완료!</h1>
-        <PetSignUpPicture
-          defaultSrc="/src/assets/defaultProfilePicture.svg"
-          image=""
-        />
+        <PetSignUpPicture defaultSrc={defaultProfilePicture} image="" />
         <p className="greeting">{petName}님 환영해요!</p>
         <Button type="button" btnTheme="main" className="submit-btn">
           주변 동물 친구 찾아보기!

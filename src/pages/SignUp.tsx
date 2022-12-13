@@ -1,12 +1,9 @@
 import { createContext, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { StyledSignUp } from './SignUp.style';
-import { SignUpStep } from './SignUp.type';
-import SignEnd from './SignUpEnd';
-import Nav from './SignUpNav';
-import SignPet from './SignUpPet';
-import SignProfile from './SignUpProfile';
-import SignStart from './SignUpStart';
+import { SignUpStep } from '../components/SignUp/SignUp.type';
+
+import Nav from '../components/SignUp/SignUpNav';
 
 function SignUp() {
   const [step, setStep] = useState<SignUpStep>(3);
@@ -32,4 +29,3 @@ function SignUp() {
 }
 
 export default SignUp;
-export { SignStart, SignEnd, SignPet, SignProfile };

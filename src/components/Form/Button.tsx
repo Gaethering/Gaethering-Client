@@ -7,6 +7,7 @@ type ButtonProp = {
   children: ReactNode;
   onClick?: MouseEventHandler;
   className?: string;
+  disabled?: boolean;
 };
 
 function Button({
@@ -15,9 +16,11 @@ function Button({
   children,
   className,
   onClick,
+  disabled,
 }: ButtonProp) {
   return (
     <StyledButton
+      disabled={disabled}
       btnTheme={btnTheme}
       type={type}
       className={className}

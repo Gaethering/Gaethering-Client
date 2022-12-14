@@ -9,7 +9,10 @@ import './assets/index.css';
 // worker.start();
 ////
 
+axiosDefaultsConfig();
+
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { axiosDefaultsConfig } from './api/axiosConfig';
 
 const queryClient = new QueryClient({
   defaultOptions: {

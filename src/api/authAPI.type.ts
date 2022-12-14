@@ -9,14 +9,7 @@ export const enum AuthApiUrl {
   ReToken = '/members/auth/reissue-token',
 }
 
-export const enum SignUpApiUrl {
-  /** POST: 이메일 인증 */
-  EMAIL_AUTH = '/members/email-auth',
-  /** POST: 이메일 인증코드 확인 */
-  EMAIL_AUTH_CONFIRM = '/members/email-confirm',
-  /** POST: 회원가입 */
-  SIGN_UP = '/members/sign-up',
-}
+
 
 export const enum UserApiUrl {
   /** GET: 사용자 프로필 조회 */

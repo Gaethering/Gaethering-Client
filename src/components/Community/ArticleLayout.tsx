@@ -1,7 +1,7 @@
 import CommentLogo from '../../assets/CommentLogo';
 import Logo from '../../assets/Logo';
 import Button from '../Form/Button';
-import { StyledArticle } from './Article.style';
+import { StyledArticleLayout } from './Article.style';
 
 interface ArticleProp {
   title: string, 
@@ -10,9 +10,9 @@ interface ArticleProp {
   likeCnt: number,
 }
 
-function Article({title, contents, viewCnt, likeCnt}: ArticleProp) {
+function ArticleLayout({title, contents, viewCnt, likeCnt}: ArticleProp) {
   return (
-    <StyledArticle>
+    <StyledArticleLayout>
       <div className="title">
         <div className="title_logo">
           <Button btnTheme="main" type="button">
@@ -40,8 +40,8 @@ function Article({title, contents, viewCnt, likeCnt}: ArticleProp) {
           <p>조회 {viewCnt}</p>
         </div>
       </div>
-    </StyledArticle>
+    </StyledArticleLayout>
   );
 }
 
-export default Article;
+export default ArticleLayout;

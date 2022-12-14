@@ -1,4 +1,4 @@
-import Article from './Article';
+import ArticleLayout from './ArticleLayout';
 import { StyledArticleList } from './Article.style';
 
 function ArticleList() {
@@ -38,7 +38,7 @@ function ArticleList() {
 
   return (
   <StyledArticleList>
-    {articles.map((article, index) => <Article key={index} title={article.title} contents={article.contents} viewCnt={article.viewCnt} likeCnt={article.likeCnt}/>)}
+    {articles.map((article, index) => <ArticleLayout key={index} title={article.title} contents={article.contents} viewCnt={article.viewCnt} likeCnt={article.likeCnt}/>)}
   </StyledArticleList>
   )
 }

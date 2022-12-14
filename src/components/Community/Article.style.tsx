@@ -6,7 +6,7 @@ export const StyledArticleList = styled.div`
   min-width: calc(390px * 0.8);
 `;
 
-export const StyledArticle = styled.div`
+export const StyledArticleLayout = styled.div`
   position: relative;
   margin: 1rem 0;
   display: flex;

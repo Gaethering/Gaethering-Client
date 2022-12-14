@@ -1,9 +1,7 @@
-import { useState } from 'react';
-import { useController } from 'react-hook-form';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
-import { useNextStep, useSignUpForm } from '../SignUp';
+import { useSignUpForm } from '../SignUp';
 import StyledSignUpStart from './SignUpStart.style';
 
 function SignUpStart() {
@@ -18,7 +16,7 @@ function SignUpStart() {
       <h1>개더링 가입하기</h1>
       <div className="email-area">
         <Input
-          name="id"
+          name="email"
           register={register}
           label="이메일(아이디)"
           plHolder="expample@email.com"
@@ -35,7 +33,7 @@ function SignUpStart() {
         </Button>
       </div>
       <Input
-        name="pw"
+        name="password"
         type="password"
         register={register}
         label="비밀번호"
@@ -50,21 +48,23 @@ function SignUpStart() {
         }}
       />
       <Input
-        name="pwCheck"
+        name="passwordCheck"
         type="password"
         register={register}
         plHolder="비밀번호 확인"
         options={{
           required: '비밀번호를 한 번 더 입력해주세요',
           validate: (v) =>
-            getValues('pw') === v || '비밀번호가 일치하지 않습니다',
+            getValues('password') === v || '비밀번호가 일치하지 않습니다',
           shouldUnregister: true,
         }}
       />
-      {errors.id && <p className="signup-error">{errors.id.message}</p>}
-      {errors.pw && <p className="signup-error">{errors.pw.message}</p>}
-      {errors.pwCheck && (
-        <p className="signup-error">{errors.pwCheck.message}</p>
+      {errors.email && <p className="signup-error">{errors.email.message}</p>}
+      {errors.password && (
+        <p className="signup-error">{errors.password.message}</p>
+      )}
+      {errors.passwordCheck && (
+        <p className="signup-error">{errors.passwordCheck.message}</p>
       )}
       <Button type="submit" disabled={!isValid} className="submit-btn">
         다음

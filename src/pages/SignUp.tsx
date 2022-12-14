@@ -1,4 +1,4 @@
-import { Dispatch, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useNavigate, useOutletContext } from 'react-router-dom';
 import Form, { BackButton, StyledSignUp } from './SignUp.style';
 import { SignUpForm, SignUpStep } from '../components/SignUp/SignUp.type';
@@ -12,7 +12,7 @@ import {
 } from 'react-hook-form';
 
 function SignUp() {
-  const [step, setStep] = useState<SignUpStep>(3);
+  const [step, setStep] = useState<SignUpStep>(2);
   const navigate = useNavigate();
 
   const methods = useForm<SignUpForm, SignUpForm>({ mode: 'onTouched' });

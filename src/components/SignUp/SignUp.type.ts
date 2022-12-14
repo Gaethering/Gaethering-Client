@@ -3,20 +3,22 @@ export const SIGNUP_STEPS = 4;
 
 export interface SignUpForm {
   /** User */
-  id: string;
-  pw: string;
-  pwCheck: string;
-  userName: string;
+  email: string;
+  password: string;
+  passwordCheck: string;
+  name: string;
   /** Profile */
-  nickname: string;
+  phone: string;
   birth: number;
-  gender: 'male' | 'female';
+  gender: 'MALE' | 'FEMALE';
+  nickname: string;
+  isEmailAuth: boolean;
   /** Pet */
   petName: string;
-  petAge: number;
+  petBirth: number;
+  weight: number;
   breed: string;
-  petWeight: number;
-  petDescription: string;
-  petGender: string;
-  neutralization: boolean;
+  petGender: 'MALE' | 'FEMALE';
+  description: string;
+  isNeutered: boolean;
 }

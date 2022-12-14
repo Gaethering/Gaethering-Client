@@ -2,6 +2,7 @@ import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import SelectInput from '../../components/Form/SelectInput';
 import PetPicture from '../../components/SignUp/PetPicture';
+import { SignUpForm } from '../../components/SignUp/SignUp.type';
 import { useSignUpForm } from '../SignUp';
 
 function SignUpPet() {
@@ -28,7 +29,7 @@ function SignUpPet() {
         }}
       />
       <Input
-        name="petAge"
+        name="petBirth"
         register={register}
         label="반려동물 생일"
         type="date"
@@ -61,7 +62,7 @@ function SignUpPet() {
           }}
         />
         <Input
-          name="petWeight"
+          name="weight"
           register={register}
           type="number"
           label="몸무게"
@@ -78,7 +79,7 @@ function SignUpPet() {
         />
       </div>
       <Input
-        name="petDescription"
+        name="description"
         register={register}
         label="소개"
         plHolder="100자 이하"
@@ -91,20 +92,22 @@ function SignUpPet() {
         }}
       />
       <div className="signup-row">
-        <SelectInput
+        <SelectInput<SignUpForm, SignUpForm['petGender']>
           name="petGender"
           label="성별"
           register={register}
-          values={['여아', '남아']}
+          values={['FEMALE', 'MALE']}
+          valueLabels={['여아', '남아']}
           options={{
             required: '성별을 입력해주세요',
           }}
         />
-        <SelectInput
-          name="neutralization"
+        <SelectInput<SignUpForm, SignUpForm['isNeutered']>
+          name="isNeutered"
           label="중성화 여부"
           register={register}
-          values={['했음', '안 했음']}
+          values={[true, false]}
+          valueLabels={['했음', '안 했음']}
           options={{ required: '중성화 여부를 입력해주세요' }}
         />
       </div>
@@ -112,19 +115,19 @@ function SignUpPet() {
       {errors.petName && (
         <p className="signup-error">{errors.petName.message}</p>
       )}
-      {errors.petAge && <p className="signup-error">{errors.petAge.message}</p>}
-      {errors.breed && <p className="signup-error">{errors.breed.message}</p>}
-      {errors.petWeight && (
-        <p className="signup-error">{errors.petWeight.message}</p>
+      {errors.petBirth && (
+        <p className="signup-error">{errors.petBirth.message}</p>
       )}
-      {errors.petDescription && (
-        <p className="signup-error">{errors.petDescription.message}</p>
+      {errors.breed && <p className="signup-error">{errors.breed.message}</p>}
+      {errors.weight && <p className="signup-error">{errors.weight.message}</p>}
+      {errors.description && (
+        <p className="signup-error">{errors.description.message}</p>
       )}
       {errors.petGender && (
         <p className="signup-error">{errors.petGender.message}</p>
       )}
-      {errors.neutralization && (
-        <p className="signup-error">{errors.neutralization.message}</p>
+      {errors.isNeutered && (
+        <p className="signup-error">{errors.isNeutered.message}</p>
       )}
 
       <Button type="submit" className="submit-btn" disabled={!isValid}>

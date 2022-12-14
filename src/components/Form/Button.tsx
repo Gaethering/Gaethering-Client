@@ -2,7 +2,7 @@ import { MouseEventHandler, ReactNode } from 'react';
 import StyledButton from './Button.style';
 
 type ButtonProp = {
-  btnTheme: 'main' | 'sub';
+  btnTheme?: 'main' | 'sub';
   type: 'button' | 'submit';
   children: ReactNode;
   onClick?: MouseEventHandler;
@@ -11,7 +11,7 @@ type ButtonProp = {
 };
 
 function Button({
-  btnTheme,
+  btnTheme = 'main',
   type = 'button',
   children,
   className,

@@ -3,7 +3,7 @@ import StyledButton from './Button.style';
 
 type ButtonProp = {
   btnTheme?: 'main' | 'sub';
-  type: 'button' | 'submit';
+  type?: 'button' | 'submit';
   children: ReactNode;
   onClick?: MouseEventHandler;
   className?: string;

@@ -1,8 +1,16 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-const postRequest = async <T, D>(url: string, data: D) => {
+const postRequest = async <T, D>(
+  url: string,
+  data: D,
+  config?: AxiosRequestConfig<D> | undefined
+) => {
   try {
-    const response = await axios.post<T, AxiosResponse<T, D>, D>(url, data);
+    const response = await axios.post<T, AxiosResponse<T, D>, D>(
+      url,
+      data,
+      config
+    );
     return response;
     //
   } catch (error) {

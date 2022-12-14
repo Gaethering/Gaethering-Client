@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
+import StyledInput from '../../components/Form/Input.style';
+import { emailAuthCheck } from '../../components/SignUp/emailAuth';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
 import { useSignUpForm } from '../SignUp';
 import StyledSignUpStart from './SignUpStart.style';
@@ -7,9 +10,18 @@ import StyledSignUpStart from './SignUpStart.style';
 function SignUpStart() {
   const {
     register,
-    formState: { errors, isValid },
+    resetField,
+    formState: {
+      errors,
+      isValid,
+      dirtyFields: { email: emailDirty },
+    },
+    setValue,
     getValues,
   } = useSignUpForm();
+  const [emailAuth, setEmailAuth] = useState(false);
+  const [isEmailChecked, setIsEmailChecked] = useState(false);
+  const canEmailAuth = emailDirty && !errors.email;
 
   return (
     <StyledSignUpStart>
@@ -28,10 +40,50 @@ function SignUpStart() {
             },
           }}
         />
-        <Button btnTheme="main" type="button" className="form-btn">
-          이메일 인증
-        </Button>
+        {emailAuth ? (
+          <Button
+            className="form-btn"
+            btnTheme="sub"
+            onClick={() => {
+              resetField('email');
+              setEmailAuth(false);
+            }}
+          >
+            이메일 재인증
+          </Button>
+        ) : (
+          <Button
+            className="form-btn"
+            disabled={!canEmailAuth}
+            onClick={() => canEmailAuth && setEmailAuth(true)}
+          >
+            이메일 인증
+          </Button>
+        )}
       </div>
+      {emailAuth && (
+        <div className="email-area">
+          <StyledInput className="input-container">
+            <label>
+              이메일을 발송했습니다
+              <input placeholder="인증 코드를 입력해주세요" required={true} />
+            </label>
+          </StyledInput>
+          <Button
+            btnTheme="main"
+            type="button"
+            className="form-btn"
+            onClick={() => {
+              if (emailAuthCheck()) {
+                setIsEmailChecked(true);
+                setValue('isEmailAuth', true);
+              }
+            }}
+          >
+            인증하기
+          </Button>
+        </div>
+      )}
       <Input
         name="password"
         type="password"
@@ -59,6 +111,9 @@ function SignUpStart() {
           shouldUnregister: true,
         }}
       />
+      {emailDirty && !isEmailChecked && (
+        <p className="signup-error">이메일 인증을 완료해주세요</p>
+      )}
       {errors.email && <p className="signup-error">{errors.email.message}</p>}
       {errors.password && (
         <p className="signup-error">{errors.password.message}</p>
@@ -66,7 +121,11 @@ function SignUpStart() {
       {errors.passwordCheck && (
         <p className="signup-error">{errors.passwordCheck.message}</p>
       )}
-      <Button type="submit" disabled={!isValid} className="submit-btn">
+      <Button
+        type="submit"
+        disabled={!isEmailChecked || !isValid}
+        className="submit-btn"
+      >
         다음
       </Button>
     </StyledSignUpStart>

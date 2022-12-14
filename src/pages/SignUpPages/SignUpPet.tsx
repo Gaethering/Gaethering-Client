@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import SelectInput from '../../components/Form/SelectInput';
@@ -11,10 +12,12 @@ function SignUpPet() {
     formState: { errors, isValid },
   } = useSignUpForm();
 
+  const [hasPicture, setHasPicture] = useState(false);
+
   return (
     <div>
       <h1>반려동물 등록</h1>
-      <PetPicture />
+      <PetPicture setHasPicture={setHasPicture} />
       <Input
         name="petName"
         register={register}
@@ -130,8 +133,12 @@ function SignUpPet() {
         <p className="signup-error">{errors.isNeutered.message}</p>
       )}
 
-      <Button type="submit" className="submit-btn" disabled={!isValid}>
-        {isValid ? '다음' : '모든 항목을 입력해주세요'}
+      <Button
+        type="submit"
+        className="submit-btn"
+        disabled={!isValid || !hasPicture}
+      >
+        {isValid && hasPicture ? '다음' : '모든 항목을 입력해주세요'}
       </Button>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Outlet, useNavigate, useOutletContext } from 'react-router-dom';
 import Form, { BackButton, StyledSignUp } from './SignUp.style';
 import { SignUpForm, SignUpStep } from '../components/SignUp/SignUp.type';
@@ -10,12 +10,16 @@ import {
   useForm,
   useFormContext,
 } from 'react-hook-form';
+import { postSignUp } from '../api/signUpAPI';
 
 function SignUp() {
-  const [step, setStep] = useState<SignUpStep>(2);
+  const [step, setStep] = useState<SignUpStep>(3);
+  const [petPicture, setPetPicture] = useState<File | null>(null);
   const navigate = useNavigate();
 
   const methods = useForm<SignUpForm, SignUpForm>({ mode: 'onTouched' });
+
+  const formData = new FormData();
 
   const prevStep = () => {
     setStep((prev) => (prev === 1 ? 1 : prev === 2 ? 1 : prev === 3 ? 2 : 3));
@@ -30,6 +34,12 @@ function SignUp() {
       nextStep();
     } else {
       console.log('submit!', data);
+      formData.append('data', 'dataaaaa');
+      formData.append('image', petPicture as File);
+      for (const data of formData.entries()) {
+        console.log(data[0], '!!', data[1]);
+      }
+      postSignUp(formData);
     }
   };
 
@@ -45,7 +55,7 @@ function SignUp() {
       </BackButton>
       <FormProvider {...methods}>
         <Form onSubmit={methods.handleSubmit(onSubmit)}>
-          <Outlet context={nextStep} />
+          <Outlet context={setPetPicture} />
         </Form>
       </FormProvider>
     </StyledSignUp>
@@ -55,8 +65,8 @@ function SignUp() {
 export function useSignUpForm() {
   return useFormContext<SignUpForm>();
 }
-export function useNextStep() {
-  return useOutletContext<() => void>();
+export function useSetPetPicture() {
+  return useOutletContext<Dispatch<SetStateAction<File | null>>>();
 }
 
 export default SignUp;

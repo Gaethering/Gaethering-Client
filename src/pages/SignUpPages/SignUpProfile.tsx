@@ -1,27 +1,16 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import styled from 'styled-components';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import SelectInput from '../../components/Form/SelectInput';
-import { BIRTH_REGEX } from '../../data/regExp';
-import Form from '../SignUp.style';
-
-interface SignUpProfileType {
-  userName: string;
-  nickname: string;
-  birth: number;
-  gender: 'male' | 'female';
-}
+import { useSignUpForm } from '../SignUp';
 
 function SignUpProfile() {
   const {
     register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SignUpProfileType>();
+    formState: { errors, isValid },
+  } = useSignUpForm();
 
   return (
-    <StyledSignUpProfile>
+    <div>
       <h1>프로필 등록</h1>
       <Input
         name="userName"
@@ -30,6 +19,14 @@ function SignUpProfile() {
         plHolder="실명을 입력해주세요"
         options={{
           required: '이름을 입력해주세요',
+          minLength: {
+            value: 2,
+            message: '이름은 2자 이상으로 입력해주세요',
+          },
+          maxLength: {
+            value: 8,
+            message: '이름은 8자 이하로 입력해주세요',
+          },
         }}
       />
       <div className="signup-row">
@@ -37,12 +34,9 @@ function SignUpProfile() {
           name="birth"
           register={register}
           label="생년월일"
-          plHolder="YYYYMMDD (숫자만 입력)"
+          type="date"
           options={{
-            pattern: {
-              value: BIRTH_REGEX,
-              message: '올바른 형식이 아닙니다(예: 19990420)',
-            },
+            valueAsDate: true,
           }}
         />
         <SelectInput
@@ -59,22 +53,28 @@ function SignUpProfile() {
         plHolder="2글자 이상 10글자 이하로 입력해주세요"
         options={{
           required: '별명을 입력해주세요',
+          minLength: {
+            value: 2,
+            message: '2글자 이상 10글자 이하로 입력해주세요',
+          },
+          maxLength: {
+            value: 10,
+            message: '2글자 이상 10글자 이하로 입력해주세요',
+          },
         }}
       />
       {errors.userName && (
-        <p className="login-error">{errors.userName.message}</p>
+        <p className="signup-error">{errors.userName.message}</p>
       )}
-      {errors.birth && <p className="login-error">{errors.birth.message}</p>}
+      {errors.birth && <p className="signup-error">{errors.birth.message}</p>}
       {errors.nickname && (
-        <p className="login-error">{errors.nickname.message}</p>
+        <p className="signup-error">{errors.nickname.message}</p>
       )}
-      <Button type="submit" btnTheme="sub" className="submit-btn">
-        다음
+      <Button type="submit" className="submit-btn" disabled={!isValid}>
+        {isValid ? '다음' : '모든 항목을 입력해주세요'}
       </Button>
-    </StyledSignUpProfile>
+    </div>
   );
 }
 
 export default SignUpProfile;
-
-const StyledSignUpProfile = styled.div``;

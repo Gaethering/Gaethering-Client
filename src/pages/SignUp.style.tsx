@@ -53,4 +53,20 @@ export const StyledSignUpForm = styled.form`
   }
 `;
 
+export const BackButton = styled.button`
+  padding: 0.4rem 0;
+  padding-right: 1rem;
+  margin-bottom: 3rem;
+  font-size: 3rem;
+  font-weight: 700;
+  font-feature-settings: 'ss18';
+
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    translate: -0.6rem;
+    font-weight: 800;
+  }
+`;
+
 export default StyledSignUpForm;

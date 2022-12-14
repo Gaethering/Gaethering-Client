@@ -51,6 +51,18 @@ export const StyledSignUpForm = styled.form`
     height: 4rem;
     margin-top: 9rem;
   }
+
+  .signup-error {
+    margin-top: 3rem;
+
+    color: ${({ theme: { color } }) => color.redPoint};
+    font-size: 1.6rem;
+    font-weight: 600;
+
+    & ~ .signup-error {
+      margin-top: 0.4rem;
+    }
+  }
 `;
 
 export const BackButton = styled.button`

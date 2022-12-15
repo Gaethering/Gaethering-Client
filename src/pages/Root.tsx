@@ -8,12 +8,7 @@ import LogInForm from '../components/Root/LogInForm';
 import StyledRoot from './Root.style';
 
 function Root() {
-  const [auth, setAuth] = useState(true);
-  // const getUser = async () => {
-  //   const res = await getRequest('/mypage');
-  //   console.log('getUser!', res);
-  //   return res;
-  // };
+  const [auth, setAuth] = useState(false);
 
   // //! mock API
   // const [auth, setAuth] = useState(false);
@@ -23,7 +18,6 @@ function Root() {
   //   console.log('session Storage: is-auth?', user);
   //   setAuth(user);
   // };
-
   // const MockLogout = () => (
   //   <button
   //     className="mock-logout"
@@ -36,6 +30,7 @@ function Root() {
   //     Log out
   //   </button>
   // );
+  //// mock API
 
   useEffect(() => {
     axiosDefaultsConfig();

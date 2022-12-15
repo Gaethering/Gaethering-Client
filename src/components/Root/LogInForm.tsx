@@ -15,7 +15,7 @@ function LogInForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LogInRequest>();
+  } = useForm<LogInRequest>({ mode: 'onTouched' });
 
   const login = useMutation(async (loginData: LogInRequest) => {
     await postLogIn(loginData);
@@ -32,7 +32,7 @@ function LogInForm() {
       <StyledLogInForm onSubmit={handleSubmit(onSubmit)}>
         <LogoWithTitle width={200} />
         <Input
-          name="id"
+          name="email"
           plHolder="아이디(이메일)"
           register={register}
           options={{
@@ -44,7 +44,7 @@ function LogInForm() {
           }}
         />
         <Input
-          name="pw"
+          name="password"
           plHolder="비밀번호"
           register={register}
           type="password"
@@ -56,8 +56,10 @@ function LogInForm() {
             },
           }}
         />
-        {errors.id && <p className="login-error">{errors.id.message}</p>}
-        {errors.pw && <p className="login-error">{errors.pw.message}</p>}
+        {errors.email && <p className="login-error">{errors.email.message}</p>}
+        {errors.password && (
+          <p className="login-error">{errors.password.message}</p>
+        )}
         <Button type="submit" btnTheme="main">
           시작하기
         </Button>

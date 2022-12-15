@@ -108,7 +108,7 @@ function SignUpStart() {
           required: '비밀번호를 한 번 더 입력해주세요',
           validate: (v) =>
             getValues('password') === v || '비밀번호가 일치하지 않습니다',
-          shouldUnregister: true,
+          // shouldUnregister: true,
         }}
       />
       {emailDirty && !isEmailChecked && (

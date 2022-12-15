@@ -9,7 +9,8 @@ import Input from '../Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
 import StyledLogInForm from './LogInForm.style';
 
-function LogInForm({ getAuth }: { getAuth: () => void }) {
+// function LogInForm({ getAuth }: { getAuth: () => void }) {
+function LogInForm() {
   const {
     register,
     handleSubmit,
@@ -18,7 +19,7 @@ function LogInForm({ getAuth }: { getAuth: () => void }) {
 
   const login = useMutation(async (loginData: LogInRequest) => {
     await postLogIn(loginData);
-    getAuth();
+    // getAuth();
   });
 
   const onSubmit: SubmitHandler<LogInRequest> = (data) => {

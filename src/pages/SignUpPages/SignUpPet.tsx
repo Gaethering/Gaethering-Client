@@ -35,18 +35,19 @@ function SignUpPet() {
         name="petBirth"
         register={register}
         label="반려동물 생일"
-        type="date"
+        // type="date"
+        type="text"
         options={{
           required: '생일을 입력해주세요',
-          valueAsDate: true,
-          min: {
-            value: Date.parse('1990-01-01'),
-            message: '생일이 잘못되었습니다',
-          },
-          max: {
-            value: Date.now(),
-            message: '생일이 잘못되었습니다',
-          },
+          // valueAsDate: true,
+          // min: {
+          //   value: Date.parse('1990-01-01'),
+          //   message: '생일이 잘못되었습니다',
+          // },
+          // max: {
+          //   value: Date.now(),
+          //   message: '생일이 잘못되었습니다',
+          // },
         }}
       />
       <div className="signup-row">

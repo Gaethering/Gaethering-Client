@@ -49,9 +49,9 @@ function SignUpProfile() {
           name="birth"
           register={register}
           label="생년월일"
-          type="date"
+          type="text"
           options={{
-            valueAsDate: true,
+            // valueAsDate: true,
           }}
         />
         <SelectInput<SignUpForm, SignUpForm['gender']>

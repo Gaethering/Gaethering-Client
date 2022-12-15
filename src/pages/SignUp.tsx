@@ -34,7 +34,10 @@ function SignUp() {
       nextStep();
     } else {
       console.log('submit!', data);
-      formData.append('data', 'dataaaaa');
+      const jsonData = JSON.stringify(data);
+      const blob = new Blob([jsonData], { type: 'application/json' });
+      formData.append('data', blob);
+      // formData.append('data', JSON.stringify(data));
       formData.append('image', petPicture as File);
       for (const data of formData.entries()) {
         console.log(data[0], '!!', data[1]);

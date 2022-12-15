@@ -4,6 +4,7 @@ import Input from '../../components/Form/Input';
 import SelectInput from '../../components/Form/SelectInput';
 import PetPicture from '../../components/SignUp/PetPicture';
 import { SignUpForm } from '../../components/SignUp/SignUp.type';
+import validDate from '../../util/validDate';
 import { useSignUpForm } from '../SignUp';
 
 function SignUpPet() {
@@ -35,19 +36,11 @@ function SignUpPet() {
         name="petBirth"
         register={register}
         label="반려동물 생일"
-        // type="date"
-        type="text"
+        type="date"
         options={{
           required: '생일을 입력해주세요',
-          // valueAsDate: true,
-          // min: {
-          //   value: Date.parse('1990-01-01'),
-          //   message: '생일이 잘못되었습니다',
-          // },
-          // max: {
-          //   value: Date.now(),
-          //   message: '생일이 잘못되었습니다',
-          // },
+          validate: (value) =>
+            validDate(value.toString(), 1980) || '생일이 잘못되었습니다',
         }}
       />
       <div className="signup-row">

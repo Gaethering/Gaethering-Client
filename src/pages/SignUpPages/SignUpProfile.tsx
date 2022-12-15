@@ -3,6 +3,7 @@ import Input from '../../components/Form/Input';
 import SelectInput from '../../components/Form/SelectInput';
 import { SignUpForm } from '../../components/SignUp/SignUp.type';
 import { PHONE_REGEX } from '../../data/regExp';
+import validDate from '../../util/validDate';
 import { useSignUpForm } from '../SignUp';
 
 function SignUpProfile() {
@@ -49,9 +50,11 @@ function SignUpProfile() {
           name="birth"
           register={register}
           label="생년월일"
-          type="text"
+          type="date"
           options={{
-            // valueAsDate: true,
+            required: '생일을 입력해주세요',
+            validate: (value) =>
+              validDate(value.toString(), 1900) || '생일이 잘못되었습니다',
           }}
         />
         <SelectInput<SignUpForm, SignUpForm['gender']>

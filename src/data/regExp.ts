@@ -6,4 +6,4 @@ export const PASSWORD_REGEX = /[-\w._!@#$%^&*?]{8,15}/;
 
 export const NICKNAME_REGEX = /\w{2, 10}/;
 
-export const BIRTH_REGEX = /[0-9]{8}/;
+export const PHONE_REGEX = /^[0-9]{2,6}-[-0-9]{2,10}$/;

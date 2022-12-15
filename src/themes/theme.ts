@@ -6,7 +6,7 @@ const main: DefaultTheme = {
     black: '#000000',
     white: '#ffffff',
     yellow: '#FDE404',
-    redPint: '#FF4926',
+    redPoint: '#FF4926',
     gray1: '#595959',
     gray2: '#B6B6B6',
     gray3: '#E6E6E6',
@@ -24,7 +24,7 @@ declare module 'styled-components' {
       black: string;
       white: string;
       yellow: string;
-      redPint: string;
+      redPoint: string;
       gray1: string;
       gray2: string;
       gray3: string;

@@ -5,10 +5,14 @@ import Router from './Router';
 import './assets/index.css';
 
 //! Mock API
-import { worker } from './mocks/browser';
-import { QueryClient, QueryClientProvider } from 'react-query';
-worker.start();
+// import { worker } from './mocks/browser';
+// worker.start();
 ////
+
+axiosDefaultsConfig();
+
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { axiosDefaultsConfig } from './api/axiosConfig';
 
 const queryClient = new QueryClient({
   defaultOptions: {

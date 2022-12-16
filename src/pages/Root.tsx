@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { postLogOut } from '../api/authAPI';
-import { axiosDefaultsConfig } from '../api/axiosConfig';
+import { setAxiosDefaultsBaseURL } from '../api/axiosConfig';
 import { getRequest } from '../api/requests';
 import NavBar from '../components/NavBar';
 import LogInForm from '../components/Root/LogInForm';
 import StyledRoot from './Root.style';
+import { QueryKeys } from '../api/QueryKeys';
+
+export type SetAuthType = React.Dispatch<React.SetStateAction<boolean>>;
 
 function Root() {
   const [auth, setAuth] = useState(false);
@@ -33,7 +36,7 @@ function Root() {
   //// mock API
 
   useEffect(() => {
-    axiosDefaultsConfig();
+    setAxiosDefaultsBaseURL();
     // getAuth();
     // getUser();
   }, []);
@@ -48,7 +51,7 @@ function Root() {
         </>
       ) : (
         // <LogInForm getAuth={getAuth} />
-        <LogInForm />
+        <LogInForm setAuth={setAuth} />
       )}
     </StyledRoot>
   );

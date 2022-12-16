@@ -8,18 +8,33 @@ import Button from '../Form/Button';
 import Input from '../Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
 import StyledLogInForm from './LogInForm.style';
+import { SetAuthType } from '../../pages/Root';
+import { QueryKeys } from '../../api/QueryKeys';
+import { setAxiosHeaderToken } from '../../api/axiosConfig';
 
 // function LogInForm({ getAuth }: { getAuth: () => void }) {
-function LogInForm() {
+function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LogInRequest>({ mode: 'onTouched' });
 
-  const login = useMutation(async (loginData: LogInRequest) => {
-    await postLogIn(loginData);
-    // getAuth();
+  const login = useMutation((loginData: LogInRequest) => postLogIn(loginData), {
+    onSuccess: (response) => {
+      if (!response) {
+        return;
+      }
+      const { accessToken, refreshToken } = response.data;
+
+      //! TEST
+      console.log('token:', accessToken, refreshToken);
+
+      setAxiosHeaderToken(accessToken);
+      localStorage.setItem(QueryKeys.refreshToken, refreshToken);
+
+      setAuth(true);
+    },
   });
 
   const onSubmit: SubmitHandler<LogInRequest> = (data) => {
@@ -37,6 +52,7 @@ function LogInForm() {
           register={register}
           options={{
             required: '아이디를 입력해주세요',
+            disabled: !login.isLoading,
             pattern: {
               value: EMAIL_REGEX,
               message: '올바른 이메일 형식이 아닙니다',
@@ -50,6 +66,7 @@ function LogInForm() {
           type="password"
           options={{
             required: '비밀번호를 입력해주세요',
+            disabled: !login.isLoading,
             pattern: {
               value: PASSWORD_REGEX,
               message: '올바른 비밀번호 형식이 아닙니다',
@@ -60,6 +77,11 @@ function LogInForm() {
         {errors.password && (
           <p className="login-error">{errors.password.message}</p>
         )}
+
+        {login.isError && (
+          <p className="login-error">잘못된 이메일 혹은 패스워드 입니다.</p>
+        )}
+
         <Button type="submit" btnTheme="main">
           시작하기
         </Button>

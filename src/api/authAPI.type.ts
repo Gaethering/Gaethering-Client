@@ -1,3 +1,5 @@
+export type JWTToken = string;
+
 export const enum AuthApiUrl {
   /** POST: 로그인 */
   LogIn = '/members/auth/login',
@@ -12,6 +14,19 @@ export const enum AuthApiUrl {
 export interface LogInRequest {
   email: string;
   password: string;
+}
+
+export interface LogInResponse {
+  accessToken: JWTToken;
+  refreshToken: JWTToken;
+}
+
+export interface ReTokenRequest {
+  accessToken?: JWTToken;
+  refreshToken: JWTToken;
+}
+export interface ReTokenResponse {
+  accessToken: JWTToken;
 }
 
 export const enum UserApiUrl {

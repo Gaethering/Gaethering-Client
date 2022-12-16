@@ -50,8 +50,7 @@ function SignUpPet() {
           label="견종"
           plHolder="견종을 알려주세요"
           options={{
-            required: '견종을 입력해주세요',
-            value: '시고르자브종',
+            required: '견종을 입력해주세요(믹스, 포메라니안 등)',
             maxLength: {
               value: 10,
               message: '견종은 10자 이하로 입력해주세요',

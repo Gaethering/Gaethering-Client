@@ -6,3 +6,8 @@ export const enum SignUpApiUrl {
   /** POST: 회원가입 */
   SIGN_UP = '/members/sign-up',
 }
+
+export interface SignUpResponse {
+  petName: string;
+  imageUrl: string;
+}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import NavProfile from '../Root/NavProfile';
-import { NavSpace, StyledArrow, StyledNavBar } from './index.style';
+import { NavLogo, NavSpace, StyledArrow, StyledNavBar } from './index.style';
 import { ServiceType } from './NavBar.type';
 import NavSelector from './NavSelector';
 import logoHorizontal from '../../assets/logo-horizontal.svg';
@@ -17,10 +17,9 @@ function NavBar() {
   return (
     <>
       <StyledNavBar>
-        {/* 스타일드 컴포넌트로 하는게 깔끔할듯 */}
-        <div className="logo">
+        <NavLogo>
           <Logo />
-        </div>
+        </NavLogo>
         <div className="service-name">
           <button
             className="nav-button"

@@ -1,3 +1,5 @@
+import { StyledPetPictureImage } from './PetPicture.style';
+
 interface SignUpPictureType {
   defaultSrc: string;
   image: string;
@@ -5,11 +7,17 @@ interface SignUpPictureType {
 
 function PetSignUpPicture({ defaultSrc, image }: SignUpPictureType) {
   return (
-    <img
-      src={image ? image : defaultSrc}
-      alt="반려동물 프로필"
-      className="pet-picture"
-    />
+    <StyledPetPictureImage>
+      {(
+        <img
+          src={image || defaultSrc}
+          alt="반려동물 프로필"
+          className="pet-picture"
+        />
+      ) || (
+        <img src={defaultSrc} alt="반려동물 프로필" className="pet-picture" />
+      )}
+    </StyledPetPictureImage>
   );
 }
 

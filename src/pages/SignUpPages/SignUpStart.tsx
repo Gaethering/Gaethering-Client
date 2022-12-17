@@ -126,7 +126,7 @@ function SignUpStart() {
         disabled={!isEmailChecked || !isValid}
         className="submit-btn"
       >
-        다음
+        {isValid ? '다음' : '모든 항목을 입력해주세요'}
       </Button>
     </StyledSignUpStart>
   );

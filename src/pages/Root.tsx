@@ -1,47 +1,27 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { postLogOut } from '../api/authAPI';
-import { axiosDefaultsConfig } from '../api/axiosConfig';
-import { getRequest } from '../api/requests';
+import { postReToken } from '../api/authAPI';
+import { setAxiosDefaultsBaseURL } from '../api/axiosConfig';
 import NavBar from '../components/NavBar';
 import LogInForm from '../components/Root/LogInForm';
 import StyledRoot from './Root.style';
 
+export type SetAuthType = React.Dispatch<React.SetStateAction<boolean>>;
+
 function Root() {
-  const [auth, setAuth] = useState(true);
-  // const getUser = async () => {
-  //   const res = await getRequest('/mypage');
-  //   console.log('getUser!', res);
-  //   return res;
-  // };
-
-  // //! mock API
-  // const [auth, setAuth] = useState(false);
-
-  // const getAuth = () => {
-  //   const user = !!sessionStorage.getItem('is-auth');
-  //   console.log('session Storage: is-auth?', user);
-  //   setAuth(user);
-  // };
-
-  // const MockLogout = () => (
-  //   <button
-  //     className="mock-logout"
-  //     type="button"
-  //     onClick={async () => {
-  //       await postLogOut();
-  //       getAuth();
-  //     }}
-  //   >
-  //     Log out
-  //   </button>
-  // );
+  const [auth, setAuth] = useState(false);
+  const [init, setInit] = useState(false);
 
   useEffect(() => {
-    axiosDefaultsConfig();
-    // getAuth();
-    // getUser();
+    setAxiosDefaultsBaseURL();
+    postReToken()
+      .then((res) => setAuth(res))
+      .then(() => setInit(true));
   }, []);
+
+  if (!init) {
+    return <></>;
+  }
 
   return (
     <StyledRoot>
@@ -53,7 +33,7 @@ function Root() {
         </>
       ) : (
         // <LogInForm getAuth={getAuth} />
-        <LogInForm />
+        <LogInForm setAuth={setAuth} />
       )}
     </StyledRoot>
   );

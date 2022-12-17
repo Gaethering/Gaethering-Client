@@ -17,7 +17,7 @@ function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<LogInRequest>({ mode: 'onTouched' });
 
   const login = useMutation((loginData: LogInRequest) => postLogIn(loginData), {
@@ -35,6 +35,8 @@ function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
 
       setAuth(true);
     },
+
+    onError: () => alert('잘못된 이메일 혹은 패스워드 입니다.'),
   });
 
   const onSubmit: SubmitHandler<LogInRequest> = (data) => {
@@ -52,7 +54,7 @@ function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
           register={register}
           options={{
             required: '아이디를 입력해주세요',
-            disabled: !login.isLoading,
+            disabled: login.isLoading,
             pattern: {
               value: EMAIL_REGEX,
               message: '올바른 이메일 형식이 아닙니다',
@@ -66,7 +68,7 @@ function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
           type="password"
           options={{
             required: '비밀번호를 입력해주세요',
-            disabled: !login.isLoading,
+            disabled: login.isLoading,
             pattern: {
               value: PASSWORD_REGEX,
               message: '올바른 비밀번호 형식이 아닙니다',
@@ -82,7 +84,12 @@ function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
           <p className="login-error">잘못된 이메일 혹은 패스워드 입니다.</p>
         )}
 
-        <Button type="submit" btnTheme="main">
+        <Button
+          className={login.isLoading ? 'loading' : ''}
+          type="submit"
+          btnTheme="main"
+          disabled={login.isLoading || !isValid}
+        >
           시작하기
         </Button>
         <Link to="/signUp/1" className="to-signup">

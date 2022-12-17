@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const breathing = keyframes`
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 30%;
+  }
+`;
 
 const StyledLogInForm = styled.form`
   display: flex;
@@ -28,21 +37,30 @@ const StyledLogInForm = styled.form`
       border: 0;
       border-radius: 1.6rem;
 
+      transition: color 0.4s ease-in-out;
+
+      &:disabled {
+        color: ${({ theme }) => theme.color.gray1};
+        animation: ${breathing} 1.2s alternate infinite both ease-in-out;
+      }
       ::placeholder {
-        color: ${({ theme: { color } }) => color.black};
+        color: ${({ theme: { color } }) => color.gray1};
       }
     }
   }
 
   p.login-error {
     margin: 0.4rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 600;
-    color: ${({ theme: { color } }) => color.redPint};
+    color: ${({ theme: { color } }) => color.redPoint};
   }
 
   button {
     margin-top: 1rem;
+    &.loading:disabled {
+      animation: ${breathing} 1.2s alternate infinite both ease-in-out;
+    }
   }
 
   .to-signup {

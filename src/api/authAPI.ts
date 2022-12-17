@@ -16,9 +16,7 @@ export const postLogIn = async (data: LogInRequest) => {
     LogInResponse,
     AxiosResponse<LogInResponse, LogInRequest>,
     LogInRequest
-  >(Auth.LogIn, data, {
-    withCredentials: true,
-  });
+  >(Auth.LogIn, data);
 
   return response;
 };

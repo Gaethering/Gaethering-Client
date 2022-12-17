@@ -42,7 +42,7 @@ function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
         console.error('name:' + error.name, 'status:' + error.status);
         console.error('cause:' + error.cause);
         console.error('code:' + error.code);
-        console.error('response:' + error.response);
+        console.error('response:', error.response);
         console.error('message:' + error.message);
         console.error('JSON:', Object(error.toJSON()));
         console.error(error);

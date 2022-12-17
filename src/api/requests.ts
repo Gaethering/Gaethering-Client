@@ -30,8 +30,6 @@ const postRequest = async <T, D>(
     } else {
       console.error(String(error));
     }
-
-    return error;
   }
 };
 

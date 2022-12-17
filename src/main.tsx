@@ -9,6 +9,9 @@ import './assets/index.css';
 // worker.start();
 ////
 
+import { setAxiosDefaultsBaseURL } from './api/axiosConfig';
+setAxiosDefaultsBaseURL();
+
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient({

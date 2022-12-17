@@ -9,12 +9,17 @@ import {
 } from './authAPI.type';
 import { setAxiosHeaderToken } from './axiosConfig';
 import { postRequest } from './requests';
+import axios, { AxiosResponse } from 'axios';
 
 export const postLogIn = async (data: LogInRequest) => {
-  const response = await postRequest<LogInResponse, LogInRequest>(
-    Auth.LogIn,
-    data
-  );
+  const response = await axios.post<
+    LogInResponse,
+    AxiosResponse<LogInResponse, LogInRequest>,
+    LogInRequest
+  >(Auth.LogIn, data, {
+    withCredentials: true,
+  });
+
   return response;
 };
 
@@ -30,10 +35,11 @@ export const postReToken = async (accessToken?: JWTToken) => {
     return;
   }
 
-  const response = await postRequest<ReTokenResponse, ReTokenRequest>(
-    Auth.ReToken,
-    { refreshToken, accessToken }
-  );
+  const response = await axios.post<
+    ReTokenResponse,
+    AxiosResponse<ReTokenResponse, ReTokenRequest>,
+    ReTokenRequest
+  >(Auth.ReToken, { refreshToken, accessToken });
 
   if (response?.status === 201) {
     const { accessToken } = response.data;

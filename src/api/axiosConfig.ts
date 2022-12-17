@@ -4,8 +4,14 @@ import { JWTToken } from './authAPI.type';
 
 export function setAxiosDefaultsBaseURL() {
   axios.defaults.baseURL = API_BASE_URL;
+  axios.defaults.headers.common['timeout'] = 3000;
+  axios.defaults.proxy = {
+    protocol: 'http',
+    host: 'localhost',
+    port: 8080,
+  };
 }
 
 export function setAxiosHeaderToken(token: JWTToken) {
-  axios.defaults.headers.common['Authorization'] = token;
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 }

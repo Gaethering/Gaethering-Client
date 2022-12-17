@@ -14,28 +14,6 @@ function Root() {
   const [auth, setAuth] = useState(false);
   const [init, setInit] = useState(false);
 
-  // //! mock API
-  // const [auth, setAuth] = useState(false);
-
-  // const getAuth = () => {
-  //   const user = !!sessionStorage.getItem('is-auth');
-  //   console.log('session Storage: is-auth?', user);
-  //   setAuth(user);
-  // };
-  // const MockLogout = () => (
-  //   <button
-  //     className="mock-logout"
-  //     type="button"
-  //     onClick={async () => {
-  //       await postLogOut();
-  //       getAuth();
-  //     }}
-  //   >
-  //     Log out
-  //   </button>
-  // );
-  //// mock API
-
   useEffect(() => {
     setAxiosDefaultsBaseURL();
     postReToken()

@@ -3,8 +3,6 @@ import { PictureButton, StyledPetPicture } from './PetPicture.style';
 import PetSignUpPicture from './PetSignUpPicture';
 import camera from '../../assets/camera.svg';
 import defaultProfilePicture from '../../assets/defaultProfilePicture.svg';
-import { UseFormSetValue } from 'react-hook-form';
-import { SignUpForm } from './SignUp.type';
 import { useSetPetPicture } from '../../pages/SignUp';
 
 const CameraImg = () => (

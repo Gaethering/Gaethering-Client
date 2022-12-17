@@ -31,7 +31,7 @@ export const postReToken = async (accessToken?: JWTToken) => {
   const refreshToken = localStorage.getItem(QueryKeys.refreshToken);
 
   if (!refreshToken) {
-    return;
+    return false;
   }
 
   try {
@@ -41,18 +41,26 @@ export const postReToken = async (accessToken?: JWTToken) => {
       ReTokenRequest
     >(Auth.ReToken, { refreshToken, accessToken });
 
-    if (response?.status === 201) {
+    if (response?.status === 200) {
       const { accessToken } = response.data;
       //! TEST
       console.log('retoken:', accessToken);
+      console.log(response);
 
       setAxiosHeaderToken(accessToken);
+
+      return true;
     }
 
-    return response;
+    alert('로그인 토큰이 만료되었습니다');
+
+    return false;
+    ////
   } catch (error) {
     if (error instanceof AxiosError) {
       showAxiosError(error);
     }
+
+    return false;
   }
 };

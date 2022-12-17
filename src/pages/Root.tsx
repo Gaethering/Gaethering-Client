@@ -12,6 +12,7 @@ export type SetAuthType = React.Dispatch<React.SetStateAction<boolean>>;
 
 function Root() {
   const [auth, setAuth] = useState(false);
+  const [init, setInit] = useState(false);
 
   // //! mock API
   // const [auth, setAuth] = useState(false);
@@ -37,8 +38,14 @@ function Root() {
 
   useEffect(() => {
     setAxiosDefaultsBaseURL();
-    postReToken();
+    postReToken()
+      .then((res) => setAuth(res))
+      .then(() => setInit(true));
   }, []);
+
+  if (!init) {
+    return <></>;
+  }
 
   return (
     <StyledRoot>

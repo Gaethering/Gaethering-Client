@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { postLogOut } from '../api/authAPI';
+import { postLogOut, postReToken } from '../api/authAPI';
 import { setAxiosDefaultsBaseURL } from '../api/axiosConfig';
 import { getRequest } from '../api/requests';
 import NavBar from '../components/NavBar';
@@ -37,6 +37,7 @@ function Root() {
 
   useEffect(() => {
     setAxiosDefaultsBaseURL();
+    postReToken();
   }, []);
 
   return (

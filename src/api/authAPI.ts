@@ -9,7 +9,8 @@ import {
 } from './authAPI.type';
 import { setAxiosHeaderToken } from './axiosConfig';
 import { postRequest } from './requests';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import showAxiosError from './showAxiosError';
 
 export const postLogIn = async (data: LogInRequest) => {
   const response = await axios.post<
@@ -33,19 +34,25 @@ export const postReToken = async (accessToken?: JWTToken) => {
     return;
   }
 
-  const response = await axios.post<
-    ReTokenResponse,
-    AxiosResponse<ReTokenResponse, ReTokenRequest>,
-    ReTokenRequest
-  >(Auth.ReToken, { refreshToken, accessToken });
+  try {
+    const response = await axios.post<
+      ReTokenResponse,
+      AxiosResponse<ReTokenResponse, ReTokenRequest>,
+      ReTokenRequest
+    >(Auth.ReToken, { refreshToken, accessToken });
 
-  if (response?.status === 201) {
-    const { accessToken } = response.data;
-    //! TEST
-    console.log('retoken:', accessToken);
+    if (response?.status === 201) {
+      const { accessToken } = response.data;
+      //! TEST
+      console.log('retoken:', accessToken);
 
-    setAxiosHeaderToken(accessToken);
+      setAxiosHeaderToken(accessToken);
+    }
+
+    return response;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      showAxiosError(error);
+    }
   }
-
-  return response;
 };

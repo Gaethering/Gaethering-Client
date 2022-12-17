@@ -12,6 +12,7 @@ import { SetAuthType } from '../../pages/Root';
 import { QueryKeys } from '../../api/QueryKeys';
 import { setAxiosHeaderToken } from '../../api/axiosConfig';
 import { AxiosError } from 'axios';
+import showAxiosError from '../../api/showAxiosError';
 
 // function LogInForm({ getAuth }: { getAuth: () => void }) {
 function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
@@ -39,13 +40,7 @@ function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
 
     onError: (error) => {
       if (error instanceof AxiosError) {
-        console.error('name:' + error.name, 'status:' + error.status);
-        console.error('cause:' + error.cause);
-        console.error('code:' + error.code);
-        console.error('response:', error.response);
-        console.error('message:' + error.message);
-        console.error('JSON:', Object(error.toJSON()));
-        console.error(error);
+        showAxiosError(error);
 
         alert('잘못된 이메일 혹은 패스워드 입니다.');
       }

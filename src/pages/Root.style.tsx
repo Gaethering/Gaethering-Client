@@ -5,6 +5,8 @@ const StyledRoot = styled.main`
   min-width: 390px;
   margin: 0 auto;
 
+  overflow: hidden;
+
   .mock-logout {
     margin: 3rem;
     padding: 0.4rem 1.4rem;

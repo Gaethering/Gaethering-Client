@@ -12,6 +12,10 @@ import {
 } from 'react-hook-form';
 import { postSignUp } from '../api/signUpAPI';
 import { SignUpResponse } from '../api/signUpAPI.type';
+import { postLogIn } from '../api/authAPI';
+import { setAxiosHeaderToken } from '../api/axiosConfig';
+import { QueryKeys } from '../api/QueryKeys';
+import { setAuthToken } from '../util/setAuthToken';
 
 function SignUp() {
   const [step, setStep] = useState<SignUpStep>(1);
@@ -30,6 +34,17 @@ function SignUp() {
     setStep((prev) => (prev === 1 ? 2 : prev === 2 ? 3 : prev === 3 ? 4 : 1));
   };
 
+  const login = async () => {
+    const loginForm = {
+      email: methods.getValues().email,
+      password: methods.getValues().password,
+    };
+
+    const response = await postLogIn(loginForm);
+
+    setAuthToken(response.data);
+  };
+
   const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
     if (step !== 3) {
       //! Test
@@ -44,13 +59,18 @@ function SignUp() {
       const jsonData = JSON.stringify(data);
       const blob = new Blob([jsonData], { type: 'application/json' });
 
-      formData.append('data', blob);
       formData.append('image', petPicture as File);
+      formData.append('data', blob);
+
+      for (const pair of formData.entries()) {
+        console.log(pair[0] + ', ', pair[1]);
+      }
 
       const response = await postSignUp(formData);
 
       if (response?.status === 201) {
         setWelcome(response.data);
+        login();
         nextStep();
       } else {
         alert('회원가입에 실패하였습니다.\n' + response?.data);

@@ -5,6 +5,7 @@ export const StyledSignUp = styled.div`
   max-width: 800px;
   min-width: 390px;
   margin: 0 auto;
+  margin-bottom: 6rem;
 `;
 
 export const StyledSignUpForm = styled.form`

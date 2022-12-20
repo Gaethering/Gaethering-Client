@@ -2,15 +2,17 @@ import styled from 'styled-components';
 
 const Title = styled.header`
   position: sticky;
+  top: 0rem;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   width: 100%;
-  height: 8.4rem;
+  padding: 0.6rem 0;
 
   box-shadow: 0 0 1rem 0.4rem rgba(100, 100, 100, 0.1);
+  background-color: ${({ theme: { color } }) => color.skyblue};
 
   z-index: 100;
 
@@ -27,7 +29,7 @@ const Title = styled.header`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
+    gap: 0.2rem;
 
     font-size: 1.8rem;
 
@@ -43,6 +45,9 @@ const InfoMark = styled.button`
 
   padding-right: 3vw;
   height: 2.4rem;
+
+  cursor: pointer;
+
   img {
     width: 2.4rem;
   }

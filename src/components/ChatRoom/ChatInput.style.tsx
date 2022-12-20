@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledChatInput = styled.form`
-  position: fixed;
+  position: sticky;
   bottom: 0;
 
   display: flex;

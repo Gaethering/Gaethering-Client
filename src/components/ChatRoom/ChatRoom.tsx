@@ -9,6 +9,7 @@ import { ChatRoomInfo } from '../Chat/Chat.type';
 import { getRequest } from '../../api/requests';
 import Spinner from '../widgets/Spinner';
 import { ChatTalkType } from './ChatRoom.type';
+import { StyledChatRoom } from './ChatRoom.style';
 
 function ChatRoom() {
   const { roomKey } = useParams<'roomKey'>();
@@ -25,7 +26,7 @@ function ChatRoom() {
   const myName = 'user3333';
   ////
 
-  const { data, isLoading } = useQuery(['chatroom', roomKey], getChatroom);
+  const { data } = useQuery(['chatroom', roomKey], getChatroom);
   const talksQuery = useQuery(['chatroomTalk', roomKey], getTalks);
   const chatRoom = data?.data;
   const talks = talksQuery.data?.data;
@@ -55,17 +56,3 @@ function ChatRoom() {
 }
 
 export default ChatRoom;
-
-const StyledChatRoom = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: start;
-  height: calc(100vh - ${({ theme: { size } }) => size.navHeight});
-  background-color: ${({ theme: { color } }) => color.skyblue};
-
-  .spinner {
-    align-self: center;
-    margin-top: 30vh;
-  }
-`;

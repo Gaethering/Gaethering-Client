@@ -11,11 +11,12 @@ const main: DefaultTheme = {
     gray2: '#B6B6B6',
     gray3: '#E6E6E6',
     gray4: '#F6F6F6',
+    skyblue: '#E3F6FC',
   },
   size: {
     navHeight: '6rem',
   },
-};
+} as const;
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -29,6 +30,7 @@ declare module 'styled-components' {
       gray2: string;
       gray3: string;
       gray4: string;
+      skyblue: string;
     };
     size: {
       navHeight: string;

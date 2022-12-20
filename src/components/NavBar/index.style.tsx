@@ -12,7 +12,7 @@ const StyledNavBar = styled.header`
   top: 0;
   left: 0;
   background-color: ${({ theme: { color } }) => color.white};
-  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.06);
 
   z-index: 1000;
 

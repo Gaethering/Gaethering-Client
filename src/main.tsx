@@ -5,8 +5,8 @@ import Router from './Router';
 import './assets/index.css';
 
 //! Mock API
-// import { worker } from './mocks/browser';
-// worker.start();
+import { worker } from './mocks/browser';
+worker.start();
 ////
 
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -14,7 +14,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      suspense: true,
+      // suspense: true,
       staleTime: Infinity,
     },
   },

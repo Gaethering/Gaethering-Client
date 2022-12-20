@@ -50,7 +50,7 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(auth));
   }),
 
-  rest.get('chatrooms', (req, res, ctx) => {
+  rest.get('/chatrooms', (req, res, ctx) => {
     console.log(mockChatRooms);
     return new Promise((resolve) =>
       setTimeout(
@@ -64,7 +64,7 @@ export const handlers = [
     return new Promise((resolve) =>
       setTimeout(
         () => resolve(res(ctx.status(200), ctx.json(mockChatRooms[0]))),
-        1000
+        500
       )
     );
   }),

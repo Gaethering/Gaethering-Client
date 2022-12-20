@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import { StyledChatInput } from './ChatInput.style';
 
 function ChatInput() {

@@ -9,8 +9,6 @@ import Input from '../Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
 import StyledLogInForm from './LogInForm.style';
 import { SetAuthType } from '../../pages/Root';
-import { QueryKeys } from '../../api/QueryKeys';
-import { setAxiosHeaderToken } from '../../api/axiosConfig';
 import { AxiosError } from 'axios';
 import showAxiosError from '../../api/showAxiosError';
 import { setAuthToken } from '../../util/setAuthToken';

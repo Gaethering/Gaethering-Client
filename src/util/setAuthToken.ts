@@ -5,7 +5,8 @@ import { QueryKeys } from '../api/QueryKeys';
 function setAuthToken({ accessToken, refreshToken }: LogInResponse) {
   //! TEST
   console.log('token:', accessToken, refreshToken);
-
+  ////TEST
+  
   setAxiosHeaderToken(accessToken);
   localStorage.setItem(QueryKeys.refreshToken, refreshToken);
 }

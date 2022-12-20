@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { API_BASE_URL } from '../data/API_ENV';
-import { postRequest } from './requests';
 import showAxiosError from './showAxiosError';
 import { SignUpApiUrl, SignUpResponse } from './signUpAPI.type';
 
@@ -22,7 +21,7 @@ export const postSignUp = async (data: FormData) => {
     if (error instanceof AxiosError) {
       showAxiosError(error);
     } else {
-      console.log(error);
+      console.error(error);
     }
   }
 };

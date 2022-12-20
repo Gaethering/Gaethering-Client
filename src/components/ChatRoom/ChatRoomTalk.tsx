@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import getTime from '../../util/getTime';
 import { ChatTalkType } from './ChatRoom.type';
 import { ChatBox, NameArea, StyledTalk, TalkArea } from './ChatRoomTalk.style';

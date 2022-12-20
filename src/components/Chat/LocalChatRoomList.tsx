@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getRequest } from '../../api/requests';
 import { ChatRoomInfo } from './Chat.type';

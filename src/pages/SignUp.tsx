@@ -13,8 +13,6 @@ import {
 import { postSignUp } from '../api/signUpAPI';
 import { SignUpResponse } from '../api/signUpAPI.type';
 import { postLogIn } from '../api/authAPI';
-import { setAxiosHeaderToken } from '../api/axiosConfig';
-import { QueryKeys } from '../api/QueryKeys';
 import { setAuthToken } from '../util/setAuthToken';
 
 function SignUp() {
@@ -67,10 +65,6 @@ function SignUp() {
 
       formData.append('image', petPicture as File);
       formData.append('data', blob);
-
-      for (const pair of formData.entries()) {
-        console.log(pair[0] + ', ', pair[1]);
-      }
 
       const response = await postSignUp(formData);
 

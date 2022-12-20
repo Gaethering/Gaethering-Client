@@ -18,7 +18,7 @@ let auth = {};
 export const handlers = [
   rest.post<SignUpForm>(SignUpApiUrl.SIGN_UP, async (req, res, ctx) => {
     const result = await req.json();
-    console.log('mocksignup',req);
+    console.log('mocksignup', req);
     return res(ctx.status(200));
   }),
 
@@ -51,6 +51,12 @@ export const handlers = [
 
   rest.get('chatrooms', (req, res, ctx) => {
     console.log(ctx.json(mockChatRoom));
-    return res(ctx.status(200), ctx.json(mockChatRoom));
+    return new Promise((resolve) =>
+      setTimeout(
+        () => resolve(res(ctx.status(200), ctx.json(mockChatRoom))),
+        1000
+      )
+    );
+    // return res(ctx.status(200), ctx.json(mockChatRoom));
   }),
 ];

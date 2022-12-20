@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 const StyledNav = styled.nav`
-  position: relative;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,6 +8,7 @@ const StyledNav = styled.nav`
   margin-bottom: 8rem;
   height: 5rem;
   width: 80vw;
+  max-width: 800px;
   min-width: 390px;
 `;
 
@@ -46,7 +45,10 @@ const NavIndicator = styled.div`
 const StepLine = styled.div`
   position: absolute;
   width: calc(80vw - 3.2rem);
+  max-width: calc(800px - 3.2rem);
+  min-width: calc(390px - 3.2rem);
   height: 0.1rem;
+
   margin: 0 1.6rem;
   background-color: ${({ theme: { color } }) => color.gray3};
 `;

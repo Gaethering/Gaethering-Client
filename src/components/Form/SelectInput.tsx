@@ -6,34 +6,38 @@ import {
 } from 'react-hook-form';
 import { SelectButton, StyledSelectInput } from './SelectInput.style';
 
-type SelectInputProp<T extends FieldValues> = {
+type SelectInputProp<T extends FieldValues, UValueType = string> = {
   name: Path<T>;
   label: string;
-  values: string[];
+  values: UValueType[];
+  valueLabels: string[];
   register: UseFormRegister<T>;
   options?: RegisterOptions<T, Path<T>>;
 };
 
-function SelectInput<T extends FieldValues>({
+function SelectInput<T extends FieldValues, UValueType = string>({
   name,
   values,
   label,
+  valueLabels,
   register,
   options,
-}: SelectInputProp<T>) {
+}: SelectInputProp<T, UValueType>) {
   return (
     <StyledSelectInput className="input-container">
       <div className="label">{label}</div>
       <div className="values">
-        {values.map((value) => (
-          <label key={value}>
+        {values.map((value, index) => (
+          <label key={(value as string).toString()}>
             <input
               type={'radio'}
               {...register(name, options)}
               autoComplete="off"
-              value={value}
+              value={value as string}
             />
-            <SelectButton className="select-button">{value}</SelectButton>
+            <SelectButton className="select-button">
+              {valueLabels[index]}
+            </SelectButton>
           </label>
         ))}
       </div>

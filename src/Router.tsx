@@ -1,15 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import ChatRoom from './components/ChatRoom/ChatRoom';
 import Chat from './pages/Chat';
 import Community from './pages/Community';
 import Profile from './pages/Profile';
 import Root from './pages/Root';
-import SignUp, {
-  SignEnd,
-  SignPet,
-  SignProfile,
-  SignStart,
-} from './pages/SignUp';
+import SignUp from './pages/SignUp';
+import { SignStart, SignProfile, SignPet, SignEnd } from './pages/SignUpPages';
 import SNS from './pages/SNS';
 import GlobalStyle from './themes/GlobalStyle.style';
 import mainTheme from './themes/theme';
@@ -20,6 +17,7 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       { path: 'chat', element: <Chat /> },
+      { path: 'chat/:roomKey', element: <ChatRoom /> },
       { path: 'community', element: <Community /> },
       { path: 'profile', element: <Profile /> },
       { path: 'sns', element: <SNS /> },

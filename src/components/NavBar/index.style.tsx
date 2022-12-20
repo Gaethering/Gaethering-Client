@@ -12,23 +12,12 @@ const StyledNavBar = styled.header`
   top: 0;
   left: 0;
   background-color: ${({ theme: { color } }) => color.white};
-  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.06);
 
   z-index: 1000;
 
-  .logo,
   .nav-profile {
     width: 18rem;
-  }
-
-  .logo {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    img {
-      margin-left: 3rem;
-      height: 3rem;
-    }
   }
 
   .service-name {
@@ -72,4 +61,16 @@ const NavSpace = styled.div`
   height: ${({ theme: { size } }) => size.navHeight};
 `;
 
-export { NavSpace, StyledArrow, StyledNavBar };
+const NavLogo = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  width: 18rem;
+  img {
+    margin-left: 3rem;
+    height: 3rem;
+  }
+`;
+
+export { NavSpace, StyledArrow, StyledNavBar, NavLogo };

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { ChatRoomInfo } from '../Chat/Chat.type';
 import infoMark from '../../assets/infoMark.svg';
 import { InfoMark, Title } from './ChatRoomTitle.style';

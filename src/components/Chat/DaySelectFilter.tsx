@@ -21,7 +21,9 @@ type ClickHandler = PointerEventHandler<HTMLButtonElement>;
 
 function DaySelectFilter() {
   const [filter, setFilter] = useState<DaysType[]>(['all']);
+  //! Test
   console.log(filter);
+  ////Test
 
   const handleFilterClick: ClickHandler = ({ currentTarget: target }) => {
     const day = target.name as DaysType;

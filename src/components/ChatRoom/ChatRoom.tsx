@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import ChatInput from './ChatInput';
 import ChatRoomMyTalk from './ChatRoomMyTalk';
 import ChatRoomTalk from './ChatRoomTalk';

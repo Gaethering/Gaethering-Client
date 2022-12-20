@@ -1,5 +1,3 @@
-import React from 'react';
-import styled from 'styled-components';
 import useRelativeTime from '../../Hooks/useRelativeTime';
 import Button from '../Form/Button.style';
 import { ChatRoomInfo } from './Chat.type';
@@ -7,7 +5,6 @@ import { Bottom, Info, StyledLocalChatRoom } from './LocalChatRoom.style';
 
 function LocalChatRoom({
   roomName,
-  roomKey,
   description,
   lastChatTime,
   participants,

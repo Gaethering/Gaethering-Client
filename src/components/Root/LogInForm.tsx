@@ -9,10 +9,9 @@ import Input from '../Form/Input';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../data/regExp';
 import StyledLogInForm from './LogInForm.style';
 import { SetAuthType } from '../../pages/Root';
-import { QueryKeys } from '../../api/QueryKeys';
-import { setAxiosHeaderToken } from '../../api/axiosConfig';
 import { AxiosError } from 'axios';
 import showAxiosError from '../../api/showAxiosError';
+import { setAuthToken } from '../../util/setAuthToken';
 
 // function LogInForm({ getAuth }: { getAuth: () => void }) {
 function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
@@ -27,13 +26,7 @@ function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
       if (!response) {
         return;
       }
-      const { accessToken, refreshToken } = response.data;
-
-      //! TEST
-      console.log('token:', accessToken, refreshToken);
-
-      setAxiosHeaderToken(accessToken);
-      localStorage.setItem(QueryKeys.refreshToken, refreshToken);
+      setAuthToken(response.data);
 
       setAuth(true);
     },

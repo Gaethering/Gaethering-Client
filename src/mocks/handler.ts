@@ -14,42 +14,9 @@ interface LoginResponse {
   age: string;
 }
 
-let auth = {};
+const auth = {};
 
 export const handlers = [
-  rest.post<SignUpForm>(SignUpApiUrl.SIGN_UP, async (req, res, ctx) => {
-    const result = await req.json();
-    console.log('mocksignup', req);
-    return res(ctx.status(200));
-  }),
-
-  rest.post<LoginBody, LoginResponse>(
-    AuthApiUrl.LogIn,
-    async (req, res, ctx) => {
-      sessionStorage.setItem('is-auth', 'true');
-      const result = await req.json();
-      auth = { ...result };
-      return res(ctx.status(200));
-    }
-  ),
-
-  rest.post<LoginBody, LoginResponse>(AuthApiUrl.LogOut, (req, res, ctx) => {
-    const isAuth = sessionStorage.getItem('is-auth');
-
-    if (!isAuth) {
-      return res(
-        ctx.status(403),
-        ctx.json({
-          message: '로그인 안 돼 있습니다.',
-        })
-      );
-    }
-
-    sessionStorage.setItem('is-auth', '');
-
-    return res(ctx.status(200), ctx.json(auth));
-  }),
-
   rest.get('/chatrooms', (req, res, ctx) => {
     console.log(mockChatRooms);
     return new Promise((resolve) =>

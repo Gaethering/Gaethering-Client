@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import showAxiosError from './showAxiosError';
 
 const postRequest = async <T, D>(
   url: string,
@@ -13,22 +14,20 @@ const postRequest = async <T, D>(
     );
 
     //! Test
-    console.log(
+    console.info(
       'POST_REQ' + response.request + '성공!, 응답: ',
       response.data,
       'status: ',
-      response.status,
-      response.statusText
+      response.status
     );
 
     return response;
     //
   } catch (error) {
     if (error instanceof AxiosError) {
-      console.error('Axios Error: ' + error.response?.status, error.name);
-      console.error('Message: ' + error.message);
+      showAxiosError(error);
     } else {
-      console.error(String(error));
+      console.info(String(error));
     }
   }
 };
@@ -41,19 +40,18 @@ const getRequest = async <T>(
     const response = await axios.get<T>(url, config);
 
     //! Test
-    console.log(
+    console.info(
       'GET_REQ' + response.request + '성공!, 응답: ',
       response.data,
       'status: ',
-      response.status,
-      response.statusText
+      response.status
     );
 
     return response;
     //
   } catch (error) {
     if (error instanceof AxiosError) {
-      console.error(error.message);
+      showAxiosError(error);
     } else {
       console.error(String(error));
     }
@@ -73,7 +71,7 @@ const patchRequest = async <T, D>(
     );
 
     //! Test
-    console.log(
+    console.info(
       'PATCH_REQ' + response.request + '성공!, 응답: ',
       response.data,
       'status: ',
@@ -85,8 +83,7 @@ const patchRequest = async <T, D>(
     //
   } catch (error) {
     if (error instanceof AxiosError) {
-      console.error('Axios Error: ' + error.response?.status, error.name);
-      console.error('Message: ' + error.message);
+      showAxiosError(error);
     } else {
       console.error(String(error));
     }

@@ -23,13 +23,13 @@ function PetPicture({ setHasPicture }: { setHasPicture: Dispatch<boolean> }) {
     const reader = new FileReader();
     setPetPicture(target.files[0]);
 
+    reader.readAsDataURL(target.files[0]);
+
     reader.onload = (e) => {
       console.log('load success');
       setImage(e.target?.result as string);
       setHasPicture(true);
     };
-
-    reader.readAsDataURL(target.files[0]);
   };
 
   return (

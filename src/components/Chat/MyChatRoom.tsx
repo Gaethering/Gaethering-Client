@@ -1,6 +1,4 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import useRelativeTime from '../../Hooks/useRelativeTime';
 import { ChatRoomInfo } from './Chat.type';
 import { Left, Right, StyledMyChatRoom, Unread } from './MyChatRoom.style';

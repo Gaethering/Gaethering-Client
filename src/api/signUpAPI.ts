@@ -1,5 +1,7 @@
-import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { API_BASE_URL } from '../data/API_ENV';
 import { postRequest } from './requests';
+import showAxiosError from './showAxiosError';
 import { SignUpApiUrl, SignUpResponse } from './signUpAPI.type';
 
 export const postSignUp = async (data: FormData) => {
@@ -12,18 +14,15 @@ export const postSignUp = async (data: FormData) => {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
+      baseURL: API_BASE_URL,
     });
 
     return response;
   } catch (error) {
     if (error instanceof AxiosError) {
-      console.error('name:' + error.name, 'status:' + error.status);
-      console.error('cause:' + error.cause);
-      console.error('code:' + error.code);
-      console.error('response:' + error.response);
-      console.error('message:' + error.message);
-      console.error('JSON:', Object(error.toJSON()));
-      console.error(error);
+      showAxiosError(error);
+    } else {
+      console.log(error);
     }
   }
 };

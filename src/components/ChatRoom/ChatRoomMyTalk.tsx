@@ -1,15 +1,23 @@
-import { ChatTalkType } from "./ChatRoom.type"
+import getTime from '../../util/getTime';
+import { ChatTalkType } from './ChatRoom.type';
+import { MyTalk } from './ChatRoomMyTalk.style';
+import { ChatBox, StyledTalk, TalkArea } from './ChatRoomTalk.style';
+import SpeechBubble from './SpeechBubble';
 
 function ChatRoomMyTalk({
-  profileImg,
-  petName,
-  userName,
   talk,
   timestamp,
 }: ChatTalkType) {
   return (
-    <div>ChatRoomMyTalk</div>
-  )
+    <MyTalk>
+      <ChatBox>
+        <TalkArea>
+          <span className="chat-timestamp">{getTime(timestamp)}</span>
+          <SpeechBubble color="myBubble">{talk}</SpeechBubble>
+        </TalkArea>
+      </ChatBox>
+    </MyTalk>
+  );
 }
 
-export default ChatRoomMyTalk
+export default ChatRoomMyTalk;

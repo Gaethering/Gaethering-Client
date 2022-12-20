@@ -1,4 +1,4 @@
-type Props = { color: string; className: string };
+type Props = { color?: string; className: string };
 
 function SpeechBubleTale({ color = 'white', className }: Props) {
   return (

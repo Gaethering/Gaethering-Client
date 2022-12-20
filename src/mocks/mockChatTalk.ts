@@ -36,4 +36,11 @@ export const mockChatTalk: ChatTalkType[] = [
     talk: '오늘 저녁에 가보는 건 어떠신가요?',
     timestamp: Date.parse('2022-12-20T12:26:00'),
   },
+  {
+    petName: '뽀삐',
+    userName: '뽀삐맘',
+    profileImg: '/public/assets/puppy2.png',
+    talk: '좋은 생각이네요!',
+    timestamp: Date.parse('2022-12-20T12:42:00'),
+  },
 ];

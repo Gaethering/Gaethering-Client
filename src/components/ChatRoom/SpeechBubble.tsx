@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import SpeechBubleTale from '../../assets/SpeechBubleTale';
 
 interface Props {
@@ -7,14 +7,17 @@ interface Props {
 }
 
 function SpeechBubble({ children, color }: Props) {
+  const theme = useTheme();
+
   return (
     <SyledSpeechBox color={color}>
-      {color === 'white' && (
-        <SpeechBubleTale color={color} className="speech-tale" />
-      )}
+      {color === 'white' && <SpeechBubleTale className="speech-tale" />}
       <Speech>{children}</Speech>
       {color === 'myBubble' && (
-        <SpeechBubleTale color={color} className="speech-tale my" />
+        <SpeechBubleTale
+          color={theme.color.yellow}
+          className="speech-tale my"
+        />
       )}
     </SyledSpeechBox>
   );
@@ -28,15 +31,20 @@ interface StyleProps {
 
 const Speech = styled.span`
   display: block;
-  padding: 0.6rem 2rem;
+  padding: 0.6rem 1.2rem;
 
   border-radius: 0.8rem;
+
+  font-size: 1.6rem;
+  font-weight: 500;
 `;
 
 const SyledSpeechBox = styled.p<StyleProps>`
   display: flex;
 
   ${Speech} {
+    box-shadow: 0 0 0.6rem 0 rgba(100, 100, 100, 0.1);
+
     background-color: ${({ color, theme }) =>
       color === 'white' ? theme.color.white : theme.color.yellow};
   }

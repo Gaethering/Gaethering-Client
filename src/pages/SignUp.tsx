@@ -23,6 +23,12 @@ function SignUp() {
   const [welcome, setWelcome] = useState<SignUpResponse>();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    //! Mock API
+    import('../mocks/browser').then((msw) => msw.worker.stop());
+    ////
+  }, []);
+
   const methods = useForm<SignUpForm, SignUpForm>({ mode: 'onTouched' });
 
   const formData = new FormData();

@@ -1,6 +1,6 @@
 import { ChatRoomInfo } from '../components/Chat/Chat.type';
 
-export const mockChatRoom: ChatRoomInfo[] = [
+export const mockChatRooms: ChatRoomInfo[] = [
   {
     roomName: 'ㅁㅁ주공 3단지 평일 저녁 산책 모임 🐾',
     description: 'ㅇㅇ동 ㅁㅁ주공 3단지 평일에 산책하는 모임입니다~',

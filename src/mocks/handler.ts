@@ -3,7 +3,8 @@ import { AuthApiUrl } from '../api/authAPI.type';
 import { SignUpApiUrl } from '../api/signUpAPI.type';
 import { SignUpForm } from '../components/SignUp/SignUp.type';
 
-import { mockChatRoom } from './mockChatRooms';
+import { mockChatRooms } from './mockChatRooms';
+import { mockChatTalk } from './mockChatTalk';
 
 interface LoginBody {
   userID: string;
@@ -50,13 +51,30 @@ export const handlers = [
   }),
 
   rest.get('chatrooms', (req, res, ctx) => {
-    console.log(ctx.json(mockChatRoom));
+    console.log(mockChatRooms);
     return new Promise((resolve) =>
       setTimeout(
-        () => resolve(res(ctx.status(200), ctx.json(mockChatRoom))),
+        () => resolve(res(ctx.status(200), ctx.json(mockChatRooms))),
         1000
       )
     );
-    // return res(ctx.status(200), ctx.json(mockChatRoom));
+  }),
+  rest.get('/chatroom/efadc2/info', (req, res, ctx) => {
+    console.log(mockChatRooms[0]);
+    return new Promise((resolve) =>
+      setTimeout(
+        () => resolve(res(ctx.status(200), ctx.json(mockChatRooms[0]))),
+        1000
+      )
+    );
+  }),
+  rest.get('/chatroom/efadc2/talks', (req, res, ctx) => {
+    console.log(mockChatTalk);
+    return new Promise((resolve) =>
+      setTimeout(
+        () => resolve(res(ctx.status(200), ctx.json(mockChatTalk))),
+        1000
+      )
+    );
   }),
 ];

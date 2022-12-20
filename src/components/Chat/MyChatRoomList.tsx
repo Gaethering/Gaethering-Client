@@ -7,9 +7,12 @@ import MyChatRoomSkeleton from './MyChatRoomSkeleton';
 // type Props = {}
 
 function MyChatRoomList() {
+  //! Mock API
   const { data: query, isLoading } = useQuery('chatrooms', () =>
-    getRequest<ChatRoomInfo[]>('chatrooms')
+    getRequest<ChatRoomInfo[]>('http://localhost:5173/chatrooms')
   );
+  ////
+
   const chatRooms = query?.data;
 
   return (

@@ -16,19 +16,8 @@ const StyledNavBar = styled.header`
 
   z-index: 1000;
 
-  .logo,
   .nav-profile {
     width: 18rem;
-  }
-
-  .logo {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    img {
-      margin-left: 3rem;
-      height: 3rem;
-    }
   }
 
   .service-name {
@@ -72,4 +61,16 @@ const NavSpace = styled.div`
   height: ${({ theme: { size } }) => size.navHeight};
 `;
 
-export { NavSpace, StyledArrow, StyledNavBar };
+const NavLogo = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  width: 18rem;
+  img {
+    margin-left: 3rem;
+    height: 3rem;
+  }
+`;
+
+export { NavSpace, StyledArrow, StyledNavBar, NavLogo };

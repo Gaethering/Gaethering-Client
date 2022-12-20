@@ -1,7 +1,7 @@
 import { SignUpStep, SIGNUP_STEPS } from './SignUp.type';
 import { NavIndicator, StepLine, StyledNav } from './SignUpNav.style';
 
-function SignUpNav<T>({ step }: { step: SignUpStep }) {
+function SignUpNav({ step }: { step: SignUpStep }) {
   return (
     <StyledNav>
       {Array(SIGNUP_STEPS)

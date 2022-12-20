@@ -1,42 +1,27 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { postLogOut } from '../api/authAPI';
+import { Outlet } from 'react-router-dom';
+import { postReToken } from '../api/authAPI';
+import { setAxiosDefaultsBaseURL } from '../api/axiosConfig';
 import NavBar from '../components/NavBar';
 import LogInForm from '../components/Root/LogInForm';
 import StyledRoot from './Root.style';
 
+export type SetAuthType = React.Dispatch<React.SetStateAction<boolean>>;
+
 function Root() {
-  //! mock API
   const [auth, setAuth] = useState(false);
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-
-  const getAuth = () => {
-    const user = !!sessionStorage.getItem('is-auth');
-    console.log(user);
-    setAuth(user);
-  };
-
-  const MockLogout = () => (
-    <button
-      className="mock-logout"
-      type="button"
-      onClick={async () => {
-        await postLogOut();
-        getAuth();
-      }}
-    >
-      Log out
-    </button>
-  );
+  const [init, setInit] = useState(false);
 
   useEffect(() => {
-    getAuth();
+    setAxiosDefaultsBaseURL();
+    postReToken()
+      .then((res) => setAuth(res))
+      .then(() => setInit(true));
+  }, []);
 
-    if (auth && pathname === '/') {
-      navigate('/chat');
-    }
-  }, [auth, navigate, pathname]);
+  if (!init) {
+    return <></>;
+  }
 
   return (
     <StyledRoot>
@@ -44,10 +29,11 @@ function Root() {
         <>
           <NavBar />
           <Outlet />
-          <MockLogout />
+          {/* <MockLogout /> */}
         </>
       ) : (
-        <LogInForm getAuth={getAuth} />
+        // <LogInForm getAuth={getAuth} />
+        <LogInForm setAuth={setAuth} />
       )}
     </StyledRoot>
   );

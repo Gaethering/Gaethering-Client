@@ -1,6 +1,5 @@
-import React, { Dispatch, useState } from 'react';
+import React, { Dispatch } from 'react';
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
 import { NavURL, SetServiceType } from './NavBar.type';
 import { StyledModalBlur, StyledNavSelector } from './NavSelector.style';
 

@@ -1,5 +1,8 @@
 import { rest } from 'msw';
 import { AuthApiUrl } from '../api/authAPI.type';
+import { SignUpApiUrl } from '../api/signUpAPI.type';
+import { SignUpForm } from '../components/SignUp/SignUp.type';
+
 import { mockChatRoom } from './mockChatRooms';
 
 interface LoginBody {
@@ -13,6 +16,12 @@ interface LoginResponse {
 let auth = {};
 
 export const handlers = [
+  rest.post<SignUpForm>(SignUpApiUrl.SIGN_UP, async (req, res, ctx) => {
+    const result = await req.json();
+    console.log('mocksignup',req);
+    return res(ctx.status(200));
+  }),
+
   rest.post<LoginBody, LoginResponse>(
     AuthApiUrl.LogIn,
     async (req, res, ctx) => {

@@ -2,6 +2,7 @@ import UserPetList from './UserPetList';
 import UserProfile from './UserProfile';
 import { StyledUser } from './User.style';
 import { useState } from 'react';
+import PetImageDefault from '../../assets/PetImageDefault.svg'
 
 function User() {
   //temporary state
@@ -9,7 +10,7 @@ function User() {
     {
       name: '예삐',
       isDelegate: true,
-      imageUrl: '/src/assets/PetImageDefault.svg',
+      imageUrl: PetImageDefault,
     },
     {
       name: '뽀삐',

@@ -1,3 +1,4 @@
+import { HTMLInputTypeAttribute } from 'react';
 import {
   FieldValues,
   Path,
@@ -7,10 +8,11 @@ import {
 import StyledInput from './Input.style';
 
 type InputProp<T extends FieldValues> = {
+  type?: HTMLInputTypeAttribute | undefined;
+  required?: boolean | undefined;
   label?: string | undefined;
   plHolder?: string | undefined;
   name: Path<T>;
-  type?: string;
   register: UseFormRegister<T>;
   options?: RegisterOptions<T, Path<T>>;
 };
@@ -20,6 +22,7 @@ function Input<T extends FieldValues>({
   plHolder,
   name,
   type = 'text',
+  required,
   register,
   options,
 }: InputProp<T>) {
@@ -30,6 +33,7 @@ function Input<T extends FieldValues>({
         <input
           {...register(name, options)}
           placeholder={plHolder}
+          required={required}
           autoComplete="off"
           type={type}
         />

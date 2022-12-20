@@ -8,8 +8,8 @@ const StyledTalk = styled.div`
   margin: 1.4rem 2rem;
 
   img {
-    width: 6rem;
-    height: 6rem;
+    width: 5.6rem;
+    height: 5.6rem;
 
     margin-right: 0.4rem;
 
@@ -47,7 +47,7 @@ const TalkArea = styled.div`
   display: flex;
   align-items: end;
 
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.6rem;
 
   .chat-timestamp {
     height: 2rem;

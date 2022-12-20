@@ -34,12 +34,12 @@ function ChatRoom() {
 
   return (
     <StyledChatRoom>
-      {/* <Spinner /> */}
-      {isLoading || talksQuery.isLoading || !chatRoom ? (
+      {chatRoom && <ChatRoomTitle {...chatRoom} />}
+
+      {talksQuery.isLoading ? (
         <Spinner />
       ) : (
         <>
-          <ChatRoomTitle {...chatRoom} />
           {talks?.map((talk) =>
             talk.userName === myName ? (
               <ChatRoomMyTalk key={talk.timestamp} {...talk} />

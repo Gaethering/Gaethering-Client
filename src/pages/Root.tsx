@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Outlet, useOutletContext, useNavigate } from 'react-router-dom';
 import { postReToken } from '../api/authAPI';
 import { setAxiosDefaultsBaseURL } from '../api/axiosConfig';
@@ -7,7 +7,7 @@ import { ServiceType } from '../components/NavBar/NavBar.type';
 import LogInForm from '../components/Root/LogInForm';
 import StyledRoot from './Root.style';
 
-export type SetAuthType = React.Dispatch<React.SetStateAction<boolean>>;
+export type SetAuthType = Dispatch<React.SetStateAction<boolean>>;
 
 function Root() {
   const [auth, setAuth] = useState(false);

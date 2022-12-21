@@ -30,7 +30,8 @@ function Root() {
     } else if (!auth) {
       navigate('/');
     }
-  }, [auth, init, navigate]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth, init]);
 
   if (!init) {
     return <></>;

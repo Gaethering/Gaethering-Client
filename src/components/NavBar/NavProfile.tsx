@@ -5,7 +5,9 @@ import { useQuery } from 'react-query';
 import { QueryKeys } from '../../api/QueryKeys';
 import { getRequest } from '../../api/requests';
 
-export default function NavProfile() {
+type Props = { onClick: React.MouseEventHandler<HTMLDivElement> };
+
+export default function NavProfile({ onClick }: Props) {
   const { data: userInfo, isLoading } = useQuery(QueryKeys.navInfo, () =>
     getRequest<NavInfoResponse>(AuthApiUrl.NavInfo).then((res) => res?.data)
   );
@@ -14,7 +16,7 @@ export default function NavProfile() {
   const petName = userInfo?.petName;
 
   return (
-    <StyledNavProfile className="nav-profile">
+    <StyledNavProfile className="nav-profile" onClick={onClick}>
       {isLoading ? (
         <></>
       ) : (

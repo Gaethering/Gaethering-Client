@@ -4,6 +4,7 @@ import {
   JWTToken,
   LogInRequest,
   LogInResponse,
+  LogOutRequest,
   ReTokenRequest,
   ReTokenResponse,
 } from './authAPI.type';
@@ -22,9 +23,8 @@ export const postLogIn = async (data: LogInRequest) => {
   return response;
 };
 
-export const postLogOut = async () => {
-  const refreshToken = localStorage.getItem(QueryKeys.refreshToken);
-  const response = await postRequest(Auth.LogOut, refreshToken);
+export const postLogOut = async (tokens: LogOutRequest) => {
+  const response = await postRequest<void, LogOutRequest>(Auth.LogOut, tokens);
   return response?.data;
 };
 

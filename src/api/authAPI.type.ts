@@ -21,6 +21,8 @@ export interface LogInResponse {
   refreshToken: JWTToken;
 }
 
+export type LogOutRequest = LogInResponse;
+
 export interface NavInfoResponse {
   petName: string;
   imageUrl: string;

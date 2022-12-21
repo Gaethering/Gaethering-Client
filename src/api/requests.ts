@@ -3,7 +3,7 @@ import showAxiosError from './showAxiosError';
 
 const postRequest = async <T, D>(
   url: string,
-  data: D,
+  data?: D,
   config?: AxiosRequestConfig<D> | undefined
 ) => {
   try {
@@ -14,13 +14,9 @@ const postRequest = async <T, D>(
     );
 
     //! Test
-    console.info(
-      'POST_REQ',
-      response.request,
-      '성공!, 응답: ',
-      response.data,
-      'status: ' + response.status
-    );
+    console.info('POST_REQ', response.request, response.headers);
+    console.info('status: ' + response.status);
+    console.info('성공! 응답:', response.data);
 
     return response;
     //

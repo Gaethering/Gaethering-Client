@@ -22,9 +22,10 @@ export const postLogIn = async (data: LogInRequest) => {
   return response;
 };
 
-export const postLogOut = async (data: string) => {
-  const response = await postRequest(Auth.LogOut, data);
-  return response;
+export const postLogOut = async () => {
+  const refreshToken = localStorage.getItem(QueryKeys.refreshToken);
+  const response = await postRequest(Auth.LogOut, refreshToken);
+  return response?.data;
 };
 
 export const postReToken = async (accessToken?: JWTToken) => {

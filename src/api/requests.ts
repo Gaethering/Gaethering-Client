@@ -15,10 +15,11 @@ const postRequest = async <T, D>(
 
     //! Test
     console.info(
-      'POST_REQ' + response.request + '성공!, 응답: ',
+      'POST_REQ',
+      response.request,
+      '성공!, 응답: ',
       response.data,
-      'status: ',
-      response.status
+      'status: ' + response.status
     );
 
     return response;
@@ -41,10 +42,11 @@ const getRequest = async <T>(
 
     //! Test
     console.info(
-      'GET_REQ' + response.request + '성공!, 응답: ',
+      'GET_REQ',
+      response.request,
+      '성공!, 응답: ',
       response.data,
-      'status: ',
-      response.status
+      'status: ' + response.status
     );
 
     return response;
@@ -72,11 +74,11 @@ const patchRequest = async <T, D>(
 
     //! Test
     console.info(
-      'PATCH_REQ' + response.request + '성공!, 응답: ',
+      'PATCH_REQ',
+      response.request,
+      '성공!, 응답: ',
       response.data,
-      'status: ',
-      response.status,
-      response.statusText
+      'status: ' + response.status
     );
 
     return response;

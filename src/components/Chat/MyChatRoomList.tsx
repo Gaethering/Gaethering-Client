@@ -8,12 +8,10 @@ import MyChatRoomSkeleton from './MyChatRoomSkeleton';
 
 function MyChatRoomList() {
   //! Mock API
-  const { data: query, isLoading } = useQuery('chatrooms', () =>
+  const { data: chatRooms, isLoading } = useQuery('chatrooms', () =>
     getRequest<ChatRoomInfo[]>('http://localhost:5173/chatrooms')
   );
   ////
-
-  const chatRooms = query?.data;
 
   return (
     <>

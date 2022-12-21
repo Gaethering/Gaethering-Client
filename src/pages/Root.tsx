@@ -1,7 +1,9 @@
+import axios from 'axios';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Outlet, useOutletContext, useNavigate } from 'react-router-dom';
-import { postReToken } from '../api/authAPI';
+import { postLogOut, postReToken } from '../api/authAPI';
 import { setAxiosDefaultsBaseURL } from '../api/axiosConfig';
+import { QueryKeys } from '../api/QueryKeys';
 import NavBar from '../components/NavBar';
 import { ServiceType } from '../components/NavBar/NavBar.type';
 import LogInForm from '../components/Root/LogInForm';
@@ -15,6 +17,20 @@ function Root() {
 
   const [serviceName, setServiceName] = useState<ServiceType>('개모임');
 
+  const logOut = async () => {
+    const accessToken = (
+      axios.defaults.headers.common['Authorization'] as string
+    ).split(' ')[1];
+    const refreshToken = localStorage.getItem(QueryKeys.refreshToken);
+    await postLogOut({
+      accessToken: accessToken,
+      refreshToken: refreshToken as string,
+    });
+    localStorage.removeItem(QueryKeys.refreshToken);
+    setInit(false);
+    setAuth(false);
+  };
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +38,7 @@ function Root() {
     postReToken()
       .then((res) => setAuth(res))
       .then(() => setInit(true));
-  }, []);
+  }, [init]);
 
   useEffect(() => {
     if (auth && init) {
@@ -30,7 +46,7 @@ function Root() {
     } else if (!auth) {
       navigate('/');
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth, init]);
 
   if (!init) {
@@ -41,12 +57,14 @@ function Root() {
     <StyledRoot>
       {auth ? (
         <>
-          <NavBar serviceName={serviceName} setServiceName={setServiceName} />
+          <NavBar
+            serviceName={serviceName}
+            setServiceName={setServiceName}
+            logOut={logOut}
+          />
           <Outlet context={setServiceName} />
-          {/* <MockLogout /> */}
         </>
       ) : (
-        // <LogInForm getAuth={getAuth} />
         <LogInForm setAuth={setAuth} />
       )}
     </StyledRoot>

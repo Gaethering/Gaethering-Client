@@ -1,9 +1,10 @@
 import { Dispatch, useState } from 'react';
-import NavProfile from '../Root/NavProfile';
 import { NavLogo, NavSpace, StyledArrow, StyledNavBar } from './index.style';
 import { ServiceType } from './NavBar.type';
 import NavSelector from './NavSelector';
 import logoHorizontal from '../../assets/logo-horizontal.svg';
+import NavMenu from './NavMenu';
+import NavProfile from './NavProfile';
 
 // Components
 const Arrow = () => <StyledArrow>{'>'}</StyledArrow>;
@@ -12,11 +13,12 @@ const Logo = () => <img src={logoHorizontal} alt="개더링" />;
 interface NavProps {
   serviceName: ServiceType;
   setServiceName: Dispatch<ServiceType>;
+  logOut: () => void;
 }
 
-function NavBar({ serviceName, setServiceName }: NavProps) {
-  const [isPending, setIsPending] = useState(false);
+function NavBar({ serviceName, setServiceName, logOut }: NavProps) {
   const [showNav, setShowNav] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <>
@@ -36,11 +38,11 @@ function NavBar({ serviceName, setServiceName }: NavProps) {
         </div>
         <NavSelector
           setServiceName={setServiceName}
-          setIsPending={setIsPending}
           showNav={showNav}
           setShowNav={setShowNav}
         />
-        <NavProfile />
+        <NavProfile onClick={() => setShowMenu((prev) => !prev)} />
+        {showMenu && <NavMenu logOut={logOut} />}
       </StyledNavBar>
       <NavSpace />
     </>

@@ -4,6 +4,7 @@ import {
   JWTToken,
   LogInRequest,
   LogInResponse,
+  LogOutRequest,
   ReTokenRequest,
   ReTokenResponse,
 } from './authAPI.type';
@@ -13,17 +14,16 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import showAxiosError from './showAxiosError';
 
 export const postLogIn = async (data: LogInRequest) => {
-  const response = await axios.post<
-    LogInResponse,
-    AxiosResponse<LogInResponse, LogInRequest>,
-    LogInRequest
-  >(Auth.LogIn, data);
+  const response = await postRequest<LogInResponse, LogInRequest>(
+    Auth.LogIn,
+    data
+  );
 
   return response;
 };
 
-export const postLogOut = async (data: string) => {
-  const response = await postRequest(Auth.LogOut, data);
+export const postLogOut = async (tokens: LogOutRequest) => {
+  const response = await postRequest<void, LogOutRequest>(Auth.LogOut, tokens);
   return response;
 };
 

@@ -1,21 +1,15 @@
 import React, { Dispatch } from 'react';
 import { NavLink } from 'react-router-dom';
 import { NavURL, SetServiceType } from './NavBar.type';
-import { StyledModalBlur, StyledNavSelector } from './NavSelector.style';
+import { StyledModalOverlay, StyledNavSelector } from './NavSelector.style';
 
 interface Props {
   setServiceName: SetServiceType;
-  setIsPending: Dispatch<boolean>;
   showNav: boolean;
   setShowNav: Dispatch<React.SetStateAction<boolean>>;
 }
 
-function NavSelector({
-  setServiceName: set,
-  setIsPending,
-  showNav,
-  setShowNav,
-}: Props) {
+function NavSelector({ setServiceName: set, showNav, setShowNav }: Props) {
   return (
     <>
       <StyledNavSelector className={showNav ? 'view-nav' : 'hidden'}>
@@ -42,8 +36,7 @@ function NavSelector({
           </li>
         </ul>
       </StyledNavSelector>
-      {/* 이름 overlay 수정 */}
-      <StyledModalBlur
+      <StyledModalOverlay
         className={showNav ? 'view-nav' : 'hidden'}
         onClick={() => setShowNav((prev) => !prev)}
       />

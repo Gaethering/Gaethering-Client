@@ -15,7 +15,6 @@ interface NavProps {
 }
 
 function NavBar({ serviceName, setServiceName }: NavProps) {
-  const [isPending, setIsPending] = useState(false);
   const [showNav, setShowNav] = useState(false);
 
   return (
@@ -36,7 +35,6 @@ function NavBar({ serviceName, setServiceName }: NavProps) {
         </div>
         <NavSelector
           setServiceName={setServiceName}
-          setIsPending={setIsPending}
           showNav={showNav}
           setShowNav={setShowNav}
         />

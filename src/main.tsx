@@ -6,14 +6,15 @@ import './assets/index.css';
 
 //! Mock API
 import { worker } from './mocks/browser';
-import { QueryClient, QueryClientProvider } from 'react-query';
 worker.start();
 ////
+
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      suspense: true,
+      // suspense: true,
       staleTime: Infinity,
     },
   },

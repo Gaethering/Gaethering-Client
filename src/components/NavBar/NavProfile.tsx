@@ -9,7 +9,7 @@ type Props = { onClick: React.MouseEventHandler<HTMLDivElement> };
 
 export default function NavProfile({ onClick }: Props) {
   const { data: userInfo, isLoading } = useQuery(QueryKeys.navInfo, () =>
-    getRequest<NavInfoResponse>(AuthApiUrl.NavInfo).then((res) => res?.data)
+    getRequest<NavInfoResponse>(AuthApiUrl.NavInfo)
   );
   const imageUrl = userInfo?.imageUrl;
   const nickname = userInfo?.nickname;

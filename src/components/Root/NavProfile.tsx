@@ -1,25 +1,32 @@
-import { useState } from 'react';
 import StyledNavProfile from './NavProfile.style';
 import defaultImg from '../../assets/defaultProfilePicture.svg';
-
-export interface NavProfileType {
-  petName: string;
-  imageUrl: string;
-}
+import { AuthApiUrl, NavInfoResponse } from '../../api/authAPI.type';
+import { useQuery } from 'react-query';
+import { QueryKeys } from '../../api/QueryKeys';
+import { getRequest } from '../../api/requests';
 
 export default function NavProfile() {
-  const [profileImg, setProfileImg] = useState('');
-  const [userName, setUserName] = useState('뽀삐');
-  const [petName, setPetName] = useState('user1234');
-
-  const imgUrl = profileImg ? profileImg : defaultImg;
+  const { data: userInfo, isLoading } = useQuery(QueryKeys.navInfo, () =>
+    getRequest<NavInfoResponse>(AuthApiUrl.NavInfo).then((res) => res?.data)
+  );
+  const imageUrl = userInfo?.imageUrl;
+  const nickname = userInfo?.nickname;
+  const petName = userInfo?.petName;
 
   return (
     <StyledNavProfile className="nav-profile">
-      <img src={imgUrl} className="pet-profile-img" alt="반려동물 프로필" />
+      {isLoading ? (
+        <></>
+      ) : (
+        <img
+          src={imageUrl ?? defaultImg}
+          className="pet-profile-img"
+          alt="반려동물 프로필"
+        />
+      )}
       <div className="user-info">
         <span className="pet-name">{petName}</span>
-        <span className="user-name">{userName}</span>
+        <span className="user-name">{nickname}</span>
       </div>
     </StyledNavProfile>
   );

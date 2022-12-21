@@ -8,6 +8,8 @@ const StyledNavProfile = styled.div`
   img.pet-profile-img {
     width: 4rem;
     margin-right: 1rem;
+
+    border-radius: 100%;
   }
 
   .user-info {

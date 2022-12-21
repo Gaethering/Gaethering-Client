@@ -5,6 +5,8 @@ const StyledNavProfile = styled.div`
   align-items: center;
   justify-content: end;
 
+  cursor: pointer;
+
   img.pet-profile-img {
     width: 4rem;
     margin-right: 1rem;

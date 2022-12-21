@@ -6,7 +6,7 @@ export const enum AuthApiUrl {
   /** POST: 로그아웃 */
   LogOut = '/members/auth/logout',
   /** GET: NavProfile 용 회원 정보 */
-  LogInInfo = '/members/info',
+  NavInfo = '/members/info',
   /** POST: 새로운 엑세스 토큰 발급 */
   ReToken = '/members/auth/reissue-token',
 }
@@ -19,6 +19,12 @@ export interface LogInRequest {
 export interface LogInResponse {
   accessToken: JWTToken;
   refreshToken: JWTToken;
+}
+
+export interface NavInfoResponse {
+  petName: string;
+  imageUrl: string;
+  nickname: string;
 }
 
 export interface ReTokenRequest {

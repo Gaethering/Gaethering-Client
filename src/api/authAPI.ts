@@ -50,16 +50,16 @@ export const postReToken = async (accessToken?: JWTToken) => {
       setAxiosHeaderToken(accessToken);
 
       return true;
+    } else {
+      return false;
     }
-
-    alert('로그인 토큰이 만료되었습니다');
-
-    return false;
     ////
   } catch (error) {
     if (error instanceof AxiosError) {
       showAxiosError(error);
     }
+    localStorage.removeItem(QueryKeys.refreshToken);
+    alert('로그인 토큰이 만료되었습니다');
 
     return false;
   }

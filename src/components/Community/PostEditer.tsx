@@ -24,17 +24,28 @@ function PostEditer() {
     console.log('res', res);
   };
   return (
-    <StyledPostEditer onSubmit={handleSubmit(onSubmit)}>
-      <TitleInput {...register('title')} />
-      <ContentsInput {...register('contents')} />
-      <Submit type="submit" btnTheme="main">
-        작성 완료{isSubmitting && isLoading && <span>{'Loading...'}</span>}
-      </Submit>
-    </StyledPostEditer>
+    <EditerOverlay>
+      <StyledPostEditer onSubmit={handleSubmit(onSubmit)}>
+        <TitleInput {...register('title')} />
+        <ContentsInput {...register('contents')} />
+        <Submit type="submit" btnTheme="main">
+          작성 완료{isSubmitting && isLoading && <span>{'Loading...'}</span>}
+        </Submit>
+      </StyledPostEditer>
+    </EditerOverlay>
   );
 }
 
 export default PostEditer;
+
+const EditerOverlay = styled.div`
+  position: fixed;
+  width: 80vw;
+  height: 100%;
+  background-color: ${({ theme: { color } }) => color.white};
+
+  z-index: 1000;
+`;
 
 const StyledPostEditer = styled.form`
   display: flex;
@@ -43,6 +54,7 @@ const StyledPostEditer = styled.form`
   padding: 2rem;
 
   border-radius: 1.6rem;
+  background-color: ${({ theme: { color } }) => color.white};
   box-shadow: 0 0 1rem 0 rgba(100, 100, 100, 0.16);
 
   input,

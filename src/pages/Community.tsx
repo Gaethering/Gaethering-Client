@@ -10,23 +10,21 @@ function Community() {
   const [isEditting, setIsEditting] = useState(false);
   const [searchWord, setSearchWord] = useState('');
   const [category, setCategory] = useState<CommunityType>('qna');
+
   return (
     <>
-      {isEditting ? (
+      <div>
         <Outlet />
-      ) : (
-        <div>
-          <CommunityNav
-            communityState={category}
-            setCommunityState={setCategory}
-          />
-          <SearchBar searchWord={searchWord} setSearchWord={setSearchWord} />
-          <ArticleList />
-          <PostButton to={'editer'} onClick={() => setIsEditting(true)}>
-            글 쓰기
-          </PostButton>
-        </div>
-      )}
+        <CommunityNav
+          communityState={category}
+          setCommunityState={setCategory}
+        />
+        <SearchBar searchWord={searchWord} setSearchWord={setSearchWord} />
+        <ArticleList />
+        <PostButton to={'editer'} onClick={() => setIsEditting(true)}>
+          글 쓰기
+        </PostButton>
+      </div>
     </>
   );
 }

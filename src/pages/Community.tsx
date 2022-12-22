@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import ArticleList from '../components/Community/ArticleList';
-import SearchBar from '../components/Community/SearchBar';
 import CommunityNav from '../components/Community/CommunityNav';
+import SearchBar from '../components/widgets/SearchBar';
 
 function Community() {
+  const [searchWord, setSearchWord] = useState('');
   return (
     <div>
       <CommunityNav />
-      <SearchBar />
+      <SearchBar searchWord={searchWord} setSearchWord={setSearchWord} />
       <ArticleList />
     </div>
   );

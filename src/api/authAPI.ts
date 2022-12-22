@@ -1,33 +1,28 @@
 import { QueryKeys } from './QueryKeys';
-import {
-  AuthApiUrl as Auth,
-  JWTToken,
-  LogInRequest,
-  LogInResponse,
-  LogOutRequest,
-  ReTokenRequest,
-  ReTokenResponse,
-} from './authAPI.type';
+import * as T from './authAPI.type';
 import { setAxiosHeaderToken } from './axiosUtils';
 import { postRequest } from './requests';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import showAxiosError from './showAxiosError';
 
-export const postLogIn = async (data: LogInRequest) => {
-  const response = await postRequest<LogInResponse, LogInRequest>(
-    Auth.LogIn,
+export const postLogIn = async (data: T.LogInRequest) => {
+  const response = await postRequest<T.LogInResponse, T.LogInRequest>(
+    T.AuthApiUrl.LogIn,
     data
   );
 
   return response;
 };
 
-export const postLogOut = async (tokens: LogOutRequest) => {
-  const response = await postRequest<void, LogOutRequest>(Auth.LogOut, tokens);
+export const postLogOut = async (tokens: T.LogOutRequest) => {
+  const response = await postRequest<void, T.LogOutRequest>(
+    T.AuthApiUrl.LogOut,
+    tokens
+  );
   return response;
 };
 
-export const postReToken = async (accessToken?: JWTToken) => {
+export const postReToken = async (accessToken?: T.JWTToken) => {
   const refreshToken = localStorage.getItem(QueryKeys.refreshToken);
 
   if (!refreshToken) {
@@ -39,10 +34,10 @@ export const postReToken = async (accessToken?: JWTToken) => {
 
   try {
     const response = await axiosNoInter.post<
-      ReTokenResponse,
-      AxiosResponse<ReTokenResponse, ReTokenRequest>,
-      ReTokenRequest
-    >(Auth.ReToken, { refreshToken, accessToken });
+      T.ReTokenResponse,
+      AxiosResponse<T.ReTokenResponse, T.ReTokenRequest>,
+      T.ReTokenRequest
+    >(T.AuthApiUrl.ReToken, { refreshToken, accessToken });
 
     if (response?.status === 200) {
       const { accessToken } = response.data;

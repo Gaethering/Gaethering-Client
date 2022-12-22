@@ -1,4 +1,4 @@
-import { CommunityType } from '../../pages/Community';
+import { CommunityType } from '../../api/boardAPI.type';
 import SectionNav from '../widgets/SectionNav';
 
 interface Props {
@@ -13,7 +13,7 @@ function CommunityNav({ communityState, setCommunityState }: Props) {
       setState={setCommunityState}
       sectionStates={[
         { name: '질문있어요', state: 'qna' },
-        { name: '동네정보', state: 'localInfo' },
+        { name: '동네정보', state: 'info' },
       ]}
     />
   );

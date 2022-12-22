@@ -34,8 +34,11 @@ export const postReToken = async (accessToken?: JWTToken) => {
     return false;
   }
 
+  const axiosNoInter = axios.create();
+  axiosNoInter.interceptors.request.clear();
+
   try {
-    const response = await axios.post<
+    const response = await axiosNoInter.post<
       ReTokenResponse,
       AxiosResponse<ReTokenResponse, ReTokenRequest>,
       ReTokenRequest

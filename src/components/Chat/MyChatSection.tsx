@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatSearchBar from './ChatSearchBar';
+import ChatSearchBar from '../widgets/SearchBar';
 import MyChatRoomList from './MyChatRoomList';
 
 // type Props = {};

@@ -1,7 +1,7 @@
-import React from 'react'
-import ChatSearchBar from './ChatSearchBar'
-import DaySelectFilter from './DaySelectFilter'
-import LocalChatRoomList from './LocalChatRoomList'
+import React from 'react';
+import ChatSearchBar from '../widgets/SearchBar';
+import DaySelectFilter from './DaySelectFilter';
+import LocalChatRoomList from './LocalChatRoomList';
 
 // type Props = {}
 
@@ -12,7 +12,7 @@ function FindChatSection() {
       <ChatSearchBar />
       <LocalChatRoomList />
     </section>
-  )
+  );
 }
 
-export default FindChatSection
+export default FindChatSection;

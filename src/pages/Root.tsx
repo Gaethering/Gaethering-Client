@@ -73,7 +73,9 @@ function Root() {
             setServiceName={setServiceName}
             logOut={logOut}
           />
-          <Outlet context={setServiceName} />
+          <main>
+            <Outlet context={setServiceName} />
+          </main>
         </>
       ) : (
         <LogInForm setAuth={setAuth} />

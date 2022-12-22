@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledRoot = styled.main`
+const StyledRoot = styled.div`
   width: 80vw;
   min-width: 390px;
   margin: 0 auto;

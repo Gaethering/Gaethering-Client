@@ -1,6 +1,11 @@
 import axios from 'axios';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { Outlet, useOutletContext, useNavigate } from 'react-router-dom';
+import {
+  Outlet,
+  useOutletContext,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import { postLogOut, postReToken } from '../api/authAPI';
 import { getAccessToken, setAxiosDefaultsConfig } from '../api/axiosUtils';
 import { QueryKeys } from '../api/QueryKeys';
@@ -37,6 +42,7 @@ function Root() {
   };
 
   const navigate = useNavigate();
+  const location = useLocation().pathname;
 
   useEffect(() => {
     setAxiosDefaultsConfig();
@@ -46,9 +52,9 @@ function Root() {
   }, [init]);
 
   useEffect(() => {
-    if (auth && init) {
+    if (auth && init && location === '/') {
       navigate('/chat');
-    } else if (!auth) {
+    } else if (!auth && init) {
       navigate('/');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

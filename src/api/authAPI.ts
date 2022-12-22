@@ -8,7 +8,7 @@ import {
   ReTokenRequest,
   ReTokenResponse,
 } from './authAPI.type';
-import { setAxiosHeaderToken } from './axiosConfig';
+import { setAxiosHeaderToken } from './axiosUtils';
 import { postRequest } from './requests';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import showAxiosError from './showAxiosError';

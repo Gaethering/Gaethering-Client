@@ -2,7 +2,7 @@ export type CommunityType = 'qna' | 'info';
 
 export const enum BoardApiUrl {
   /** POST: 게시글 작성 */
-  PostArticle = '/api/boards',
+  PostArticle = '/boards',
 }
 
 export interface BoardArticle {

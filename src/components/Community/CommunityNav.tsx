@@ -1,12 +1,22 @@
-import { StyledCommunityNav, NavButton } from './CommunityNav.style';
+import { CommunityType } from '../../pages/Community';
+import SectionNav from '../widgets/SectionNav';
 
-function CommunityNav() {
+interface Props {
+  communityState: CommunityType;
+  setCommunityState: React.Dispatch<React.SetStateAction<CommunityType>>;
+}
+
+function CommunityNav({ communityState, setCommunityState }: Props) {
   return (
-    <StyledCommunityNav>
-      <NavButton type='button' className='active'>질문 있어요</NavButton>
-      <NavButton type='button'>동네 정보</NavButton>
-    </StyledCommunityNav>
-  )
+    <SectionNav<CommunityType>
+      currentState={communityState}
+      setState={setCommunityState}
+      sectionStates={[
+        { name: '질문있어요', state: 'qna' },
+        { name: '동네정보', state: 'localInfo' },
+      ]}
+    />
+  );
 }
 
 export default CommunityNav;

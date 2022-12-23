@@ -2,10 +2,13 @@ import UserPetList from './UserPetList';
 import UserProfile from './UserProfile';
 import { StyledUser } from './User.style';
 import { useState } from 'react';
-import PetImageDefault from '../../assets/PetImageDefault.svg'
+import PetImageDefault from '../../assets/PetImageDefault.svg';
+import { ProfileResponse } from '../../api/profileAPI.typs';
 
-function User() {
+
+function User({ data: user }:ProfileResponse) {
   //temporary state
+
   const [petList, setPetList] = useState([
     {
       name: '예삐',
@@ -28,9 +31,9 @@ function User() {
   return (
     <StyledUser>
       <UserProfile
-        userName="user1234"
+        userName={user?.nickname}
         userLocal="ㅂㅂ동"
-        userTemp={36.5}
+        userTemp={user?.mannerDegree}
         petImg={petList[0].imageUrl}
       />
       <UserPetList petList={petList} />

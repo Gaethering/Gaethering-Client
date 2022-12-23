@@ -58,7 +58,7 @@ export const StyledUserPet = styled.div<StyledUserPetProp>`
       &::after {
         content: '✓';
         position: absolute;
-        top: 63%;
+        top: 59%;
         left: 81%;
         width: 2rem;
         height: 2rem;

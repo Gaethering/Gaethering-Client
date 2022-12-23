@@ -7,16 +7,17 @@ interface UserPetProp {
   children: ReactNode;
   src: string;
   id: string;
+  name: string;
   className: string;
-  isRepresentative: boolean;
+  representative: boolean;
 }
 
-function UserPet({ src, id, className, isRepresentative, children }: UserPetProp) {
+function UserPet({ src, id, name, className, representative, children }: UserPetProp) {
   return (
-    <StyledUserPet isRepresentative={isRepresentative}>
+    <StyledUserPet representative={representative}>
       <Link to="/profile/pet" className="link">
         <div className="container">
-          <PetImage src={src} id={id} className={className} />
+          <PetImage src={src} id={id} name={name} className={className} />
         </div>
         {children}
       </Link>

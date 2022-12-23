@@ -4,12 +4,12 @@ import PetImage from './PetImage';
 
 interface UserProp {
   userName: string;
-  userLocal: string;
   userTemp: number;
   petImg: string;
 }
 
-function UserProfile({ userName, userLocal, userTemp, petImg }: UserProp) {
+function UserProfile({ userName, userTemp, petImg }: UserProp) {
+  console.log('userName', userName)
   return (
     <StyledUserProfile>
       <div className="user_profile_container">
@@ -17,7 +17,6 @@ function UserProfile({ userName, userLocal, userTemp, petImg }: UserProp) {
         <div className="user_profile_detail">
           <div className="user_info">
             <h2 className="user_name">{userName}</h2>
-            <p className="user_local">{userLocal}</p>
           </div>
           <p className="user_temp">산책 매너 온도 {userTemp}℃</p>
         </div>

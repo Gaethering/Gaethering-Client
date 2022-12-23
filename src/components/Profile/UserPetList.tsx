@@ -3,8 +3,9 @@ import UserPet from './UserPet';
 
 interface UserPetListProp {
   petList: {
+    id: string;
     name: string;
-    isRepresentative: boolean;
+    representative: boolean;
     imageUrl: string;
   }[];
 }
@@ -14,13 +15,14 @@ function UserPetList({ petList }: UserPetListProp) {
     <UserPetListStyle>
       <h2>나의 반려동물</h2>
       <div className="pet_list">
-        {petList.map((pet) => (
+        {petList && petList.map((pet) => (
           <UserPet
-            key={pet.name}
+            key={pet?.id}
+            id={pet?.id}
+            name={pet?.name}
             src={pet.imageUrl}
-            id={pet.name}
             className="pet_img"
-            isRepresentative={pet.isRepresentative}
+            representative={pet?.representative}
           >
             {pet.name}
           </UserPet>

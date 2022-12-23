@@ -4,7 +4,7 @@ import UserPet from './UserPet';
 interface UserPetListProp {
   petList: {
     name: string;
-    isDelegate: boolean;
+    isRepresentative: boolean;
     imageUrl: string;
   }[];
 }
@@ -20,7 +20,7 @@ function UserPetList({ petList }: UserPetListProp) {
             src={pet.imageUrl}
             id={pet.name}
             className="pet_img"
-            isDelegate={pet.isDelegate}
+            isRepresentative={pet.isRepresentative}
           >
             {pet.name}
           </UserPet>

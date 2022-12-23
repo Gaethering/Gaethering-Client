@@ -8,13 +8,13 @@ interface UserPetProp {
   src: string;
   id: string;
   className: string;
-  isDelegate: boolean;
+  isRepresentative: boolean;
 }
 
-function UserPet({ src, id, className, isDelegate, children }: UserPetProp) {
+function UserPet({ src, id, className, isRepresentative, children }: UserPetProp) {
   return (
-    <StyledUserPet isDelegate={isDelegate}>
-      <Link to="/pet" className="link">
+    <StyledUserPet isRepresentative={isRepresentative}>
+      <Link to="/profile/pet" className="link">
         <div className="container">
           <PetImage src={src} id={id} className={className} />
         </div>

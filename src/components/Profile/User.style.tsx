@@ -20,7 +20,7 @@ export const UserPetListStyle = styled.div`
 `
 
 interface StyledUserPetProp {
-  isDelegate: boolean;
+  isRepresentative: boolean;
 }
 
 export const StyledUserPet = styled.div<StyledUserPetProp>`
@@ -35,8 +35,8 @@ export const StyledUserPet = styled.div<StyledUserPetProp>`
     font-weight: 700;
   }
 
-  ${({ isDelegate }) =>
-    isDelegate &&
+  ${({ isRepresentative }) =>
+    isRepresentative &&
     css`
       .container {
         border-radius: 50%;
@@ -132,6 +132,8 @@ export const StyledUserProfile = styled.div`
     margin: 3rem 0;
     .go_my_article,
     .edit_profile {
+      box-sizing: content-box;
+      padding: 0.8rem;
       width: 45%;
       min-width: 140px;
       font-size: 1.7rem;

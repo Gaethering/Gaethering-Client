@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styled from 'styled-components';
 import { postArticle } from '../../api/boardAPI';
 import { PostArticleRequest } from '../../api/boardAPI.type';
 import StyledButton from '../Form/Button.style';
+import PicturesInput from './PicturesInput';
 
 function PostEditer() {
   const {
@@ -11,14 +13,26 @@ function PostEditer() {
     formState: { errors, isLoading, isSubmitting },
     register,
   } = useForm<PostArticleRequest>();
+
+  const [images, setImages] = useState<File[]>([]);
+
   const onSubmit: SubmitHandler<PostArticleRequest> = async (data) => {
+    setValue('categoryId', 1);
     console.log(data);
-    setValue('category', 'qna');
 
     const jsonData = JSON.stringify(data);
     const blob = new Blob([jsonData], { type: 'application/json' });
+    const blob2 = new Blob();
     const formData = new FormData();
+
+    console.log(!!images[0]);
+
+    formData.append('images', images[0] || blob2);
     formData.append('data', blob);
+
+    for (const pair of formData.entries()) {
+      console.log(`${pair[0]}`, pair[1]);
+    }
 
     const res = await postArticle(formData);
     console.log('res', res);
@@ -26,10 +40,14 @@ function PostEditer() {
   return (
     <EditerOverlay>
       <StyledPostEditer onSubmit={handleSubmit(onSubmit)}>
-        <TitleInput {...register('title')} />
-        <ContentsInput {...register('contents')} />
+        <TitleInput {...register('title')} placeholder="제목을 입력해주세요" />
+        <ContentsInput
+          {...register('content')}
+          placeholder="내용을 입력해주세요"
+        />
+        <PicturesInput images={images} setImages={setImages} />
         <Submit type="submit" btnTheme="main">
-          작성 완료{isSubmitting && isLoading && <span>{'Loading...'}</span>}
+          작성 완료 {isSubmitting && isLoading && <span>{'Loading...'}</span>}
         </Submit>
       </StyledPostEditer>
     </EditerOverlay>
@@ -40,11 +58,15 @@ export default PostEditer;
 
 const EditerOverlay = styled.div`
   position: fixed;
+  top: ${({ theme: { size } }) => size.navHeight};
+
   width: 80vw;
   height: 100%;
   background-color: ${({ theme: { color } }) => color.white};
 
-  z-index: 1000;
+  overflow-y: scroll;
+
+  z-index: 100;
 `;
 
 const StyledPostEditer = styled.form`
@@ -81,7 +103,7 @@ const ContentsInput = styled.textarea`
   resize: none;
   outline: none;
 
-  height: 60vh;
+  height: 50vh;
   padding: 1rem;
 
   border: none;
@@ -92,5 +114,7 @@ const ContentsInput = styled.textarea`
 
 const Submit = styled(StyledButton)`
   margin-top: 2rem;
+  margin-bottom: 4rem;
+
   font-size: 1.8rem;
 `;

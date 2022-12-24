@@ -22,8 +22,8 @@ export interface BoardArticle {
 
 export interface PostArticleRequest {
   title: string;
-  contents: string;
-  category: string;
+  content: string;
+  categoryId: 1 | 2;
 }
 
 export type PostArticleResponse = BoardArticle;

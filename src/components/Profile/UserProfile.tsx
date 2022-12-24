@@ -1,6 +1,7 @@
 import { StyledUserProfile } from './User.style';
 import Button from '../Form/Button';
 import PetImage from './PetImage';
+import { Link } from 'react-router-dom';
 
 interface UserProp {
   userName: string;
@@ -9,7 +10,7 @@ interface UserProp {
 }
 
 function UserProfile({ userName, userTemp, petImg }: UserProp) {
-  console.log('userName', userName)
+  console.log('userName', userName);
   return (
     <StyledUserProfile>
       <div className="user_profile_container">
@@ -22,12 +23,16 @@ function UserProfile({ userName, userTemp, petImg }: UserProp) {
         </div>
       </div>
       <div className="button_container">
-        <Button btnTheme="sub" type="button" className="go_my_article">
-          내가 쓴 게시물
-        </Button>
-        <Button btnTheme="main" type="button" className="edit_profile">
-          프로필 수정
-        </Button>
+        <Link to="/myBoard" className="link">
+          <Button btnTheme="sub" type="button" className="go_my_article">
+            내가 쓴 게시물
+          </Button>
+        </Link>
+        <Link to="/editProfile" className="link">
+          <Button btnTheme="main" type="button" className="edit_profile">
+            프로필 수정
+          </Button>
+        </Link>
       </div>
     </StyledUserProfile>
   );

@@ -125,13 +125,19 @@ export const StyledUserProfile = styled.div`
     justify-content: space-between;
     gap: 1rem;
     margin: 3rem 0;
-    .go_my_article,
-    .edit_profile {
+    a {
+      display: inline-flex;
+      text-decoration: none;
+      margin: 0;
+      padding: 0;
+      width: 48%;
+      min-width: 140px;
+    }
+    button {
       box-sizing: content-box;
       padding: 0.8rem;
-      width: 45%;
-      min-width: 140px;
       font-size: 1.7rem;
+      width: 100%;
     }
   }
 `;

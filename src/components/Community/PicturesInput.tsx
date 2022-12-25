@@ -26,7 +26,7 @@ function PicturesInput({ images, setImages }: Props) {
       console.log('load success');
       const img = e.target?.result as string;
       setShowImg((prev) => [...prev, img]);
-      setImages(file);
+      setImages((prev) => [...prev, file]);
     };
   };
 

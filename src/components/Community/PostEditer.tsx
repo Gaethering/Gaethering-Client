@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styled from 'styled-components';
 import { postArticle } from '../../api/boardAPI';
@@ -7,6 +7,14 @@ import StyledButton from '../Form/Button.style';
 import PicturesInput from './PicturesInput';
 
 function PostEditer() {
+  useEffect(() => {
+    //! Mock API
+    import('../../mocks/browser').then((msw) => {
+      msw.worker.context.isMockingEnabled && msw.worker.stop();
+    });
+    ////
+  }, []);
+
   const {
     handleSubmit,
     setValue,
@@ -22,17 +30,10 @@ function PostEditer() {
 
     const jsonData = JSON.stringify(data);
     const blob = new Blob([jsonData], { type: 'application/json' });
-    const blob2 = new Blob();
     const formData = new FormData();
 
-    console.log(!!images[0]);
-
-    formData.append('images', images[0] || blob2);
+    images.forEach((img) => formData.append('images', img));
     formData.append('data', blob);
-
-    for (const pair of formData.entries()) {
-      console.log(`${pair[0]}`, pair[1]);
-    }
 
     const res = await postArticle(formData);
     console.log('res', res);

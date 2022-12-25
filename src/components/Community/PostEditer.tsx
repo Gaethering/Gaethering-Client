@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useMutation } from 'react-query';
 import styled from 'styled-components';
 import { postArticle } from '../../api/boardAPI';
 import { PostArticleRequest } from '../../api/boardAPI.type';
+import { useCategory } from '../../pages/Community';
 import StyledButton from '../Form/Button.style';
 import PicturesInput from './PicturesInput';
 
@@ -18,11 +20,18 @@ function PostEditer() {
   const {
     handleSubmit,
     setValue,
-    formState: { errors, isLoading, isSubmitting },
+    formState: { errors },
     register,
   } = useForm<PostArticleRequest>();
 
   const [images, setImages] = useState<File[]>([]);
+  const {category} = useCategory();
+  
+  const { mutate, isLoading } = useMutation(postArticle, {
+    retry: 5,
+    retryDelay: 1000,
+    onSuccess: (data) => console.log(data),
+  });
 
   const onSubmit: SubmitHandler<PostArticleRequest> = async (data) => {
     setValue('categoryId', 1);
@@ -32,10 +41,13 @@ function PostEditer() {
     const blob = new Blob([jsonData], { type: 'application/json' });
     const formData = new FormData();
 
+    images[0] ?? formData.append('images', new Blob());
     images.forEach((img) => formData.append('images', img));
+
     formData.append('data', blob);
 
-    const res = await postArticle(formData);
+    const res = mutate(formData);
+
     console.log('res', res);
   };
   return (
@@ -48,7 +60,7 @@ function PostEditer() {
         />
         <PicturesInput images={images} setImages={setImages} />
         <Submit type="submit" btnTheme="main">
-          작성 완료 {isSubmitting && isLoading && <span>{'Loading...'}</span>}
+          작성 완료 {isLoading && <span>{'Loading...'}</span>}
         </Submit>
       </StyledPostEditer>
     </EditerOverlay>

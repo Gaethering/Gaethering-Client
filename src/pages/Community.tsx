@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import { NavLink, Outlet, useOutlet, useOutletContext } from 'react-router-dom';
-import { CommunityType } from '../api/boardAPI.type';
+import { CommunityCategory } from '../api/boardAPI.type';
 import ArticleList from '../components/Community/ArticleList';
 import CommunityNav from '../components/Community/CommunityNav';
 import PostButton from '../components/Community/PostButton';
 import SearchBar from '../components/widgets/SearchBar';
 
 type CommunityOutlet = {
-  category: CommunityType;
+  category: CommunityCategory;
   // setCategory: React.Dispatch<React.SetStateAction<CommunityType>>;
 };
 
 function Community() {
   const [isEditting, setIsEditting] = useState(false);
   const [searchWord, setSearchWord] = useState('');
-  const [category, setCategory] = useState<CommunityType>('qna');
+  const [category, setCategory] = useState<CommunityCategory>('qna');
 
   return (
     <>

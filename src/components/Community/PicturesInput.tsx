@@ -6,9 +6,10 @@ import StyledButton from '../Form/Button.style';
 interface Props {
   images: File[];
   setImages: React.Dispatch<React.SetStateAction<File[]>>;
+  disabled: boolean;
 }
 
-function PicturesInput({ images, setImages }: Props) {
+function PicturesInput({ images, setImages, disabled }: Props) {
   const [showImg, setShowImg] = useState([] as string[]);
 
   const handleFile: ChangeEventHandler<HTMLInputElement> = ({
@@ -38,12 +39,13 @@ function PicturesInput({ images, setImages }: Props) {
         ))}
       </div>
       <label>
-        <PictureButtonDiv>+</PictureButtonDiv>
+        {disabled || <PictureButtonDiv>+</PictureButtonDiv>}
         <input
           type={'file'}
           className="hidden"
           accept="image/jpeg, image/jpg, image/png"
           onChange={handleFile}
+          disabled={disabled}
         />
       </label>
     </StyledPicturesInput>

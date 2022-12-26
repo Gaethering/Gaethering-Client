@@ -57,11 +57,54 @@ const ContentsInput = styled.textarea`
   font-weight: 400;
 `;
 
-const Submit = styled(StyledButton)`
+const Error = styled.p`
+  color: ${({ theme: { color } }) => color.redPoint};
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+`;
+
+const ButtonSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
   margin-top: 2rem;
   margin-bottom: 4rem;
+`;
 
+const Submit = styled(StyledButton)`
+  flex: 1;
   font-size: 1.8rem;
 `;
 
-export { ContentsInput, EditerOverlay, StyledPostEditer, Submit, TitleInput };
+const CancleButton = styled(StyledButton)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 1.6rem;
+
+  span {
+    rotate: 45deg;
+
+    font-size: 4rem;
+    font-weight: 300;
+  }
+`;
+
+export {
+  ContentsInput,
+  EditerOverlay,
+  StyledPostEditer,
+  Submit,
+  TitleInput,
+  Error,
+  CancleButton,
+  ButtonSection,
+};

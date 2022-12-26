@@ -9,4 +9,6 @@ export const QueryKeys = {
   refreshToken: 'refreshToken',
   /** 로그인 여부 */
   auth: 'auth',
+  /** NavBar 유저 정보 */
+  navInfo: ['user', 'navBar'],
 } as const;

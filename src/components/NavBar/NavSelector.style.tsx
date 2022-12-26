@@ -45,7 +45,7 @@ const StyledNavSelector = styled.nav`
   }
 `;
 
-const StyledModalBlur = styled.div`
+const StyledModalOverlay = styled.div`
   display: none;
   position: fixed;
   top: ${({ theme: { size } }) => size.navHeight};
@@ -61,4 +61,4 @@ const StyledModalBlur = styled.div`
   }
 `;
 
-export { StyledModalBlur, StyledNavSelector };
+export { StyledModalOverlay, StyledNavSelector };

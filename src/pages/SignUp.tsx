@@ -45,8 +45,9 @@ function SignUp() {
     };
 
     const response = await postLogIn(loginForm);
-
-    setAuthToken(response.data);
+    if (response) {
+      setAuthToken(response);
+    }
   };
 
   const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
@@ -68,7 +69,7 @@ function SignUp() {
 
       const response = await postSignUp(formData);
 
-      if (response?.status === 201) {
+      if (response?.status === 201 || response?.status === 200) {
         setWelcome(response.data);
         login();
         nextStep();

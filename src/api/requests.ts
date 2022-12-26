@@ -3,7 +3,7 @@ import showAxiosError from './showAxiosError';
 
 const postRequest = async <T, D>(
   url: string,
-  data: D,
+  data?: D,
   config?: AxiosRequestConfig<D> | undefined
 ) => {
   try {
@@ -14,14 +14,11 @@ const postRequest = async <T, D>(
     );
 
     //! Test
-    console.info(
-      'POST_REQ' + response.request + '성공!, 응답: ',
-      response.data,
-      'status: ',
-      response.status
-    );
+    console.info('POST_REQ', response.request, response.headers);
+    console.info('status: ' + response.status);
+    console.info('성공! 응답:', response.data);
 
-    return response;
+    return response.data;
     //
   } catch (error) {
     if (error instanceof AxiosError) {
@@ -40,14 +37,11 @@ const getRequest = async <T>(
     const response = await axios.get<T>(url, config);
 
     //! Test
-    console.info(
-      'GET_REQ' + response.request + '성공!, 응답: ',
-      response.data,
-      'status: ',
-      response.status
-    );
+    console.info('POST_REQ', response.request, response.headers);
+    console.info('status: ' + response.status);
+    console.info('성공! 응답:', response.data);
 
-    return response;
+    return response.data;
     //
   } catch (error) {
     if (error instanceof AxiosError) {
@@ -71,15 +65,11 @@ const patchRequest = async <T, D>(
     );
 
     //! Test
-    console.info(
-      'PATCH_REQ' + response.request + '성공!, 응답: ',
-      response.data,
-      'status: ',
-      response.status,
-      response.statusText
-    );
+    console.info('POST_REQ', response.request, response.headers);
+    console.info('status: ' + response.status);
+    console.info('성공! 응답:', response.data);
 
-    return response;
+    return response.data;
     //
   } catch (error) {
     if (error instanceof AxiosError) {

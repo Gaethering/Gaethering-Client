@@ -21,12 +21,12 @@ function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
     formState: { errors, isValid },
   } = useForm<LogInRequest>({ mode: 'onTouched' });
 
-  const login = useMutation((loginData: LogInRequest) => postLogIn(loginData), {
+  const login = useMutation(postLogIn, {
     onSuccess: (response) => {
       if (!response) {
         return;
       }
-      setAuthToken(response.data);
+      setAuthToken(response);
 
       setAuth(true);
     },

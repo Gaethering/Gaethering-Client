@@ -2,6 +2,7 @@ import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import { postInfoArticle, postQnaArticle } from '../../api/boardAPI';
 import {
   PostArticleRequest,
@@ -24,6 +25,7 @@ function PostEditer() {
   const {
     handleSubmit,
     formState: { errors, isValid },
+    reset,
     register,
   } = useForm<PostArticleRequest>({ mode: 'all' });
 
@@ -71,6 +73,20 @@ function PostEditer() {
 
     mutate(formData);
   };
+
+  const navigate = useNavigate();
+
+  const onCencel = () => {
+    const isConfirm = confirm('작성을 취소하시겠습니까?');
+    if (!isConfirm) {
+      return;
+    }
+
+    reset();
+    setImages([]);
+    navigate('../');
+  };
+
   return (
     <S.EditerOverlay>
       <S.StyledPostEditer onSubmit={handleSubmit(onSubmit)}>
@@ -103,13 +119,9 @@ function PostEditer() {
           >
             작성 완료
           </S.Submit>
-          <S.CancleButton
-            type="button"
-            btnTheme="sub"
-            disabled={!isValid || isLoading}
-          >
-            <span>+</span>
-          </S.CancleButton>
+          <S.CencelButton type="button" btnTheme="sub" onClick={onCencel}>
+            작성 취소
+          </S.CencelButton>
         </S.ButtonSection>
       </S.StyledPostEditer>
     </S.EditerOverlay>

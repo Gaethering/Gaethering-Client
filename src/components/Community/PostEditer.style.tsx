@@ -79,23 +79,19 @@ const Submit = styled(StyledButton)`
   font-size: 1.8rem;
 `;
 
-const CancleButton = styled(StyledButton)`
+const CencelButton = styled(StyledButton)`
   display: flex;
   align-items: center;
   justify-content: center;
 
   padding: 0;
 
-  width: 4.4rem;
+  width: 10rem;
   height: 4.4rem;
   border-radius: 1.6rem;
 
-  span {
-    rotate: 45deg;
-
-    font-size: 4rem;
-    font-weight: 300;
-  }
+  font-size: 1.8rem;
+  font-weight: 300;
 `;
 
 export {
@@ -105,6 +101,6 @@ export {
   Submit,
   TitleInput,
   Error,
-  CancleButton,
+  CencelButton,
   ButtonSection,
 };

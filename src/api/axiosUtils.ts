@@ -34,6 +34,10 @@ function getTokenExpirationDate(token: JWTToken) {
 
 function setAxiosIntercept() {
   axios.interceptors.request.use(async (config) => {
+    if (!getAccessToken()) {
+      return config;
+    }
+
     if (
       getTokenExpirationDate(getAccessToken()) <
       new Date(Date.now() + 2 * 60000)

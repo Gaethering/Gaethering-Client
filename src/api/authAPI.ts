@@ -6,12 +6,16 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import showAxiosError from './showAxiosError';
 
 export const postLogIn = async (data: T.LogInRequest) => {
-  const response = await postRequest<T.LogInResponse, T.LogInRequest>(
-    T.AuthApiUrl.LogIn,
-    data
-  );
+  const axiosNoInter = axios.create();
+  axiosNoInter.interceptors.request.clear();
 
-  return response;
+  const response = await axiosNoInter.post<
+    T.LogInResponse,
+    AxiosResponse<T.LogInResponse, T.LogInRequest>,
+    T.LogInRequest
+  >(T.AuthApiUrl.LogIn, data);
+
+  return response.data;
 };
 
 export const postLogOut = async (tokens: T.LogOutRequest) => {
@@ -23,14 +27,14 @@ export const postLogOut = async (tokens: T.LogOutRequest) => {
 };
 
 export const postReToken = async (accessToken?: T.JWTToken) => {
+  const axiosNoInter = axios.create();
+  axiosNoInter.interceptors.request.clear();
+
   const refreshToken = localStorage.getItem(QueryKeys.refreshToken);
 
   if (!refreshToken) {
     return false;
   }
-
-  const axiosNoInter = axios.create();
-  axiosNoInter.interceptors.request.clear();
 
   try {
     const response = await axiosNoInter.post<

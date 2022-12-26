@@ -50,6 +50,8 @@ export interface BoardArticle {
 
 export interface GetArticlesResponse {
   posts: BoardArticleList[];
+  totalPostsCnt: number;
+  nextCursor: number;
 }
 
 export interface GetArticleDetailResponse {

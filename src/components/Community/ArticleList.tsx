@@ -10,11 +10,11 @@ interface Props {
 }
 
 function ArticleList({ category }: Props) {
-  const articlesQuery = useQuery([QueryKeys.ArticleList, category], () =>
+  const { data: articless } = useQuery([QueryKeys.ArticleList, category], () =>
     getArticles(category, 10, '9223372036854775807')
   );
 
-  console.log('게시글!', articlesQuery);
+  console.log('게시글!', articless);
 
   //임시
   const articles = [

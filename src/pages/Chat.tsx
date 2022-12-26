@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
+import chatStart from '../api/chatAPI';
 import ChatNav from '../components/Chat/ChatNav';
 import FindChatSection from '../components/Chat/FindChatSection';
 import MyChatSection from '../components/Chat/MyChatSection';
@@ -11,8 +13,17 @@ function Chat() {
 
   useEffect(() => {
     //! Mock API
-    import('../mocks/browser').then((msw) => msw.worker.start());
+    // import('../mocks/browser').then((msw) => msw.worker.stop());
     ////
+  }, []);
+  useEffect(() => {
+    const chat = chatStart(
+      axios.defaults.headers.common['Authorization'] as string
+    );
+    console.log('chat', chat);
+    console.log(axios.defaults.headers.common['Authorization'] as string);
+
+    chat.activate();
   }, []);
 
   const setNav = useSetServiceName();

@@ -23,7 +23,7 @@ function SignUp() {
 
   useEffect(() => {
     //! Mock API
-    import('../mocks/browser').then((msw) => msw.worker.stop());
+    // import('../mocks/browser').then((msw) => msw.worker.stop());
     ////
   }, []);
 

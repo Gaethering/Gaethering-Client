@@ -1,33 +1,42 @@
 import { Client, Message } from '@stomp/stompjs';
+import { JWTToken } from './authAPI.type';
 
-const stompClient = new Client({
-  brokerURL: 'ws://',
-  connectHeaders: {
-    login: 'user',
-    passcode: 'password',
-  },
-  debug: function (str) {
-    console.log(str);
-  },
-  reconnectDelay: 5000,
-  heartbeatIncoming: 4000,
-  heartbeatOutgoing: 4000,
-});
+function chatStart(token: JWTToken) {
+  const stompClient = new Client({
+    brokerURL: 'ws://localhost:8080/ws-connect',
 
-stompClient.onConnect = (frame) => {
-  // Do something, all subscribes must be done is this callback
-  // This is needed because this will be executed after a (re)connect
-  console.log('STOMP CONNECTED', frame);
-};
+    connectHeaders: {
+      Authorization: token,
+      authorization: token,
+    },
+    debug: function (str) {
+      console.log('STOMP Debug', str);
+    },
+    reconnectDelay: 10000,
+    // heartbeatIncoming: 4000,
+    // heartbeatOutgoing: 4000,
+  });
 
-stompClient.onStompError = (frame) => {
-  // Will be invoked in case of error encountered at Broker
-  // Bad login/passcode typically will cause an error
-  // Complaint brokers will set `message` header with a brief message. Body may contain details.
-  // Compliant brokers will terminate the connection after any error
-  console.error('STOMP: Broker reported error: ' + frame.headers['message']);
-  console.error('STOMP: Additional details: ', frame.body);
-  console.error('STOMP: Error Header: ', frame.headers);
-};
+  stompClient.onConnect = (frame) => {
+    // Do something, all subscribes must be done is this callback
+    // This is needed because this will be executed after a (re)connect
+    console.log('STOMP CONNECTED', frame);
+    stompClient.subscribe(`/exchange/chat.exchange/room.1`, () =>
+      alert('Hello!')
+    );
+  };
 
-stompClient.activate();
+  stompClient.onStompError = (frame) => {
+    // Will be invoked in case of error encountered at Broker
+    // Bad login/passcode typically will cause an error
+    // Complaint brokers will set `message` header with a brief message. Body may contain details.
+    // Compliant brokers will terminate the connection after any error
+    console.error('STOMP: Broker reported error: ' + frame.headers['message']);
+    console.error('STOMP: Additional details: ', frame.body);
+    console.error('STOMP: Error Header: ', frame.headers);
+  };
+
+  return stompClient;
+}
+
+export default chatStart;

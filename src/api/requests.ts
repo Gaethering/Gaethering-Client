@@ -26,6 +26,7 @@ const postRequest = async <T, D>(
     } else {
       console.info(String(error));
     }
+    return error;
   }
 };
 
@@ -49,6 +50,7 @@ const getRequest = async <T>(
     } else {
       console.error(String(error));
     }
+    return error;
   }
 };
 
@@ -77,6 +79,7 @@ const patchRequest = async <T, D>(
     } else {
       console.error(String(error));
     }
+    return error;
   }
 };
 

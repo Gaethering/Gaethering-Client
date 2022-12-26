@@ -6,7 +6,7 @@ interface PetImageProp {
   className: string;
 }
 
-function PetImage({ src, petID, name, className }: PetImageProp) {
+function PetImage({ src, name, className }: PetImageProp) {
   return (
     <StyledPetImage>
       <img src={src} name={name} className={className}></img>

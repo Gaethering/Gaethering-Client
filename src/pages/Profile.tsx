@@ -47,7 +47,9 @@ function Profile() {
       <UserProfile
         userName={userData.data?.nickname}
         userTemp={userData.data?.mannerDegree}
-        petImg={petList[0].imageUrl}
+        petImg={
+          // userData.data?.pets.filter((pet) => pet.representative === true).imageUrl}
+          userData.data?.pets[0].imageUrl}
       />
       <UserPetList petList={userData.data?.pets} />
     </StyledUser>

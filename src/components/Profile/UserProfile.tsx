@@ -14,7 +14,7 @@ function UserProfile({ userName, userTemp, petImg }: UserProp) {
   return (
     <StyledUserProfile>
       <div className="user_profile_container">
-        <PetImage src={petImg} id="pet" className="user_img" />
+        <PetImage src={petImg} name={userName} className="user_img" />
         <div className="user_profile_detail">
           <div className="user_info">
             <h2 className="user_name">{userName}</h2>

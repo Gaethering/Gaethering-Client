@@ -14,7 +14,7 @@ function PetProfile({ age, gender, breed, weight, isNeutered, description }: Pet
   return (
     <StyledPetProfile>
       <div className="age">
-        <h3>나이</h3>
+        <h3>생일</h3>
         <p>{age}</p>
       </div>
       <div className="breed_weight_section">
@@ -35,7 +35,7 @@ function PetProfile({ age, gender, breed, weight, isNeutered, description }: Pet
         <div className="gender">
           <h3>성별</h3>
           <Button btnTheme="main" type="button" className="btn_gender">
-            {gender}
+            {gender === 'FEMALE' ? '여아' : '남아'}
           </Button>
         </div>
         <div className="isNeutered">

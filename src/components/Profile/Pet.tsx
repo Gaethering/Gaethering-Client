@@ -11,9 +11,9 @@ import { PetResponse } from '../../api/profileAPI.typs';
 
 function Pet() {
   const { petID } = useParams();
-  const userData = useQuery(['pets', petID], () => getPetProfile(petID));
-  console.log('gg', userData.data);
-  console.log('gg2', userData);
+  const petData = useQuery(['pets', petID], () => getPetProfile(petID));
+  console.log('gg', petData.data);
+  console.log('gg2', petData);
 
   // const setNav = useSetServiceName();
 
@@ -22,28 +22,28 @@ function Pet() {
   // }, [setNav]);
 
   //임시 데이터
-  const petData = {
-    name: '해삐',
-    age: 6,
-    gender: '남아',
-    breed: '말티즈',
-    weight: 5.5,
-    isNeutered: true,
-    description: '말을 잘들어요',
-    imageUrl:
-      'https://images.pexels.com/photos/13215915/pexels-photo-13215915.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-  };
+  // const petData = {
+  //   name: '해삐',
+  //   age: 6,
+  //   gender: '남아',
+  //   breed: '말티즈',
+  //   weight: 5.5,
+  //   isNeutered: true,
+  //   description: '말을 잘들어요',
+  //   imageUrl:
+  //     'https://images.pexels.com/photos/13215915/pexels-photo-13215915.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+  // };
 
   return (
     <StyledPet>
       <div className="title_section">
         <PetImage
-          src={petData.imageUrl}
-          name={petData.name}
+          src={petData.data?.imageUrl}
+          name={petData.data?.name}
           className="pet_img"
         />
         <div className="name_section">
-          <p className="pet_name">{petData.name}</p>
+          <p className="pet_name">{petData.data?.name}</p>
           <Link to="editPet" className="link">
             <Button btnTheme="sub" type="button" className="btn_edit_profile">
               프로필 수정
@@ -52,12 +52,12 @@ function Pet() {
         </div>
       </div>
       <PetProfile
-        age={petData.age}
-        gender={petData.gender}
-        breed={petData.breed}
-        weight={petData.weight}
-        isNeutered={petData.isNeutered}
-        description={petData.description}
+        age={petData.data?.birth}
+        gender={petData.data?.gender}
+        breed={petData.data?.breed}
+        weight={petData.data?.weight}
+        isNeutered={petData.data?.isNeutered}
+        description={petData.data?.description}
       />
     </StyledPet>
   );

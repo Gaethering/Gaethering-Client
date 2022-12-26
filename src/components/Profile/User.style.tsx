@@ -19,6 +19,19 @@ export const UserPetListStyle = styled.div`
   }
 `
 
+export const Title = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .link {
+    button {
+      font-size: 1.5rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 1.2rem;
+    }
+  }
+`
+
 interface StyledUserPetProp {
   representative: boolean;
 }

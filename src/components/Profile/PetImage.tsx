@@ -2,14 +2,14 @@ import StyledPetImage from './PetImage.style'
 
 interface PetImageProp {
   src: string;
-  id: string;
+  name: string;
   className: string;
 }
 
-function PetImage({ src, id, className }: PetImageProp) {
+function PetImage({ src, petID, name, className }: PetImageProp) {
   return (
     <StyledPetImage>
-      <img src={src} id={id} className={className}></img>
+      <img src={src} name={name} className={className}></img>
     </StyledPetImage>
   );
 }

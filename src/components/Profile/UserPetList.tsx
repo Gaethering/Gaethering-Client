@@ -3,7 +3,7 @@ import UserPet from './UserPet';
 
 interface UserPetListProp {
   petList: {
-    id: string;
+    id: number;
     name: string;
     representative: boolean;
     imageUrl: string;
@@ -18,9 +18,9 @@ function UserPetList({ petList }: UserPetListProp) {
         {petList && petList.map((pet) => (
           <UserPet
             key={pet?.id}
-            id={pet?.id}
+            petID={pet?.id}
             name={pet?.name}
-            src={pet.imageUrl}
+            src={pet?.imageUrl}
             className="pet_img"
             representative={pet?.representative}
           >

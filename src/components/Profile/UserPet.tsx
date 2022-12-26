@@ -6,18 +6,18 @@ import { StyledUserPet } from './User.style';
 interface UserPetProp {
   children: ReactNode;
   src: string;
-  id: string;
+  petID: number;
   name: string;
   className: string;
   representative: boolean;
 }
 
-function UserPet({ src, id, name, className, representative, children }: UserPetProp) {
+function UserPet({ src, petID, name, className, representative, children }: UserPetProp) {
   return (
     <StyledUserPet representative={representative}>
-      <Link to="/profile/pet" className="link">
+      <Link to={`/profile/pet/${petID}`} className="link">
         <div className="container">
-          <PetImage src={src} id={id} name={name} className={className} />
+          <PetImage src={src} name={name} className={className} />
         </div>
         {children}
       </Link>

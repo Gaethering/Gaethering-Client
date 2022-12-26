@@ -2,9 +2,25 @@ import PetImage from './PetImage';
 import PetProfile from './PetProfile';
 import { StyledPet } from './Pet.style';
 import Button from '../Form/Button';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { useEffect } from 'react';
+import { useSetServiceName } from '../../pages/Root';
+import { getPetProfile } from '../../api/profileAPI';
+import { PetResponse } from '../../api/profileAPI.typs';
 
 function Pet() {
+  const { petID } = useParams();
+  const userData = useQuery(['pets', petID], () => getPetProfile(petID));
+  console.log('gg', userData.data);
+  console.log('gg2', userData);
+
+  // const setNav = useSetServiceName();
+
+  // useEffect(() => {
+  //   setNav('프로필');
+  // }, [setNav]);
+
   //임시 데이터
   const petData = {
     name: '해삐',
@@ -21,21 +37,28 @@ function Pet() {
   return (
     <StyledPet>
       <div className="title_section">
-        <PetImage src={petData.imageUrl} id={petData.name} className="pet_img" />
+        <PetImage
+          src={petData.imageUrl}
+          name={petData.name}
+          className="pet_img"
+        />
         <div className="name_section">
           <p className="pet_name">{petData.name}</p>
-          <Link to="/editPet" className='link'>
-            <Button
-              btnTheme="sub"
-              type="button"
-              className="btn_edit_profile"
-            >
+          <Link to="editPet" className="link">
+            <Button btnTheme="sub" type="button" className="btn_edit_profile">
               프로필 수정
             </Button>
           </Link>
         </div>
       </div>
-      <PetProfile age={petData.age} gender={petData.gender} breed={petData.breed} weight={petData.weight} isNeutered={petData.isNeutered} description={petData.description}/>
+      <PetProfile
+        age={petData.age}
+        gender={petData.gender}
+        breed={petData.breed}
+        weight={petData.weight}
+        isNeutered={petData.isNeutered}
+        description={petData.description}
+      />
     </StyledPet>
   );
 }

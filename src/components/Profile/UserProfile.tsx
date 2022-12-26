@@ -28,7 +28,7 @@ function UserProfile({ userName, userTemp, petImg }: UserProp) {
             내가 쓴 게시물
           </Button>
         </Link>
-        <Link to="/editProfile" className="link">
+        <Link to="edit" className="link">
           <Button btnTheme="main" type="button" className="edit_profile">
             프로필 수정
           </Button>

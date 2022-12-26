@@ -5,6 +5,7 @@ import Button from '../Form/Button';
 import Input from '../Form/Input';
 import SelectInput from '../Form/SelectInput';
 import { StyledEditForm } from './Pet.style';
+import { EditPetForm } from './Edit.type';
 
 interface EditPetType {
   petName: string;
@@ -119,19 +120,21 @@ function EditPet() {
           </div>
           <div className="one_row">
             <div className="select_gender select column">
-              <SelectInput
-                name="petGender"
+              <SelectInput<EditPetForm, EditPetForm['gender']>
+                name="gender"
                 label="성별"
                 register={register}
-                values={['여아', '남아']}
+                values={['FEMALE', 'MALE']}
+                valueLabels={['여아', '남아']}
               />
             </div>
             <div className="select_neutralization select column">
-              <SelectInput
-                name="neutralization"
+              <SelectInput<EditPetForm, EditPetForm['isNeutered']>
+                name="isNeutered"
                 label="중성화 여부"
                 register={register}
-                values={['완료', '미완료']}
+                values={[true, false]}
+                valueLabels={['완료', '미완료']}
               />
             </div>
           </div>

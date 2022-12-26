@@ -32,7 +32,7 @@ function Community() {
           setCommunityState={setCategory}
         />
         <SearchBar searchWord={searchWord} setSearchWord={setSearchWord} />
-        <ArticleList />
+        <ArticleList category={category} />
         <PostButton to={'editer'} onClick={() => setIsEditting(true)}>
           글 쓰기
         </PostButton>

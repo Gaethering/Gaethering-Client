@@ -1,15 +1,20 @@
 import ArticleLayout from './ArticleLayout';
 import { StyledArticleList } from './Article.style';
-import { CommunityCategory } from '../../api/boardAPI.type';
+import { CategoryID, CommunityCategory } from '../../api/boardAPI.type';
 import { useQuery } from 'react-query';
 import { QueryKeys } from '../../api/QueryKeys';
+import { getArticles } from '../../api/boardAPI';
 
 interface Props {
   category: CommunityCategory;
 }
 
 function ArticleList({ category }: Props) {
-  const articlesQuery = useQuery(QueryKeys.ArticleList);
+  const articlesQuery = useQuery([QueryKeys.ArticleList, category], () =>
+    getArticles(category, 10, '9223372036854775807')
+  );
+
+  console.log('게시글!', articlesQuery);
 
   //임시
   const articles = [

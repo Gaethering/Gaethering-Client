@@ -35,27 +35,19 @@ export async function postInfoArticle(data: FormData) {
   return response.data;
 }
 
-async function getArticles(
+export async function getArticles(
+  category: T.CommunityCategory,
   size = 10,
-  categoryId: T.CategoryID,
   lastId?: number
 ) {
   type Res = T.GetArticlesResponse;
   const response = await axios.get<Res, A<Res, void>>(
-    `${Api.GetArticles}${categoryId}/list?size=${size}${
+    `${Api.GetArticles}${T.CategoryID[category]}/list?size=${size}${
       lastId ? '&lastPostId=' + lastId : ''
     }`
   );
 
   return response.data;
-}
-
-export async function getQnaArticles(size?: number, lastId?: PostId) {
-  return await getArticles(size, T.CategoryID.qna, lastId);
-}
-
-export async function getInfoArticles(size?: number, lastId?: PostId) {
-  return await getArticles(size, T.CategoryID.info, lastId);
 }
 
 export async function patchArticle(id: PostId, data: T.PatchArticleRequest) {

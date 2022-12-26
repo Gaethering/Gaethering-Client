@@ -15,10 +15,10 @@ export const enum BoardApiUrl {
   DeleteArticle = '/boards/',
 }
 
-export const enum CategoryID {
-  'qna' = 1,
-  'info' = 2,
-}
+export const CategoryID = {
+  qna: 1,
+  info: 2,
+} as const;
 
 export type CommunityCategory = keyof typeof CategoryID;
 

@@ -1,14 +1,14 @@
-import { CommunityType } from '../../api/boardAPI.type';
+import { CommunityCategory } from '../../api/boardAPI.type';
 import SectionNav from '../widgets/SectionNav';
 
 interface Props {
-  communityState: CommunityType;
-  setCommunityState: React.Dispatch<React.SetStateAction<CommunityType>>;
+  communityState: CommunityCategory;
+  setCommunityState: React.Dispatch<React.SetStateAction<CommunityCategory>>;
 }
 
 function CommunityNav({ communityState, setCommunityState }: Props) {
   return (
-    <SectionNav<CommunityType>
+    <SectionNav<CommunityCategory>
       currentState={communityState}
       setState={setCommunityState}
       sectionStates={[

@@ -13,17 +13,20 @@ function chatStart(token: JWTToken) {
       console.log('STOMP Debug', str);
     },
     reconnectDelay: 0,
-    heartbeatIncoming: 4000,
-    heartbeatOutgoing: 4000,
+    heartbeatIncoming: 0,
+    heartbeatOutgoing: 0,
   });
 
   stompClient.onConnect = (frame) => {
     // Do something, all subscribes must be done is this callback
     // This is needed because this will be executed after a (re)connect
     console.log('STOMP CONNECTED', frame);
-    // stompClient.subscribe(`/exchange/chat.exchange/room.1`, () =>
-    //   alert('Hello!')
-    // );
+    stompClient.subscribe(
+      `/exchange/chat.exchange/room.4d284910-3d2c-466c-9135-adbdc9296d3b`,
+      (data) => {
+        console.log('BODY', data.body);
+      }
+    );
   };
 
   stompClient.onStompError = (frame) => {

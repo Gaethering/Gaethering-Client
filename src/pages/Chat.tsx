@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import chatStart from '../api/chatAPI';
+import { postRequest } from '../api/requests';
 import ChatNav from '../components/Chat/ChatNav';
 import FindChatSection from '../components/Chat/FindChatSection';
 import MyChatSection from '../components/Chat/MyChatSection';
+import Button from '../components/Form/Button';
 import { useSetServiceName } from './Root';
 
 export type ChatState = 'findChat' | 'myChat';
@@ -16,14 +18,44 @@ function Chat() {
     // import('../mocks/browser').then((msw) => msw.worker.stop());
     ////
   }, []);
+  const chat = chatStart(
+    axios.defaults.headers.common['Authorization'] as string
+  );
+  console.log('chat', chat);
   useEffect(() => {
-    const chat = chatStart(
-      axios.defaults.headers.common['Authorization'] as string
-    );
-    console.log('chat', chat);
-
     chat.activate();
   }, []);
+
+  const onClick = () => {
+    chat.publish({
+      destination: '/app/chat.enter.4d284910-3d2c-466c-9135-adbdc9296d3b',
+      body: JSON.stringify({ memberId: '2', content: '입장' }),
+    });
+    chat.publish({
+      destination: '/app/chat.send.4d284910-3d2c-466c-9135-adbdc9296d3b',
+      body: JSON.stringify({ memberId: '2', content: 'Hello!!!' }),
+    });
+  };
+
+  const onClick2 = async () => {
+    const res = await postRequest('/chat/room', {
+      name: null,
+      maxParticipantCount: 0,
+      description: '설명',
+      walkingTimes: [
+        {
+          dayOfWeek: '월',
+          time: '2020-11-20 11:30 ~ 2020-11-20 13:30',
+        },
+        {
+          dayOfWeek: '화',
+          time: '2020-11-20 11:30 ~ 2020-11-20 13:30',
+        },
+      ],
+    });
+
+    console.log('chatRes', res);
+  };
 
   const setNav = useSetServiceName();
 
@@ -33,6 +65,8 @@ function Chat() {
 
   return (
     <div>
+      <Button onClick={onClick}>Hello</Button>
+      <Button onClick={onClick2}>Make</Button>
       <ChatNav chatState={chatState} setChatState={setChatState} />
       {/* {chatState === 'findChat' ? <FindChatSection /> : <MyChatSection />} */}
     </div>

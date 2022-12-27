@@ -9,3 +9,12 @@ export interface EditPetForm {
   imageUrl: string;
 }
 
+export interface AddPetForm {
+  petName: string;
+  petBirth: number;
+  weight: number;
+  breed: string;
+  petGender: 'MALE' | 'FEMALE';
+  description: string;
+  isNeutered: boolean;
+}

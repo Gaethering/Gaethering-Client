@@ -2,12 +2,12 @@ import Button from '../Form/Button';
 import { StyledPetProfile } from './Pet.style';
 
 interface PetProfileProp {
-  age: number;
-  gender: string;
-  breed: string;
-  weight: number;
-  isNeutered: boolean;
-  description: string;
+  age?: string;
+  gender?: string;
+  breed?: string;
+  weight?: number;
+  isNeutered?: boolean;
+  description?: string;
 }
 
 function PetProfile({ age, gender, breed, weight, isNeutered, description }: PetProfileProp) {

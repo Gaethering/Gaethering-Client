@@ -34,7 +34,7 @@ function PostEditer() {
   const { category } = useCategory();
 
   const post = category === 'qna' ? postQnaArticle : postInfoArticle;
-  const { invalidateQueries } = useQueryClient();
+  const queryClient = useQueryClient();
   const { mutate, isLoading } = useMutation<
     PostArticleResponse,
     AxiosError,
@@ -48,7 +48,7 @@ function PostEditer() {
       ////TEST
       alert('작성 완료!');
 
-      invalidateQueries([QueryKeys.ArticleList, category]);
+      queryClient.invalidateQueries([QueryKeys.ArticleList, category]);
 
       reset();
       setImages([]);

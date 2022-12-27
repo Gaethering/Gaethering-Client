@@ -1,13 +1,14 @@
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { postInfoArticle, postQnaArticle } from '../../api/boardAPI';
 import {
   PostArticleRequest,
   PostArticleResponse,
 } from '../../api/boardAPI.type';
+import { QueryKeys } from '../../api/QueryKeys';
 import showAxiosError from '../../api/showAxiosError';
 import { useCategory } from '../../pages/Community';
 import PicturesInput from './PicturesInput';
@@ -33,7 +34,7 @@ function PostEditer() {
   const { category } = useCategory();
 
   const post = category === 'qna' ? postQnaArticle : postInfoArticle;
-
+  const { invalidateQueries } = useQueryClient();
   const { mutate, isLoading } = useMutation<
     PostArticleResponse,
     AxiosError,
@@ -46,7 +47,9 @@ function PostEditer() {
       console.log('게시글 작성 완료!', data);
       ////TEST
       alert('작성 완료!');
-      
+
+      invalidateQueries(QueryKeys.ArticleList);
+
       reset();
       setImages([]);
       navigate('../');

@@ -5,15 +5,13 @@ const StyledRoot = styled.div`
   min-width: 390px;
   margin: 0 auto;
 
-  overflow-x: hidden;
-
-  .mock-logout {
-    margin: 3rem;
-    padding: 0.4rem 1.4rem;
-    background-color: #000;
-    color: #fff;
-    font-weight: 700;
+  main {
+    overflow-x: hidden;
   }
+`;
+
+export const Container = styled.div`
+  overflow-x: hidden;
 `;
 
 export default StyledRoot;

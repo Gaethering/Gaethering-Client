@@ -6,6 +6,7 @@ import CommunityNav from '../components/Community/CommunityNav';
 import PostButton from '../components/Community/PostButton';
 import SearchBar from '../components/widgets/SearchBar';
 import { useSetServiceName } from './Root';
+import { Container } from './Root.style';
 
 type CommunityOutlet = {
   category: CommunityCategory;
@@ -25,7 +26,7 @@ function Community() {
 
   return (
     <>
-      <div>
+      <Container>
         <Outlet context={{ category }} />
         <CommunityNav
           communityState={category}
@@ -36,7 +37,7 @@ function Community() {
         <PostButton to={'editer'} onClick={() => setIsEditting(true)}>
           글 쓰기
         </PostButton>
-      </div>
+      </Container>
     </>
   );
 }

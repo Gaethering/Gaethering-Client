@@ -4,6 +4,7 @@ import StyledButton from '../Form/Button.style';
 const EditerOverlay = styled.div`
   position: fixed;
   top: ${({ theme: { size } }) => size.navHeight};
+  right: 10vw;
 
   width: 80vw;
   height: 100%;

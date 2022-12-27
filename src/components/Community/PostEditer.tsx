@@ -42,11 +42,14 @@ function PostEditer() {
     retry: 3,
     retryDelay: 500,
     onSuccess: (data) => {
-      alert('작성 완료!');
-
       //! TEST
       console.log('게시글 작성 완료!', data);
       ////TEST
+      alert('작성 완료!');
+      
+      reset();
+      setImages([]);
+      navigate('../');
     },
     onError: (error) => showAxiosError(error),
   });

@@ -1,3 +1,4 @@
+import { useMutation } from 'react-query';
 import { useTheme } from 'styled-components';
 import { BoardArticleList } from '../../api/boardAPI.type';
 import CommentLogo from '../../assets/CommentLogo';
@@ -24,6 +25,8 @@ function ArticleLayout({
       <br />
     </>
   ));
+
+  // const heart = useMutation()
 
   return (
     <S.ArticleLayout>

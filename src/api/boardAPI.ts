@@ -85,4 +85,57 @@ export async function deleteImage(id: PostId, imageId: number) {
   return response.data;
 }
 
+export async function getComments(
+  id: PostId,
+  size = 5,
+  lastId = Number.MAX_SAFE_INTEGER
+) {
+  const response = await axios.get<
+    T.GetCommentsResponse,
+    A<T.GetCommentsResponse, void>
+  >(Api.GetComments + id + `/comments?size=${size}&lastPostId=${lastId}`);
 
+  return response.data;
+}
+
+export async function postComment(id: PostId, content: string) {
+  const response = await axios.post<
+    T.PostCommentResponse,
+    A<T.PostCommentResponse, T.PostCommentRequest>,
+    T.PostCommentRequest
+  >(Api.PostComment + id + '/comments', { content });
+
+  return response.data;
+}
+
+export async function patchComment(
+  postId: PostId,
+  commentId: number,
+  content: string
+) {
+  const response = await axios.patch<
+    T.PatchCommentResponse,
+    A<T.PatchCommentResponse, T.PatchCommentRequest>,
+    T.PatchCommentRequest
+  >(Api.PatchComment + `${postId}/comments/${commentId}`, { content });
+
+  return response.data;
+}
+
+export async function deleteComment(postId: PostId, commentId: number) {
+  const response = await axios.delete<void>(
+    Api.DeleteComment + `${postId}/comments/${commentId}`
+  );
+
+  return response;
+}
+
+export async function postHeart(postId: PostId) {
+  const response = await axios.post<
+    T.PostHeartResponse,
+    A<T.PostHeartResponse, void>,
+    void
+  >(Api.PostHeart + `${postId}/comments`);
+
+  return response.data;
+}

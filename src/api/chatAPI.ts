@@ -4,26 +4,26 @@ import { JWTToken } from './authAPI.type';
 function chatStart(token: JWTToken) {
   const stompClient = new Client({
     brokerURL: 'ws://localhost:8080/ws-connect',
-
+    discardWebsocketOnCommFailure: true,
     connectHeaders: {
       Authorization: token,
-      authorization: token,
     },
+
     debug: function (str) {
       console.log('STOMP Debug', str);
     },
-    reconnectDelay: 10000,
-    // heartbeatIncoming: 4000,
-    // heartbeatOutgoing: 4000,
+    reconnectDelay: 0,
+    heartbeatIncoming: 4000,
+    heartbeatOutgoing: 4000,
   });
 
   stompClient.onConnect = (frame) => {
     // Do something, all subscribes must be done is this callback
     // This is needed because this will be executed after a (re)connect
     console.log('STOMP CONNECTED', frame);
-    stompClient.subscribe(`/exchange/chat.exchange/room.1`, () =>
-      alert('Hello!')
-    );
+    // stompClient.subscribe(`/exchange/chat.exchange/room.1`, () =>
+    //   alert('Hello!')
+    // );
   };
 
   stompClient.onStompError = (frame) => {

@@ -21,7 +21,6 @@ function Chat() {
       axios.defaults.headers.common['Authorization'] as string
     );
     console.log('chat', chat);
-    console.log(axios.defaults.headers.common['Authorization'] as string);
 
     chat.activate();
   }, []);
@@ -35,7 +34,7 @@ function Chat() {
   return (
     <div>
       <ChatNav chatState={chatState} setChatState={setChatState} />
-      {chatState === 'findChat' ? <FindChatSection /> : <MyChatSection />}
+      {/* {chatState === 'findChat' ? <FindChatSection /> : <MyChatSection />} */}
     </div>
   );
 }

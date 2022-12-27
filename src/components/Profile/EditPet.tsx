@@ -5,50 +5,42 @@ import Button from '../Form/Button';
 import Input from '../Form/Input';
 import SelectInput from '../Form/SelectInput';
 import { StyledEditForm } from './Pet.style';
-import { EditPetForm } from './Edit.type';
-
-interface EditPetType {
-  petName: string;
-  petAge: number;
-  breed: string;
-  petWeight: number;
-  petDescription: string;
-  petGender: string;
-  neutralization: string;
-}
+import { EditPetForm } from './Profile.type';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { getPetProfile } from '../../api/profileAPI';
+import validDate from '../../util/validDate';
 
 function EditPet() {
-  //임시 데이터
-  const petData = {
-    name: '해삐',
-    age: 6,
-    gender: '남아',
-    breed: '말티즈',
-    weight: 5.5,
-    isNeutered: true,
-    description: '말을 잘들어요',
-    imageUrl:
-      'https://images.pexels.com/photos/13215915/pexels-photo-13215915.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-  };
+  const { petID } = useParams();
+  const petData = useQuery(['pets', petID], () => getPetProfile(petID));
+  console.log('ee', petData.data);
+
 
   const defaultValues = {
-    petName: `${petData.name}`,
-    petAge: petData.age,
-    breed: `${petData.breed}`,
-    petWeight: petData.weight,
-    petDescription: `${petData.description}`,
-    petGender: `${petData.gender}`,
-    neutralization: petData.isNeutered === true ? '완료' : '미완료',
+    name: `${petData.data?.name}`,
+    birth: `${petData.data?.birth}`,
+    gender: petData.data?.gender,
+    breed: `${petData.data?.breed}`,
+    weight: petData.data?.weight,
+    description: `${petData.data?.description}`,
+    isNeutered: petData.data?.isNeutered,
+    imageUrl: petData.data?.imageUrl,
   };
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
-  } = useForm<EditPetType>({ defaultValues });
+  } = useForm<EditPetForm>({ defaultValues });
 
-  const onSubmit: SubmitHandler<EditPetType> = (data) => {
+  const onSubmit: SubmitHandler<EditPetForm> = (data) => {
     console.log(data);
+  };
+
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
   };
 
   return (
@@ -56,20 +48,20 @@ function EditPet() {
       <StyledEditForm onSubmit={handleSubmit(onSubmit)}>
         <div className="title_section">
           <PetImage
-            src={petData.imageUrl}
-            id={petData.name}
+            src={petData.data?.imageUrl}
+            name={petData.data?.name}
             className="pet_img"
           />
           <div className="name_input">
             <Input
-              name="petName"
+              name="name"
               register={register}
               label=""
               plHolder="2자 이상 8자 이하"
               options={{}}
             />
             <div className="button_section">
-              <Button btnTheme="sub" type="button" className="btn_cancel">
+              <Button btnTheme="sub" type="button" className="btn_cancel" onClick={goBack}>
                 취소
               </Button>
               <Button btnTheme="main" type="submit" className="btn_save">
@@ -81,11 +73,16 @@ function EditPet() {
         <div className="profile_section">
           <div className="age_input input_row">
             <Input
-              name="petAge"
+              name="birth"
               register={register}
-              label="나이"
+              label="생일"
+              type="date"
               plHolder="숫자만 입력해주세요"
-              options={{}}
+              options={{
+                required: '생일을 입력해주세요',
+                validate: (value) =>
+                  validDate(value.toString(), 1980) || '생일이 잘못되었습니다',
+              }}
             />
           </div>
 
@@ -101,8 +98,9 @@ function EditPet() {
             </div>
             <div className="weight_input input_row">
               <Input
-                name="petWeight"
+                name="weight"
                 register={register}
+                type="number"
                 label="몸무게"
                 plHolder="숫자만 입력해주세요"
                 options={{}}
@@ -111,7 +109,7 @@ function EditPet() {
           </div>
           <div className="description_input column">
             <Input
-              name="petDescription"
+              name="description"
               register={register}
               label="소개"
               plHolder="100자 이하"

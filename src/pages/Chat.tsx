@@ -28,12 +28,12 @@ function Chat() {
 
   const onClick = () => {
     chat.publish({
-      destination: '/app/chat.enter.4d284910-3d2c-466c-9135-adbdc9296d3b',
-      body: JSON.stringify({ memberId: '2', content: '입장' }),
+      destination: '/app/chat.enter.b313627e-f9ae-4203-b41a-a161bb0af872',
+      body: JSON.stringify({ memberId: '1', content: '입장' }),
     });
     chat.publish({
-      destination: '/app/chat.send.4d284910-3d2c-466c-9135-adbdc9296d3b',
-      body: JSON.stringify({ memberId: '2', content: 'Hello!!!' }),
+      destination: '/app/chat.send.b313627e-f9ae-4203-b41a-a161bb0af872',
+      body: JSON.stringify({ memberId: '1', content: 'Hello!!!' }),
     });
   };
 

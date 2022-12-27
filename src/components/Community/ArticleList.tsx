@@ -18,14 +18,8 @@ function ArticleList({ category }: Props) {
 
   return (
     <StyledArticleList>
-      {articles?.posts.map((article, index) => (
-        <ArticleLayout
-          key={index}
-          title={article.title}
-          contents={article.contents}
-          viewCnt={article.viewCnt}
-          likeCnt={article.likeCnt}
-        />
+      {articles?.posts.map((article) => (
+        <ArticleLayout key={article.postId} {...article} />
       ))}
     </StyledArticleList>
   );

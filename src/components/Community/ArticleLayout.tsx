@@ -1,16 +1,24 @@
+import { useTheme } from 'styled-components';
+import { BoardArticleList } from '../../api/boardAPI.type';
 import CommentLogo from '../../assets/CommentLogo';
 import Logo from '../../assets/Logo';
+import useRelativeTime from '../../Hooks/useRelativeTime';
 import Button from '../Form/Button';
 import { StyledArticleLayout } from './Article.style';
 
-interface ArticleProp {
-  title: string, 
-  contents: string, 
-  viewCnt?: number, 
-  likeCnt: number,
-}
+function ArticleLayout({
+  title,
+  commentCnt,
+  content,
+  createdAt,
+  hasHeart,
+  heartCnt,
+  imageUrl,
+}: BoardArticleList) {
+  const gray = useTheme().color.gray2;
+  const time = Date.parse(createdAt).toString();
+  const relTime = useRelativeTime(time);
 
-function ArticleLayout({title, contents, viewCnt, likeCnt}: ArticleProp) {
   return (
     <StyledArticleLayout>
       <div className="title">
@@ -19,25 +27,18 @@ function ArticleLayout({title, contents, viewCnt, likeCnt}: ArticleProp) {
             동네정보
           </Button>
         </div>
-        <p className="title_content">
-          {title}
-        </p>
+        <p className="title_content">{title}</p>
       </div>
-      <div className="body">
-        {contents}
-      </div>
-      <div className="time">4시간 전</div>
+      <p className="body">{content}</p>
+      <div className="time">{relTime}</div>
       <div className="footer">
         <div className="like_container container">
-          <Logo />
-          <p>추천해요 {likeCnt}</p>
+          {hasHeart ? <Logo /> : <Logo color={gray} />}
+          <p>추천해요 {heartCnt}</p>
         </div>
         <div className="comment-container container">
           <CommentLogo />
-          <p>댓글 2</p>
-        </div>
-        <div className="view-container container">
-          <p>조회 {viewCnt}</p>
+          <p>댓글 {commentCnt}</p>
         </div>
       </div>
     </StyledArticleLayout>

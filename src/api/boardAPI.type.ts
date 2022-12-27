@@ -23,11 +23,10 @@ export const CategoryID = {
 export type CommunityCategory = keyof typeof CategoryID;
 
 export interface BoardArticleList {
+  postId: number;
   title: string;
   content: string;
   imageUrl: string;
-  categoryName: CommunityCategory;
-  viewCnt: number;
   heartCnt: number;
   commentCnt: number;
   hasHeart: boolean;

@@ -75,7 +75,11 @@ export const Image = styled.div`
   }
 `;
 
-export const More = styled.p`
+export const More = styled.button`
+  display: flex;
+  align-items: start;
+  justify-content: start;
+
   padding-top: 1rem;
 
   font-weight: 600;
@@ -91,21 +95,27 @@ export const Bottom = styled.div`
   padding: 0.3rem 2.5rem;
   height: 4rem;
   border-top: 1px solid ${(prop) => prop.theme.color.gray3};
-  p {
-    font-weight: 600;
-    font-size: 1.5rem;
-    color: ${(prop) => prop.theme.color.main};
+
+  .btn-container {
+    width: 15rem;
   }
+`;
 
-  .container {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: 14rem;
+export const Button = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 
-    svg {
-      width: 2rem;
-      height: 2rem;
-    }
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: ${(prop) => prop.theme.color.main};
+
+  margin-right: 1rem;
+
+  cursor: pointer;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
   }
 `;

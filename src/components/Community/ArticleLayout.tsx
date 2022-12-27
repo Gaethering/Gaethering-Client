@@ -3,7 +3,6 @@ import { BoardArticleList } from '../../api/boardAPI.type';
 import CommentLogo from '../../assets/CommentLogo';
 import Logo from '../../assets/Logo';
 import useRelativeTime from '../../Hooks/useRelativeTime';
-import Button from '../Form/Button';
 import * as S from './Article.style';
 
 function ArticleLayout({
@@ -45,13 +44,17 @@ function ArticleLayout({
       </S.Contents>
 
       <S.Bottom>
-        <div className="container">
-          {hasHeart ? <Logo /> : <Logo color={gray} />}
-          <p>추천해요 {heartCnt}</p>
+        <div className="btn-container">
+          <S.Button type="button">
+            {hasHeart ? <Logo /> : <Logo color={gray} />}
+            추천해요 {heartCnt}
+          </S.Button>
         </div>
-        <div className="container">
-          <CommentLogo />
-          <p>댓글 {commentCnt}</p>
+        <div className="btn-container">
+          <S.Button type="button">
+            <CommentLogo />
+            댓글 {commentCnt}
+          </S.Button>
         </div>
       </S.Bottom>
     </S.ArticleLayout>

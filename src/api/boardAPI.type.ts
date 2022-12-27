@@ -13,6 +13,16 @@ export const enum BoardApiUrl {
   DeleteImage = '/boards/',
   /** DELETE: 게시글 삭제 /boards/{postId} */
   DeleteArticle = '/boards/',
+  /** POST: 좋아요  /boards/{postId}/hearts */
+  PostHeart = '/boards/',
+  /** GET: 댓글 조회 /boards/{postId}/comments?size={5}&lastPostId={9223372036854775807} */
+  GetComments = '/boards/',
+  /** POST: 댓글 작성 /boards/{postId}/comments */
+  PostComment = '/boards/',
+  /** PATCH: 댓글 수정 /boards/{postId}/comments/{commentId} */
+  PatchComment = '/boards/',
+  /** DELETE: 댓글 수정 /boards/{postId}/comments/{commentId} */
+  DeleteComment = '/boards/',
 }
 
 export const CategoryID = {
@@ -96,3 +106,37 @@ export interface PostArticleRequest {
 }
 
 export type PatchArticleRequest = PostArticleRequest;
+
+export interface PostHeartResponse {
+  memberId: number;
+  postId: number;
+  heartCnt: number;
+}
+
+export interface Comment {
+  commentId: number;
+  memberId: number;
+  content: string;
+  nickname: string;
+  createdAt: string;
+}
+
+export interface ListComment extends Comment {
+  isOwner: boolean;
+}
+
+export interface GetCommentsResponse {
+  comments: ListComment[];
+  totalCommentsCnt: number;
+  nextCursor: number;
+}
+
+export interface PostCommentRequest {
+  content: string;
+}
+export type PostCommentResponse = Comment;
+
+export interface PatchCommentRequest {
+  content: string;
+}
+export type PatchCommentResponse = Comment;

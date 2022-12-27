@@ -84,3 +84,5 @@ export async function deleteImage(id: PostId, imageId: number) {
 
   return response.data;
 }
+
+

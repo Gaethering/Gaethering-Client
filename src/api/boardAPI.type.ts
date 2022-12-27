@@ -60,7 +60,7 @@ export interface BoardArticle {
 export interface GetArticlesResponse {
   posts: BoardArticleList[];
   totalPostsCnt: number;
-  nextCursor: number;
+  nextCursor: number | undefined;
 }
 
 export interface GetArticleDetailResponse {

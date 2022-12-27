@@ -47,6 +47,10 @@ export async function getArticles(
     }`
   );
 
+  if (response.data.nextCursor === -1) {
+    response.data.nextCursor = undefined;
+  }
+
   return response.data;
 }
 

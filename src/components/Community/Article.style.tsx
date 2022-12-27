@@ -2,15 +2,18 @@ import styled from 'styled-components';
 
 export const StyledArticleList = styled.div`
   margin: 0 auto;
-  width: 80vw;
+  width: 60vw;
+  height: calc(100vh - 20rem);
   min-width: calc(390px * 0.8);
+
+  overflow-y: scroll;
 `;
 
 export const ArticleLayout = styled.article`
   display: flex;
   flex-direction: column;
 
-  margin: 1rem;
+  margin: 2rem 0;
 
   border: 1px solid ${(prop) => prop.theme.color.gray3};
   box-shadow: 0 0 1.4rem 0 rgba(100, 100, 100, 0.1);
@@ -54,10 +57,7 @@ export const Contents = styled.div`
   }
 
   .time {
-    margin: 0 2.5rem;
-    position: absolute;
-    bottom: 5.3rem;
-    right: 0;
+    margin: 0 2rem;
     text-align: right;
     color: ${(prop) => prop.theme.color.gray2};
   }
@@ -72,6 +72,7 @@ export const Image = styled.div`
 
   img {
     height: 20rem;
+    border-radius: 1.6rem;
   }
 `;
 

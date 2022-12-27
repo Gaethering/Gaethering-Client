@@ -1,7 +1,7 @@
 import ArticleLayout from './ArticleLayout';
-import { StyledArticleList } from './Article.style';
+import { Button, StyledArticleList } from './Article.style';
 import { CategoryID, CommunityCategory } from '../../api/boardAPI.type';
-import { useQuery } from 'react-query';
+import { useInfiniteQuery, useQuery } from 'react-query';
 import { QueryKeys } from '../../api/QueryKeys';
 import { getArticles } from '../../api/boardAPI';
 
@@ -10,17 +10,31 @@ interface Props {
 }
 
 function ArticleList({ category }: Props) {
-  const { data: articles } = useQuery([QueryKeys.ArticleList, category], () =>
-    getArticles(category, 10, '9223372036854775807' as unknown as number)
-  );
+  const fetch = ({
+    pageParam = '9223372036854775807' as unknown as number,
+  }: {
+    pageParam?: number;
+  }) => getArticles(category, 2, pageParam);
 
-  console.log('게시글!', articles);
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    [QueryKeys.ArticleList, category],
+    fetch,
+    {
+      getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
+    }
+  );
 
   return (
     <StyledArticleList>
-      {articles?.posts.map((article) => (
-        <ArticleLayout key={article.postId} {...article} />
-      ))}
+      {data?.pages.map((articles) =>
+        articles?.posts.map((article) => (
+          <ArticleLayout key={article.postId} {...article} />
+        ))
+      )}
+      <h3>{hasNextPage && 'HAS NEXT PAGE'}</h3>
+      <Button type="button" onClick={() => fetchNextPage()}>
+        <h2>MORE!!!</h2>
+      </Button>
     </StyledArticleList>
   );
 }

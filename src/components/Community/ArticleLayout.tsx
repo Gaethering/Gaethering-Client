@@ -4,7 +4,7 @@ import CommentLogo from '../../assets/CommentLogo';
 import Logo from '../../assets/Logo';
 import useRelativeTime from '../../Hooks/useRelativeTime';
 import Button from '../Form/Button';
-import { StyledArticleLayout } from './Article.style';
+import * as S from './Article.style';
 
 function ArticleLayout({
   title,
@@ -18,30 +18,43 @@ function ArticleLayout({
   const gray = useTheme().color.gray2;
   const time = Date.parse(createdAt).toString();
   const relTime = useRelativeTime(time);
+  const contentsArr = content.split('\n');
+  const splitContents = contentsArr.slice(0, 4).map((elem) => (
+    <>
+      {elem}
+      <br />
+    </>
+  ));
 
   return (
-    <StyledArticleLayout>
-      <div className="title">
+    <S.ArticleLayout>
+      <S.Title>
         <div className="title_logo">
-          <Button btnTheme="main" type="button">
-            동네정보
-          </Button>
+          <S.CategoryTag>동네정보</S.CategoryTag>
         </div>
-        <p className="title_content">{title}</p>
-      </div>
-      <p className="body">{content}</p>
-      <div className="time">{relTime}</div>
-      <div className="footer">
-        <div className="like_container container">
+        <h3>{title}</h3>
+      </S.Title>
+
+      <S.Contents>
+        <S.Image>
+          {imageUrl && <img src={imageUrl} alt={'게시글 이미지'} />}
+        </S.Image>
+        <p className="contents-body">{splitContents}</p>
+        {contentsArr.length > 4 && <S.More>더보기</S.More>}
+        <div className="time">{relTime}</div>
+      </S.Contents>
+
+      <S.Bottom>
+        <div className="container">
           {hasHeart ? <Logo /> : <Logo color={gray} />}
           <p>추천해요 {heartCnt}</p>
         </div>
-        <div className="comment-container container">
+        <div className="container">
           <CommentLogo />
           <p>댓글 {commentCnt}</p>
         </div>
-      </div>
-    </StyledArticleLayout>
+      </S.Bottom>
+    </S.ArticleLayout>
   );
 }
 

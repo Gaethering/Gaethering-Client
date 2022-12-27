@@ -6,44 +6,51 @@ export const StyledArticleList = styled.div`
   min-width: calc(390px * 0.8);
 `;
 
-export const StyledArticleLayout = styled.div`
-  position: relative;
-  margin: 1rem 0;
+export const ArticleLayout = styled.article`
   display: flex;
   flex-direction: column;
-  height: 200px;
+
+  margin: 1rem;
+
   border: 1px solid ${(prop) => prop.theme.color.gray3};
-  box-shadow: 0px 2px 10px 2px ${(prop) => prop.theme.color.gray3};
-  border-radius: 1.4rem;
+  box-shadow: 0 0 1.4rem 0 rgba(100, 100, 100, 0.1);
+  border-radius: 1.6rem;
+`;
 
-  .logo,
-  svg {
-    width: 2rem;
-    height: 2rem;
+export const CategoryTag = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 5rem;
+
+  color: ${(prop) => prop.theme.color.white};
+  background-color: ${(prop) => prop.theme.color.main};
+  border-radius: 1rem;
+
+  font-size: 1rem;
+  font-weight: 600;
+`;
+
+export const Title = styled.div`
+  margin: 2rem 3.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  h3 {
     font-size: 2rem;
-    font-weight: 700;
-    color: ${(prop) => prop.theme.color.main};
-  }
-
-  button {
-    padding: 0;
-    width: 5rem;
-    font-size: 1rem;
     font-weight: 600;
   }
+`;
 
-  .title {
-    margin: 1.5rem 2.5rem 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    p {
-      font-weight: 600;
-    }
-  }
+export const Contents = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 2.5rem;
 
-  .body {
-    margin: 1rem 2.5rem 0;
+  p.contents-body {
+    margin-left: 1rem;
   }
 
   .time {
@@ -54,106 +61,51 @@ export const StyledArticleLayout = styled.div`
     text-align: right;
     color: ${(prop) => prop.theme.color.gray2};
   }
+`;
 
-  .footer {
-    padding: 0.3rem 2.5rem;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    bottom: 0rem;
-    height: 4rem;
-    width: calc(100% - 5rem);
-    border-top: 1px solid ${(prop) => prop.theme.color.gray3};
-    p {
-      font-weight: 600;
-      font-size: 1.5rem;
-      color: ${(prop) => prop.theme.color.main};
-    }
+export const Image = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    .container {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      width: 14rem;
-    }
+  margin: 1rem 0;
+
+  img {
+    height: 20rem;
   }
 `;
 
+export const More = styled.p`
+  padding-top: 1rem;
 
-export const StyledArticle = styled.div`
-  position: relative;
-  margin: 1rem 0;
+  font-weight: 600;
+  color: ${({ theme: { color } }) => color.gray2};
+
+  box-shadow: 0 -1.6rem 2rem 0.4rem rgba(255, 255, 255, 0.8);
+`;
+
+export const Bottom = styled.div`
   display: flex;
-  flex-direction: column;
-  border: 1px solid ${(prop) => prop.theme.color.gray3};
-  box-shadow: 0px 2px 10px 2px ${(prop) => prop.theme.color.gray3};
-  border-radius: 1.4rem;
-
-  .logo,
-  svg {
-    width: 2rem;
-    height: 2rem;
-    font-size: 2rem;
-    font-weight: 700;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0.3rem 2.5rem;
+  height: 4rem;
+  border-top: 1px solid ${(prop) => prop.theme.color.gray3};
+  p {
+    font-weight: 600;
+    font-size: 1.5rem;
     color: ${(prop) => prop.theme.color.main};
   }
 
-  button {
-    padding: 0;
-    width: 5rem;
-    font-size: 1rem;
-    font-weight: 600;
-  }
-
-  .title {
-    margin: 1.5rem 2.5rem 0;
+  .container {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    p {
-      font-weight: 600;
+    gap: 0.5rem;
+    width: 14rem;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
     }
-  }
-
-  .profile {
-    /* margin: 1rem 2.5rem; */
-    padding: 1.5rem 2.5rem;
-    border-bottom: 1px solid ${(prop) => prop.theme.color.gray3};
-  }
-
-  .body {
-    margin: 1rem 2.5rem;
-    .time {
-      margin: 0;
-      text-align: right;
-      color: ${(prop) => prop.theme.color.gray2};
-    }
-  }
-
-
-  .footer {
-    padding: 0.1rem 2.5rem;
-    display: flex;
-    align-items: center;
-    height: 4rem;
-    width: calc(100% - 5rem);
-    border-top: 1px solid ${(prop) => prop.theme.color.gray3};
-    border-bottom: 1px solid ${(prop) => prop.theme.color.gray3};
-    p {
-      font-weight: 600;
-      font-size: 1.5rem;
-      color: ${(prop) => prop.theme.color.main};
-    }
-
-    .container {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      width: 14rem;
-    }
-  }
-
-  .comment_list {
-    margin: 1rem 2.5rem;
   }
 `;

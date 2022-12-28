@@ -1,46 +1,49 @@
 import ArticleLayout from './ArticleLayout';
-import { StyledArticleList } from './Article.style';
+import { Blank, MoreArticle, StyledArticleList } from './Article.style';
+import { CategoryID, CommunityCategory } from '../../api/boardAPI.type';
+import { useInfiniteQuery, useQuery } from 'react-query';
+import { QueryKeys } from '../../api/QueryKeys';
+import { getArticles } from '../../api/boardAPI';
 
-function ArticleList() {
-  //임시
-  const articles = [
+interface Props {
+  category: CommunityCategory;
+}
+
+function ArticleList({ category }: Props) {
+  const fetch = ({ pageParam }: { pageParam?: number }) =>
+    getArticles(category, 6, pageParam);
+
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    [...QueryKeys.ArticleList, category],
+    fetch,
     {
-      "title": "ㅇㅇ동 갈만한 애견 동반 식당 추천드려요~!",
-      "contents": "부모님이랑 저희 강아지 데리고 식사할만한 식당 찾아서 추천드려요~!",
-      "category": "동네정보",
-      "viewCnt": 14,
-      "memberId": 1,
-      "nickname": "닉네임",
-      "likeCnt": 3,
-      "createdAt": "2022-11-30 12:30:23"
-    },
-    {
-      "title": "ㅁㅁ공원 지갑 잃어버리신 분 계신가요?",
-      "contents": "ㅁㅁ공원에서 산책하다가 지갑을 하나 주웠어요. 주인 분 계시면 댓글주세요~",
-      "category": "동네정보",
-      "viewCnt": 14,
-      "memberId": 1,
-      "nickname": "닉네임",
-      "likeCnt": 10,
-      "createdAt": "2022-11-30 12:30:23"
-    },
-    {
-      "title": "제목1",
-      "contents": "내용",
-      "category": "동네정보",
-      "viewCnt": 14,
-      "memberId": 1,
-      "nickname": "닉네임",
-      "likeCnt": 10,
-      "createdAt": "2022-11-30 12:30:23"
-    },
-  ];
+      getNextPageParam: (lastPage) => lastPage.nextCursor,
+    }
+  );
 
   return (
-  <StyledArticleList>
-    {articles.map((article, index) => <ArticleLayout key={index} title={article.title} contents={article.contents} viewCnt={article.viewCnt} likeCnt={article.likeCnt}/>)}
-  </StyledArticleList>
-  )
+    <StyledArticleList>
+      {data?.pages.map((articles) =>
+        articles?.posts.map((article) => (
+          <ArticleLayout
+            key={article.postId}
+            {...article}
+            category={category}
+          />
+        ))
+      )}
+      {hasNextPage && (
+        <MoreArticle
+          btnTheme="sub"
+          type="button"
+          onClick={() => fetchNextPage()}
+        >
+          게시글 더보기
+        </MoreArticle>
+      )}
+      <Blank />
+    </StyledArticleList>
+  );
 }
 
 export default ArticleList;

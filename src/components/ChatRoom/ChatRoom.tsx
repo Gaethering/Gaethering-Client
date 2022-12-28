@@ -9,13 +9,18 @@ import { Blank, StyledChatRoom } from './ChatRoom.style';
 import { ChatQueryKeys, QueryKeys } from '../../api/QueryKeys';
 import { getChatHistory, getChatroom } from '../../api/chatroomAPI';
 import { NavInfoResponse } from '../../api/authAPI.type';
+import { useEffect } from 'react';
+import chatStart from '../../api/chatAPI';
+import { getAccessToken } from '../../api/axiosUtils';
 
 function ChatRoom() {
+  const { roomKey } = useParams<'roomKey'>();
+  const chatService = chatStart('Bearer' + getAccessToken());
+
   const queryClient = useQueryClient();
   const userId = queryClient.getQueryData<NavInfoResponse>(
     QueryKeys.navInfo
   )?.memberId;
-  const { roomKey } = useParams<'roomKey'>();
 
   const { data: history, isLoading: historyLoading } = useQuery(
     [...ChatQueryKeys.chatHistory, roomKey],
@@ -25,6 +30,25 @@ function ChatRoom() {
     [...ChatQueryKeys.chatRoomInfo, roomKey],
     () => getChatroom(roomKey ?? '')
   );
+
+  useEffect(() => {
+    chatService.activate();
+    console.log('chat', chatService, chatService.connected);
+    chatService.connected;
+    chatService.onConnect = (frame) => {
+      // Do something, all subscribes must be done is this callback
+      // This is needed because this will be executed after a (re)connect
+      console.log('STOMP CONNECTED', frame);
+
+      chatService?.subscribe(
+        `/exchange/chat.exchange/room.${roomKey}`,
+        (data) => {
+          console.log('BODY', data.body);
+          history?.push(data.body);
+        }
+      );
+    };
+  }, [roomKey, chatService]);
 
   document.title = info?.name ?? '채팅방';
 
@@ -37,13 +61,15 @@ function ChatRoom() {
         <Spinner />
       ) : (
         <>
-          {history?.map((talk) =>
-            talk.memberId === (userId ?? 0) ? (
-              <ChatRoomMyTalk key={talk.createdAt} {...talk} />
-            ) : (
-              <ChatRoomTalk key={talk.createdAt} {...info} {...talk} />
-            )
-          )}
+          {history
+            ?.sort((x, y) => Date.parse(x.createdAt) - Date.parse(y.createdAt))
+            ?.map((talk) =>
+              talk.memberId === (userId ?? 0) ? (
+                <ChatRoomMyTalk key={talk.createdAt} {...talk} />
+              ) : (
+                <ChatRoomTalk key={talk.createdAt} {...info} {...talk} />
+              )
+            )}
           <ChatInput />
           <Blank />
         </>

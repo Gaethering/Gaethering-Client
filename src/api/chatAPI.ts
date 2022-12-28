@@ -12,22 +12,11 @@ export function chatStart(token: JWTToken) {
     // debug: function (str) {
     //   console.log('STOMP Debug', str);
     // },
+
     reconnectDelay: 5000,
     heartbeatIncoming: 20000,
     heartbeatOutgoing: 20000,
   });
-
-  stompClient.onConnect = (frame) => {
-    // Do something, all subscribes must be done is this callback
-    // This is needed because this will be executed after a (re)connect
-    console.log('STOMP CONNECTED', frame);
-    stompClient.subscribe(
-      `/exchange/chat.exchange/room.725cae56-5936-4d01-a186-d7533d51acf6`,
-      (data) => {
-        console.log('BODY', data.body);
-      }
-    );
-  };
 
   stompClient.onStompError = (frame) => {
     // Will be invoked in case of error encountered at Broker

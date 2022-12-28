@@ -7,10 +7,16 @@ function getChatTime(time: number | string) {
       minute: '2-digit',
     });
   } else {
-    return date.toLocaleDateString('ko-KR', {
-      dateStyle: 'short',
-      timeStyle: 'medium',
-    });
+    return (
+      date.toLocaleDateString('ko-KR', {
+        dateStyle: 'short',
+      }) +
+      ' ' +
+      date.toLocaleTimeString('ko-KR', {
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    );
   }
 }
 

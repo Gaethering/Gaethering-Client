@@ -1,4 +1,4 @@
-import { PointerEventHandler, useState } from 'react';
+import { PointerEventHandler, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Days = {
@@ -21,9 +21,12 @@ type ClickHandler = PointerEventHandler<HTMLButtonElement>;
 
 function DaySelectFilter() {
   const [filter, setFilter] = useState<DaysType[]>(['all']);
-  //! Test
-  console.log(filter);
-  ////Test
+
+  useEffect(() => {
+    //! Test
+    console.log(filter);
+    ////Test
+  }, [filter]);
 
   const handleFilterClick: ClickHandler = ({ currentTarget: target }) => {
     const day = target.name as DaysType;

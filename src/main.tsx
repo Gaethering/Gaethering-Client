@@ -6,7 +6,7 @@ import './assets/index.css';
 
 //! Mock API
 import { worker } from './mocks/browser';
-worker.start();
+worker.context.isMockingEnabled || worker.start();
 ////
 
 import { QueryClient, QueryClientProvider } from 'react-query';

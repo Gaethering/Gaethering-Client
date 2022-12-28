@@ -17,6 +17,7 @@ import { setAuthToken } from '../../util/setAuthToken';
 function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
   const {
     register,
+    setError,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<LogInRequest>({ mode: 'onTouched' });

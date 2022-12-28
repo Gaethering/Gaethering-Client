@@ -9,9 +9,9 @@ export function chatStart(token: JWTToken) {
       Authorization: token,
     },
 
-    // debug: function (str) {
-    //   console.log('STOMP Debug', str);
-    // },
+    debug: function (str) {
+      console.log('STOMP Debug', str);
+    },
 
     reconnectDelay: 5000,
     heartbeatIncoming: 20000,

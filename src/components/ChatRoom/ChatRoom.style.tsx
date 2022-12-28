@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Blank = styled.div`
-  height: 6rem;
+  height: 10rem;
 `;
 
 export const Chats = styled.div`
@@ -9,6 +9,9 @@ export const Chats = styled.div`
   flex-direction: column-reverse;
   align-items: start;
   justify-content: end;
+
+  width: 100%;
+  overflow-y: scroll;
 `;
 
 const StyledChatRoom = styled.div`

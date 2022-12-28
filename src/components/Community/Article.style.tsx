@@ -3,9 +3,10 @@ import StyledButton from '../Form/Button.style';
 
 export const StyledArticleList = styled.div`
   margin: 0 auto;
-  width: 60vw;
+
+  width: 80vw;
   height: calc(100vh - 20rem);
-  min-width: calc(390px * 0.8);
+  min-width: calc(390px);
 
   overflow-y: scroll;
 `;
@@ -14,11 +15,15 @@ export const ArticleLayout = styled.article`
   display: flex;
   flex-direction: column;
 
-  margin: 2rem 0;
+  margin: 2rem auto;
+  width: 90%;
 
-  border: 1px solid ${(prop) => prop.theme.color.gray3};
   box-shadow: 0 0 1.4rem 0 rgba(100, 100, 100, 0.1);
   border-radius: 1.6rem;
+
+  * {
+    text-decoration: none;
+  }
 `;
 
 export const CategoryTag = styled.span`
@@ -26,7 +31,7 @@ export const CategoryTag = styled.span`
   align-items: center;
   justify-content: center;
 
-  width: 5rem;
+  padding: 0 0.8rem;
 
   color: ${(prop) => prop.theme.color.white};
   background-color: ${(prop) => prop.theme.color.main};

@@ -42,7 +42,9 @@ function ArticleDetail() {
 
             <S.Contents>
               <S.Images>
-                {/* {imageUrl && <img src={imageUrl} alt={'게시글 이미지'} />} */}
+                {article?.images.map(({ imageUrl, imageId }) => (
+                  <img src={imageUrl} alt={'이미지' + imageId} key={imageId} />
+                ))}
               </S.Images>
               <p className="contents-body">
                 {contentsArr?.map((content) => (

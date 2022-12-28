@@ -70,14 +70,19 @@ export const Contents = styled.div`
 
 export const Images = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
   align-items: center;
   justify-content: center;
 
-  margin: 1rem 0;
+  width: calc(100% - 4rem);
+  margin: 4rem 2rem;
 
   img {
-    height: 20rem;
+    max-width: calc(100% - 4rem);
+    max-height: 25rem;
     border-radius: 1.6rem;
+    box-shadow: 0 0 1rem 0 rgba(100, 100, 100, 0.2);
   }
 `;
 

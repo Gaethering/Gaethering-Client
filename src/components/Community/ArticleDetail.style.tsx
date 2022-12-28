@@ -1,8 +1,29 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+
+export const ArticleOverlay = styled.div`
+  position: fixed;
+  top: ${({ theme: { size } }) => size.navHeight};
+  right: 10vw;
+
+  width: 80vw;
+  height: 100%;
+  background-color: ${({ theme: { color } }) => color.white};
+
+  overflow-y: scroll;
+
+  z-index: 100;
+`;
 
 const StyledWrapper = styled.article`
-  
-`
+  display: flex;
+  flex-direction: column;
+  margin: 4rem 1rem;
+  padding: 2rem;
+
+  border-radius: 1.6rem;
+  background-color: ${({ theme: { color } }) => color.white};
+  box-shadow: 0 0 1rem 0 rgba(100, 100, 100, 0.16);
+`;
 
 export const CategoryTag = styled.span`
   display: flex;
@@ -109,5 +130,4 @@ export const Button = styled.button`
   }
 `;
 
-
-export {StyledWrapper, Title};
+export { StyledWrapper, Title };

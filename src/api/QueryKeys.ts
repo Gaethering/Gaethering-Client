@@ -13,4 +13,6 @@ export const QueryKeys = {
   navInfo: ['user', 'navBar'],
   /** Board 게시글 리스트 */
   ArticleList: 'articles',
+  /** Board 게시글 상세 정보 ['article', {id}]*/
+  ArticleDetail: 'article',
 } as const;

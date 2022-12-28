@@ -1,24 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const StyledArticleList = styled.div`
-  margin: 0 auto;
-  width: 60vw;
-  height: calc(100vh - 20rem);
-  min-width: calc(390px * 0.8);
-
-  overflow-y: scroll;
-`;
-
-export const ArticleLayout = styled.article`
-  display: flex;
-  flex-direction: column;
-
-  margin: 2rem 0;
-
-  border: 1px solid ${(prop) => prop.theme.color.gray3};
-  box-shadow: 0 0 1.4rem 0 rgba(100, 100, 100, 0.1);
-  border-radius: 1.6rem;
-`;
+const StyledWrapper = styled.article`
+  
+`
 
 export const CategoryTag = styled.span`
   display: flex;
@@ -35,7 +19,7 @@ export const CategoryTag = styled.span`
   font-weight: 600;
 `;
 
-export const Title = styled.div`
+const Title = styled.h2`
   margin: 2rem 3.5rem 0;
   display: flex;
   align-items: center;
@@ -124,3 +108,6 @@ export const Button = styled.button`
     height: 2rem;
   }
 `;
+
+
+export {StyledWrapper, Title};

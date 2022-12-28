@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import ChatRoom from './components/ChatRoom/ChatRoom';
+import ArticleDetail from './components/Community/ArticleDetail';
 import PostEditer from './components/Community/PostEditer';
 import Chat from './pages/Chat';
 import Community from './pages/Community';
@@ -22,7 +23,10 @@ const router = createBrowserRouter([
       {
         path: 'community',
         element: <Community />,
-        children: [{ path: 'editer', element: <PostEditer /> }],
+        children: [
+          { path: 'editer', element: <PostEditer /> },
+          { path: ':postId', element: <ArticleDetail /> },
+        ],
       },
       { path: 'profile', element: <Profile /> },
       { path: 'sns', element: <SNS /> },

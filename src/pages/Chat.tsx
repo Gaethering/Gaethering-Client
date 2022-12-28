@@ -13,13 +13,6 @@ export type ChatState = 'findChat' | 'myChat';
 function Chat() {
   const [chatState, setChatState] = useState<ChatState>('findChat');
 
-  useEffect(() => {
-    //! Mock API
-    import('../mocks/browser').then((msw) => {
-      msw.worker.context.isMockingEnabled || msw.worker.start();
-    });
-    ////
-  }, []);
   const chat = chatStart(
     axios.defaults.headers.common['Authorization'] as string
   );

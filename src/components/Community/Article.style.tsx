@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import StyledButton from '../Form/Button.style';
 
 export const StyledArticleList = styled.div`
   margin: 0 auto;
@@ -123,4 +124,18 @@ export const Button = styled.button`
     width: 2rem;
     height: 2rem;
   }
+`;
+
+export const MoreArticle = styled(StyledButton)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 3rem;
+  padding: 0;
+
+  border-radius: 0.8rem;
+
+  font-size: 1.4rem;
 `;

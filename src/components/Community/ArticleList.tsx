@@ -1,5 +1,5 @@
 import ArticleLayout from './ArticleLayout';
-import { Button, StyledArticleList } from './Article.style';
+import { MoreArticle, StyledArticleList } from './Article.style';
 import { CategoryID, CommunityCategory } from '../../api/boardAPI.type';
 import { useInfiniteQuery, useQuery } from 'react-query';
 import { QueryKeys } from '../../api/QueryKeys';
@@ -31,10 +31,15 @@ function ArticleList({ category }: Props) {
           <ArticleLayout key={article.postId} {...article} />
         ))
       )}
-      <h3>{hasNextPage && 'HAS NEXT PAGE'}</h3>
-      <Button type="button" onClick={() => fetchNextPage()}>
-        <h2>MORE!!!</h2>
-      </Button>
+      {hasNextPage && (
+        <MoreArticle
+          btnTheme="sub"
+          type="button"
+          onClick={() => fetchNextPage()}
+        >
+          게시글 더보기
+        </MoreArticle>
+      )}
     </StyledArticleList>
   );
 }

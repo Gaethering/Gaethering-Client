@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
-import { ChatRoomInfo } from '../Chat/Chat.type';
 import infoMark from '../../assets/infoMark.svg';
 import { InfoMark, Title } from './ChatRoomTitle.style';
+import { GetChatroomResponse } from '../../api/chatroomAPI.type';
+
+type ChatRoomInfo = GetChatroomResponse;
 
 function ChatRoomTitle({
-  roomName,
-  participants,
-  maxParticipants,
+  description,
+  maxParticipantCount,
+  name,
+  chatRoomMemberInfos,
+  walkingTimesInfos,
 }: ChatRoomInfo) {
   const handleInfoClick = () => {
     alert('info');
@@ -14,12 +18,12 @@ function ChatRoomTitle({
 
   return (
     <Title>
-      <Link to="./../" className="chatroom-back">
+      <Link to="../" className="chatroom-back">
         {'<'}
       </Link>
       <h2>
-        {roomName}
-        <div>{`${participants} / ${maxParticipants}`}</div>
+        {name}
+        <div>{`${maxParticipantCount}`}</div>
       </h2>
       <InfoMark type="button" onClick={handleInfoClick}>
         <img src={infoMark} alt="채팅방 정보" />

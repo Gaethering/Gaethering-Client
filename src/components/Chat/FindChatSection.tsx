@@ -7,6 +7,7 @@ import LocalChatRoomList from './LocalChatRoomList';
 
 function FindChatSection() {
   const [searchWord, setSearchWord] = useState('');
+  
   return (
     <section>
       <DaySelectFilter />

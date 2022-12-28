@@ -30,4 +30,4 @@ export const ChatQueryKeys = {
   chatHistory: ['chat', 'history'],
   /** 채팅방 정보 ['chatroom', 'info', {roomKey}] */
   chatRoomInfo: ['chatroom', 'info'],
-};
+} as const;

@@ -1,17 +1,16 @@
 import { useQuery } from 'react-query';
-import { getRequest } from '../../api/requests';
-import { ChatRoomInfo } from './Chat.type';
+import { getChatroomMyList } from '../../api/chatroomAPI';
+import { ChatQueryKeys } from '../../api/QueryKeys';
 import MyChatRoom from './MyChatRoom';
 import MyChatRoomSkeleton from './MyChatRoomSkeleton';
 
 // type Props = {}
 
 function MyChatRoomList() {
-  //! Mock API
-  const { data: chatRooms, isLoading } = useQuery('chatrooms', () =>
-    getRequest<ChatRoomInfo[]>('http://localhost:5173/chatrooms')
+  const { data, isLoading } = useQuery(
+    ChatQueryKeys.chatRoomMyList,
+    getChatroomMyList
   );
-  ////
 
   return (
     <>
@@ -24,13 +23,9 @@ function MyChatRoomList() {
       ) : (
         <>
           <div>
-            {chatRooms
-              ?.sort(
-                (x, y) => parseInt(y.lastChatTime) - parseInt(x.lastChatTime)
-              )
-              .map((elem) => (
-                <MyChatRoom {...elem} key={elem.roomKey} />
-              ))}
+            {data?.chatRooms.map((elem) => (
+              <MyChatRoom {...elem} key={elem.roomKey} />
+            ))}
           </div>
         </>
       )}

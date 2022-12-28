@@ -22,8 +22,22 @@ async function getChatroom(roomKey: string) {
   return response.data;
 }
 
+async function getChatroomList() {
+  type Res = T.GetChatroomListResponse;
+  const response = await axios.get<Res, A<Res, void>>(Api.GetChatroomList);
+
+  return response.data;
+}
+
+async function getChatroomMyList() {
+  type Res = T.GetChatroomListResponse;
+  const response = await axios.get<Res, A<Res, void>>(Api.GetChatroomMyList);
+
+  return response.data;
+}
+
 async function getChatHistory(roomKey: string) {
-  type Res = T.GetChatroomResponse;
+  type Res = T.GetChatHistoryResponse;
   const response = await axios.get<Res, A<Res, void>>(
     Api.GetChatHistory + roomKey + '/history'
   );
@@ -31,4 +45,18 @@ async function getChatHistory(roomKey: string) {
   return response.data;
 }
 
-export { getChatHistory, getChatroom, postMakeChatroom };
+async function getMemberProfile(id: number) {
+  type Res = { nickname: string };
+  const response = await axios.get<Res, A<Res, void>>(`/members/${id}/profile`);
+
+  return response.data;
+}
+
+export {
+  getChatHistory,
+  getChatroom,
+  postMakeChatroom,
+  getChatroomList,
+  getMemberProfile,
+  getChatroomMyList,
+};

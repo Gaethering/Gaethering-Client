@@ -3,48 +3,43 @@ import ChatInput from './ChatInput';
 import ChatRoomMyTalk from './ChatRoomMyTalk';
 import ChatRoomTalk from './ChatRoomTalk';
 import ChatRoomTitle from './ChatRoomTitle';
-import { useQuery } from 'react-query';
-import { ChatRoomInfo } from '../Chat/Chat.type';
-import { getRequest } from '../../api/requests';
+import { useQuery, useQueryClient } from 'react-query';
 import Spinner from '../widgets/Spinner';
-import { ChatTalkType } from './ChatRoom.type';
 import { StyledChatRoom } from './ChatRoom.style';
+import { ChatQueryKeys, QueryKeys } from '../../api/QueryKeys';
+import { getChatHistory, getChatroom } from '../../api/chatroomAPI';
+import { NavInfoResponse } from '../../api/authAPI.type';
 
 function ChatRoom() {
+  const queryClient = useQueryClient();
+  const userId = queryClient.getQueryData<NavInfoResponse>(
+    QueryKeys.navInfo
+  )?.memberId;
   const { roomKey } = useParams<'roomKey'>();
 
-  //! Mock API
-  const getChatroom = () =>
-    getRequest<ChatRoomInfo>(`http://localhost:5173/chatroom/${roomKey}/info`);
+  const { data: history, isLoading: historyLoading } = useQuery(
+    [...ChatQueryKeys.chatHistory, roomKey],
+    () => getChatHistory(roomKey ?? '')
+  );
+  const { data: info } = useQuery([...ChatQueryKeys.chatHistory, roomKey], () =>
+    getChatroom(roomKey ?? '')
+  );
 
-  const getTalks = () =>
-    getRequest<ChatTalkType[]>(
-      `http://localhost:5173/chatroom/${roomKey}/talks`
-    );
-
-  const myName = 'user3333';
-  ////
-
-  const { data } = useQuery(['chatroom', roomKey], getChatroom);
-  const talksQuery = useQuery(['chatroomTalk', roomKey], getTalks);
-  const chatRoom = data?.data;
-  const talks = talksQuery.data?.data;
-
-  document.title = '채팅';
+  document.title = info?.name ?? '채팅방';
 
   return (
     <StyledChatRoom>
-      {chatRoom && <ChatRoomTitle {...chatRoom} />}
+      {info && <ChatRoomTitle {...info} />}
 
-      {talksQuery.isLoading ? (
+      {historyLoading || !info ? (
         <Spinner />
       ) : (
         <>
-          {talks?.map((talk) =>
-            talk.userName === myName ? (
-              <ChatRoomMyTalk key={talk.timestamp} {...talk} />
+          {history?.map((talk) =>
+            talk.memberId === (userId ?? 0) ? (
+              <ChatRoomMyTalk key={talk.createdAt} {...talk} />
             ) : (
-              <ChatRoomTalk key={talk.timestamp} {...talk} />
+              <ChatRoomTalk key={talk.createdAt} {...info} {...talk} />
             )
           )}
           <ChatInput />

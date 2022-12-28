@@ -1,7 +1,4 @@
 function getChatTime(time: number | string) {
-  if (typeof time === 'string') {
-    time = parseInt(time);
-  }
   const date = new Date(time);
   const now = new Date();
   if (now.toDateString() === date.toDateString()) {

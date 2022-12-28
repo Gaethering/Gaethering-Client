@@ -16,22 +16,16 @@ function ChatRoomTalk({
   const { data } = useQuery(['member', 'profile', memberId], () =>
     getMemberProfile(memberId)
   );
-  const [profileImg, setProfileImg] = useState(defaultProfilePicture);
-  const [nickname, setNickname] = useState('');
-
-  chatRoomMemberInfos.forEach((elem) => {
-    if (elem.id === memberId) {
-      setProfileImg(elem.representPetImageUrl);
-      setNickname(elem.nickname);
-    }
-  });
 
   return (
     <StyledTalk>
-      <img src={profileImg} alt={data?.nickname} />
+      <img
+        src={data?.pets[0].imageUrl ?? defaultProfilePicture}
+        alt={data?.nickname}
+      />
       <ChatBox>
         <NameArea>
-          <span className="chat-pet-name">{nickname}</span>
+          <span className="chat-pet-name">{data?.nickname}</span>
           {/* <span className="chat-user-name">{userName}</span> */}
         </NameArea>
         <TalkArea>

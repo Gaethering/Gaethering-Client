@@ -13,7 +13,7 @@ const enum ChatApiUrl {
 
 interface ChatRoom {
   name: string;
-  maxParticipantCount: string;
+  maxParticipant: string;
   description: string;
 }
 

@@ -46,8 +46,24 @@ async function getChatHistory(roomKey: string) {
 }
 
 async function getMemberProfile(id: number) {
-  type Res = { nickname: string };
+  interface Res {
+    email: string;
+    nickname: string;
+    gender: string;
+    mannerDegree: number;
+    followerCount: number;
+    followingCount: number;
+    petCount: number;
+    pets: {
+      id: number;
+      name: string;
+      imageUrl: string;
+      representative: true;
+    }[];
+  }
   const response = await axios.get<Res, A<Res, void>>(`/members/${id}/profile`);
+
+  console.log(response);
 
   return response.data;
 }

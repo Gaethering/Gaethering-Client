@@ -21,8 +21,9 @@ function ChatRoom() {
     [...ChatQueryKeys.chatHistory, roomKey],
     () => getChatHistory(roomKey ?? '')
   );
-  const { data: info } = useQuery([...ChatQueryKeys.chatHistory, roomKey], () =>
-    getChatroom(roomKey ?? '')
+  const { data: info } = useQuery(
+    [...ChatQueryKeys.chatRoomInfo, roomKey],
+    () => getChatroom(roomKey ?? '')
   );
 
   document.title = info?.name ?? '채팅방';

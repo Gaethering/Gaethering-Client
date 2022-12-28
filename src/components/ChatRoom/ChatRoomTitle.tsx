@@ -7,23 +7,23 @@ type ChatRoomInfo = GetChatroomResponse;
 
 function ChatRoomTitle({
   description,
-  maxParticipantCount,
+  maxParticipant,
   name,
   chatRoomMemberInfos,
   walkingTimesInfos,
 }: ChatRoomInfo) {
   const handleInfoClick = () => {
-    alert('info');
+    alert('채팅방 설명: ' + description);
   };
 
   return (
     <Title>
-      <Link to="../" className="chatroom-back">
+      <Link to="./../" className="chatroom-back">
         {'<'}
       </Link>
       <h2>
         {name}
-        <div>{`${maxParticipantCount}`}</div>
+        <div>{`${maxParticipant}`}</div>
       </h2>
       <InfoMark type="button" onClick={handleInfoClick}>
         <img src={infoMark} alt="채팅방 정보" />

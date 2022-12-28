@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
+export const Blank = styled.div`
+  height: 6rem;
+`;
+
 const StyledChatRoom = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: start;
+  justify-content: end;
   height: calc(100vh - ${({ theme: { size } }) => size.navHeight});
   background-color: ${({ theme: { color } }) => color.skyblue};
 

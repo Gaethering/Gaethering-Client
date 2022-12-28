@@ -13,7 +13,13 @@ function ChatRoomTitle({
   walkingTimesInfos,
 }: ChatRoomInfo) {
   const handleInfoClick = () => {
-    alert('채팅방 설명: ' + description);
+    alert(
+      '채팅방 설명: ' +
+        description +
+        '\n' +
+        '산책 시간: ' +
+        (walkingTimesInfos ?? '산책 안 함')
+    );
   };
 
   return (

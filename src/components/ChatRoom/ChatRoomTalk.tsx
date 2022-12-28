@@ -3,7 +3,6 @@ import getTime from '../../util/getChatTime';
 import { ChatBox, NameArea, StyledTalk, TalkArea } from './ChatRoomTalk.style';
 import SpeechBubble from './SpeechBubble';
 import defaultProfilePicture from '../../assets/defaultProfilePicture.svg';
-import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getMemberProfile } from '../../api/chatroomAPI';
 

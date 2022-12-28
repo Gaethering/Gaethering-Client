@@ -5,7 +5,7 @@ import ChatRoomTalk from './ChatRoomTalk';
 import ChatRoomTitle from './ChatRoomTitle';
 import { useQuery, useQueryClient } from 'react-query';
 import Spinner from '../widgets/Spinner';
-import { StyledChatRoom } from './ChatRoom.style';
+import { Blank, StyledChatRoom } from './ChatRoom.style';
 import { ChatQueryKeys, QueryKeys } from '../../api/QueryKeys';
 import { getChatHistory, getChatroom } from '../../api/chatroomAPI';
 import { NavInfoResponse } from '../../api/authAPI.type';
@@ -31,6 +31,7 @@ function ChatRoom() {
   return (
     <StyledChatRoom>
       {info && <ChatRoomTitle {...info} />}
+      <Blank />
 
       {historyLoading || !info ? (
         <Spinner />
@@ -44,6 +45,7 @@ function ChatRoom() {
             )
           )}
           <ChatInput />
+          <Blank />
         </>
       )}
     </StyledChatRoom>

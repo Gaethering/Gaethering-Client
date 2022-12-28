@@ -47,7 +47,10 @@ function ArticleComments() {
     <Wrapper>
       <CommentCount>댓글: {data?.pages[0].totalCommentsCnt} 개</CommentCount>
       <CommentForm onSubmit={handleSubmit(onSubmit)}>
-        <CommentInput {...register('content', { required: true })} />
+        <CommentInput
+          autoComplete="off"
+          {...register('content', { required: true })}
+        />
         <SubmitButton type="submit" disabled={!isValid}>
           작성
         </SubmitButton>

@@ -27,16 +27,14 @@ function ArticleDetail() {
 
   const createdAt = Date.parse(article?.createdAt ?? '2020-01-01').toString();
   const relTime = useRelativeTime(createdAt);
-  const contentsArr = article?.content.split('\n');
 
   return (
     <>
       {isLoading || (
         <S.ArticleOverlay
-          onClick={({ currentTarget }) => {
-            console.log(currentTarget.className);
-            currentTarget.className.includes('post-editer-overlay') &&
-              navigate('../');
+          onClick={({ target }) => {
+            const t = target as HTMLDivElement;
+            t?.className.includes('post-editer-overlay') && navigate('../');
           }}
           className="post-editer-overlay"
         >
@@ -58,14 +56,7 @@ function ArticleDetail() {
                   ))}
                 </S.Images>
               )}
-              <p className="contents-body">
-                {contentsArr?.map((content) => (
-                  <>
-                    {content}
-                    <br />
-                  </>
-                ))}
-              </p>
+              <pre className="contents-body">{article?.content}</pre>
               <div className="time">{relTime}</div>
             </S.Contents>
 

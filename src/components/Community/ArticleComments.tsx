@@ -19,11 +19,8 @@ function ArticleComments() {
     reset,
   } = useForm<PostCommentRequest>();
 
-  const fetch = ({
-    pageParam = '9223372036854775807' as unknown as number,
-  }: {
-    pageParam?: number;
-  }) => getComments(postId ?? '', 2, pageParam);
+  const fetch = ({ pageParam }: { pageParam?: number }) =>
+    getComments(postId ?? '', 5, pageParam);
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
     [...QueryKeys.ArticleComments, postId],

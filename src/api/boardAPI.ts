@@ -38,7 +38,7 @@ export async function postInfoArticle(data: FormData) {
 export async function getArticles(
   category: T.CommunityCategory,
   size = 10,
-  lastId?: number
+  lastId = Number.MAX_SAFE_INTEGER
 ) {
   type Res = T.GetArticlesResponse;
   const response = await axios.get<Res, A<Res, void>>(
@@ -98,7 +98,11 @@ export async function deleteImage(id: PostId, imageId: number) {
   return response.data;
 }
 
-export async function getComments(id: PostId, size = 5, lastId: number) {
+export async function getComments(
+  id: PostId,
+  size = 5,
+  lastId = Number.MAX_SAFE_INTEGER
+) {
   const response = await axios.get<
     T.GetCommentsResponse,
     A<T.GetCommentsResponse, void>

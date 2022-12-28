@@ -3,13 +3,16 @@ import StyledButton from '../Form/Button.style';
 
 export const StyledArticleList = styled.div`
   margin: 0 auto;
-  padding-bottom: 10rem;
 
   width: 80vw;
   height: calc(100vh - 20rem);
   min-width: calc(390px);
 
   overflow-y: scroll;
+`;
+
+export const Blank = styled.div`
+  height: 10rem;
 `;
 
 export const ArticleLayout = styled.article`

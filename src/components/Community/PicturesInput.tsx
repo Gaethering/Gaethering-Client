@@ -1,7 +1,5 @@
 import { ChangeEventHandler, useState } from 'react';
 import styled from 'styled-components';
-import Button from '../Form/Button';
-import StyledButton from '../Form/Button.style';
 
 interface Props {
   images: File[];

@@ -1,5 +1,5 @@
 import ArticleLayout from './ArticleLayout';
-import { MoreArticle, StyledArticleList } from './Article.style';
+import { Blank, MoreArticle, StyledArticleList } from './Article.style';
 import { CategoryID, CommunityCategory } from '../../api/boardAPI.type';
 import { useInfiniteQuery, useQuery } from 'react-query';
 import { QueryKeys } from '../../api/QueryKeys';
@@ -10,11 +10,8 @@ interface Props {
 }
 
 function ArticleList({ category }: Props) {
-  const fetch = ({
-    pageParam = '9223372036854775807' as unknown as number,
-  }: {
-    pageParam?: number;
-  }) => getArticles(category, 2, pageParam);
+  const fetch = ({ pageParam }: { pageParam?: number }) =>
+    getArticles(category, 6, pageParam);
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
     [...QueryKeys.ArticleList, category],
@@ -44,6 +41,7 @@ function ArticleList({ category }: Props) {
           게시글 더보기
         </MoreArticle>
       )}
+      <Blank />
     </StyledArticleList>
   );
 }

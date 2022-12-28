@@ -10,11 +10,9 @@ import { Container } from './Root.style';
 
 type CommunityOutlet = {
   category: CommunityCategory;
-  // setCategory: React.Dispatch<React.SetStateAction<CommunityType>>;
 };
 
 function Community() {
-  const [isEditting, setIsEditting] = useState(false);
   const [searchWord, setSearchWord] = useState('');
   const [category, setCategory] = useState<CommunityCategory>('qna');
 
@@ -34,9 +32,7 @@ function Community() {
         />
         <SearchBar searchWord={searchWord} setSearchWord={setSearchWord} />
         <ArticleList category={category} />
-        <PostButton to={'editer'} onClick={() => setIsEditting(true)}>
-          글 쓰기
-        </PostButton>
+        <PostButton to={'editer'}>글 쓰기</PostButton>
       </Container>
     </>
   );

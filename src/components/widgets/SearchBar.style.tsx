@@ -11,6 +11,8 @@ const StyledSearchBar = styled.div`
   background-color: ${({ theme: { color } }) => color.gray3};
   border-radius: 1.6rem;
 
+  z-index: index 1000;
+
   .search-input {
     flex: 1 0;
 

@@ -1,9 +1,8 @@
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getArticleDetail } from '../../api/boardAPI';
-import { CategoryID, GetArticleDetailResponse } from '../../api/boardAPI.type';
+import { CategoryID } from '../../api/boardAPI.type';
 import { QueryKeys } from '../../api/QueryKeys';
-import CommentLogo from '../../assets/CommentLogo';
 import Logo from '../../assets/Logo';
 import useRelativeTime from '../../Hooks/useRelativeTime';
 import { useCategory } from '../../pages/Community';
@@ -33,7 +32,14 @@ function ArticleDetail() {
   return (
     <>
       {isLoading || (
-        <S.ArticleOverlay>
+        <S.ArticleOverlay
+          onClick={({ currentTarget }) => {
+            console.log(currentTarget.className);
+            currentTarget.className.includes('post-editer-overlay') &&
+              navigate('../');
+          }}
+          className="post-editer-overlay"
+        >
           <S.StyledWrapper>
             <S.Title>
               <S.CategoryTag>동네정보</S.CategoryTag>
@@ -41,11 +47,17 @@ function ArticleDetail() {
             </S.Title>
 
             <S.Contents>
-              <S.Images>
-                {article?.images.map(({ imageUrl, imageId }) => (
-                  <img src={imageUrl} alt={'이미지' + imageId} key={imageId} />
-                ))}
-              </S.Images>
+              {article?.images[0] && (
+                <S.Images>
+                  {article?.images.map(({ imageUrl, imageId }) => (
+                    <img
+                      src={imageUrl}
+                      alt={'이미지' + imageId}
+                      key={imageId}
+                    />
+                  ))}
+                </S.Images>
+              )}
               <p className="contents-body">
                 {contentsArr?.map((content) => (
                   <>

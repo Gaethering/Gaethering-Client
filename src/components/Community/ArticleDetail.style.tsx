@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const ArticleOverlay = styled.div`
   position: fixed;
   top: ${({ theme: { size } }) => size.navHeight};
-  right: 10vw;
+  left: 0;
 
-  width: 80vw;
-  height: 100%;
+  width: 100vw;
+  height: calc(100% - ${({ theme: { size } }) => size.navHeight});
   background-color: ${({ theme: { color } }) => color.white};
 
   overflow-y: scroll;
@@ -17,7 +17,9 @@ export const ArticleOverlay = styled.div`
 const StyledWrapper = styled.article`
   display: flex;
   flex-direction: column;
-  margin: 4rem 1rem;
+  width: calc(80vw - 6rem);
+
+  margin: 4rem auto;
   padding: 2rem;
 
   border-radius: 1.6rem;

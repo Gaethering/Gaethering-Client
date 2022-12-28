@@ -22,4 +22,7 @@ export const QueryKeys = {
   ArticleDetail: 'article',
   /** Board 댓글 리스트 ['article', 'comments', {postId}] */
   ArticleComments: ['article', 'comments'],
+  /** 반려동물 프로필 */
+  petProfile: ['pet', 'profile', 'petID'],
+  pet: 'pet',
 } as const;

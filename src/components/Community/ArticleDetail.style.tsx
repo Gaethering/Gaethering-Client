@@ -57,12 +57,18 @@ export const Contents = styled.div`
   flex-direction: column;
   margin: 1rem 1rem;
 
-  p.contents-body {
-    margin-left: 1rem;
+  .contents-body {
+    margin: 0 1rem;
+
+    word-break: break-all;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .time {
-    margin: 0 2rem;
+    margin: 0 1rem;
     text-align: right;
     color: ${(prop) => prop.theme.color.gray2};
   }

@@ -66,12 +66,6 @@ function ArticleDetail() {
                   추천해요 {article?.heartCnt}
                 </S.Button>
               </div>
-              <div className="btn-container">
-                {/* <S.Button type="button">
-            <CommentLogo />
-            댓글 {article.commentCnt}
-          </S.Button> */}
-              </div>
             </S.Bottom>
             <ArticleComments />
           </S.StyledWrapper>

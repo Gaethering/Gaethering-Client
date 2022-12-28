@@ -26,13 +26,12 @@ function ArticleLayout({
   const gray = useTheme().color.gray2;
   const time = Date.parse(createdAt).toString();
   const relTime = useRelativeTime(time);
+
+  if (content.length > 120) {
+    content = content.slice(0, 120);
+    content += ' ...';
+  }
   const contentsArr = content.split('\n');
-  const splitContents = contentsArr.slice(0, 4).map((elem) => (
-    <>
-      {elem}
-      <br />
-    </>
-  ));
 
   // const heart = useMutation()
 
@@ -54,11 +53,13 @@ function ArticleLayout({
       </DetailLink>
 
       <S.Contents>
-        <S.Image>
-          {imageUrl && <img src={imageUrl} alt={'게시글 이미지'} />}
-        </S.Image>
-        <p className="contents-body">{splitContents}</p>
-        {contentsArr.length > 4 && (
+        <DetailLink>
+          <S.Image>
+            {imageUrl && <img src={imageUrl} alt={'게시글 이미지'} />}
+          </S.Image>
+        </DetailLink>
+        <pre className="contents-body">{content}</pre>
+        {(contentsArr.length > 3 || content.length > 120) && (
           <DetailLink>
             <S.More>더보기</S.More>
           </DetailLink>

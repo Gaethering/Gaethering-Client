@@ -12,7 +12,7 @@ function Chat() {
   useEffect(() => {
     //! Mock API
     import('../mocks/browser').then((msw) => {
-      // msw.worker.context.isMockingEnabled || msw.worker.start();
+      msw.worker.context.isMockingEnabled || msw.worker.start();
     });
     ////
   }, []);

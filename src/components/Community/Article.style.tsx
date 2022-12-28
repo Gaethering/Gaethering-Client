@@ -3,6 +3,7 @@ import StyledButton from '../Form/Button.style';
 
 export const StyledArticleList = styled.div`
   margin: 0 auto;
+  padding-bottom: 10rem;
 
   width: 80vw;
   height: calc(100vh - 20rem);
@@ -43,11 +44,21 @@ export const CategoryTag = styled.span`
 
 export const Title = styled.div`
   margin: 2rem 3.5rem 0;
+  height: 2.4rem;
+
   display: flex;
   align-items: center;
   gap: 1rem;
 
   h3 {
+    white-space: normal;
+    line-break: strict;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+
+    /* height: 2.4rem; */
+
     font-size: 2rem;
     font-weight: 600;
   }
@@ -58,8 +69,15 @@ export const Contents = styled.div`
   flex-direction: column;
   margin: 1rem 2.5rem;
 
-  p.contents-body {
-    margin-left: 1rem;
+  .contents-body {
+    max-height: 12rem;
+    margin: 0 1rem;
+
+    word-break: break-all;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .time {
@@ -87,6 +105,7 @@ export const More = styled.button`
   align-items: center;
   justify-content: center;
 
+  width: 100%;
   margin: 1rem 0;
 
   font-weight: 600;

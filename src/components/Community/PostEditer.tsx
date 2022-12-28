@@ -99,6 +99,7 @@ function PostEditer() {
         <S.TitleInput
           {...register('title', {
             required: '제목을 입력해주세요',
+            maxLength: {value: 30, message: '제목은 30자 이하로 작성해주세요'},
             disabled: isLoading,
           })}
           placeholder="제목을 입력해주세요"

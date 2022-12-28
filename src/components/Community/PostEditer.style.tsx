@@ -54,6 +54,10 @@ const ContentsInput = styled.textarea`
 
   border: none;
 
+  word-break: break-all;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+
   font-size: 1.6rem;
   font-weight: 400;
 `;

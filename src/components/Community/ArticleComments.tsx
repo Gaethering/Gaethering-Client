@@ -125,9 +125,10 @@ const More = styled(StyledButton)`
   align-items: center;
   justify-content: center;
 
-  height: 3rem;
+  height: 2.6rem;
   padding: 0;
 
+  background-color: ${({ theme: { color } }) => color.gray4};
   border-radius: 0.8rem;
 
   font-size: 1.4rem;

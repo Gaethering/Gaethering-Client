@@ -4,7 +4,7 @@ import * as T from './boardAPI.type';
 import { BoardApiUrl as Api } from './boardAPI.type';
 
 type A<T, D> = AxiosResponse<T, D>;
-type PostId = number;
+type PostId = number | string;
 
 export async function postQnaArticle(data: FormData) {
   type Res = T.PostArticleResponse;
@@ -50,6 +50,15 @@ export async function getArticles(
   if (response.data.nextCursor === -1) {
     response.data.nextCursor = undefined;
   }
+
+  return response.data;
+}
+
+export async function getArticleDetail(categoryId: 1 | 2, postId: PostId) {
+  type Res = T.GetArticleDetailResponse;
+  const response = await axios.get<Res, A<Res, void>>(
+    `${Api.GetArticleDetail}${categoryId}/${postId}`
+  );
 
   return response.data;
 }

@@ -37,4 +37,27 @@ function useRelativeTime(time: string, locale = 'ko-KR'): string {
   return timeFormat(getSeconds(relativeTime), 'second');
 }
 
+export function getRelativeTime(time: string, locale = 'ko-KR') {
+  const date = parseInt(time);
+  const now = Date.now();
+  const relativeTime = date - now;
+
+  const timeFormat = (value: number, unit: Intl.RelativeTimeFormatUnit) =>
+    new Intl.RelativeTimeFormat(locale, { style: 'short' }).format(value, unit);
+
+  if (isDay(relativeTime)) {
+    return timeFormat(getDays(relativeTime), 'day');
+  }
+
+  if (isHour(relativeTime)) {
+    return timeFormat(getHours(relativeTime), 'hour');
+  }
+
+  if (isMinute(relativeTime)) {
+    return timeFormat(getMinutes(relativeTime), 'minute');
+  }
+
+  return timeFormat(getSeconds(relativeTime), 'second');
+}
+
 export default useRelativeTime;

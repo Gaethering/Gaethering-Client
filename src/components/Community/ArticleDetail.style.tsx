@@ -41,7 +41,7 @@ export const CategoryTag = styled.span`
 `;
 
 const Title = styled.h2`
-  margin: 2rem 3.5rem 0;
+  margin: 2rem 1rem 0;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -55,7 +55,7 @@ const Title = styled.h2`
 export const Contents = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1rem 2.5rem;
+  margin: 1rem 1rem;
 
   p.contents-body {
     margin-left: 1rem;
@@ -68,7 +68,7 @@ export const Contents = styled.div`
   }
 `;
 
-export const Image = styled.div`
+export const Images = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,7 +102,7 @@ export const Bottom = styled.div`
   display: flex;
   align-items: center;
   margin-top: 1rem;
-  padding: 0.3rem 2.5rem;
+  padding: 0.3rem 0.6rem;
   height: 4rem;
   border-top: 1px solid ${(prop) => prop.theme.color.gray3};
 

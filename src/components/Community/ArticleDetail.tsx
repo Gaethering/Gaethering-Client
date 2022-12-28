@@ -41,9 +41,9 @@ function ArticleDetail() {
             </S.Title>
 
             <S.Contents>
-              <S.Image>
+              <S.Images>
                 {/* {imageUrl && <img src={imageUrl} alt={'게시글 이미지'} />} */}
-              </S.Image>
+              </S.Images>
               <p className="contents-body">{contentsArr}</p>
               <div className="time">{relTime}</div>
             </S.Contents>

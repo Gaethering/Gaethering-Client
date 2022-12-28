@@ -17,10 +17,10 @@ function ArticleList({ category }: Props) {
   }) => getArticles(category, 2, pageParam);
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    [QueryKeys.ArticleList, category],
+    [...QueryKeys.ArticleList, category],
     fetch,
     {
-      getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
+      getNextPageParam: (lastPage) => lastPage.nextCursor,
     }
   );
 

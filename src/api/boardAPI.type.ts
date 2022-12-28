@@ -128,7 +128,7 @@ export interface ListComment extends Comment {
 export interface GetCommentsResponse {
   comments: ListComment[];
   totalCommentsCnt: number;
-  nextCursor: number;
+  nextCursor: number | undefined;
 }
 
 export interface PostCommentRequest {

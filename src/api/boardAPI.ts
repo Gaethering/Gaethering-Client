@@ -98,15 +98,15 @@ export async function deleteImage(id: PostId, imageId: number) {
   return response.data;
 }
 
-export async function getComments(
-  id: PostId,
-  size = 5,
-  lastId = Number.MAX_SAFE_INTEGER
-) {
+export async function getComments(id: PostId, size = 5, lastId: number) {
   const response = await axios.get<
     T.GetCommentsResponse,
     A<T.GetCommentsResponse, void>
-  >(Api.GetComments + id + `/comments?size=${size}&lastPostId=${lastId}`);
+  >(Api.GetComments + id + `/comments?size=${size}&lastCommentId=${lastId}`);
+
+  if (response.data.nextCursor === -1) {
+    response.data.nextCursor = undefined;
+  }
 
   return response.data;
 }

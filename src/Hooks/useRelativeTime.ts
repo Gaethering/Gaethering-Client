@@ -14,13 +14,19 @@ const getHours = (time: number) => Math.round(time / HOUR);
 const getMinutes = (time: number) => Math.round(time / MINUTE);
 const getSeconds = (time: number) => Math.round(time / SECOND);
 
-function useRelativeTime(time: string, locale = 'ko-KR'): string {
+type DateStyle = 'full' | 'long' | 'medium' | 'short';
+
+function useRelativeTime(
+  time: string,
+  locale = 'ko-KR',
+  dateStyle: DateStyle = 'long'
+): string {
   const date = parseInt(time);
   const now = Date.now();
   const relativeTime = date - now;
 
   const dateFormat = () =>
-    new Intl.DateTimeFormat(locale, { dateStyle: 'long' }).format(date);
+    new Intl.DateTimeFormat(locale, { dateStyle }).format(date);
 
   const timeFormat = (value: number, unit: Intl.RelativeTimeFormatUnit) =>
     new Intl.RelativeTimeFormat(locale, { style: 'short' }).format(value, unit);

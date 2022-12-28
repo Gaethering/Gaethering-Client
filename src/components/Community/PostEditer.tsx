@@ -48,7 +48,7 @@ function PostEditer() {
       ////TEST
       alert('작성 완료!');
 
-      queryClient.invalidateQueries([QueryKeys.ArticleList, category]);
+      queryClient.invalidateQueries([...QueryKeys.ArticleList, category]);
 
       reset();
       setImages([]);

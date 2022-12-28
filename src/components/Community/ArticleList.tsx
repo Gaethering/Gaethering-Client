@@ -28,7 +28,11 @@ function ArticleList({ category }: Props) {
     <StyledArticleList>
       {data?.pages.map((articles) =>
         articles?.posts.map((article) => (
-          <ArticleLayout key={article.postId} {...article} />
+          <ArticleLayout
+            key={article.postId}
+            {...article}
+            category={category}
+          />
         ))
       )}
       {hasNextPage && (

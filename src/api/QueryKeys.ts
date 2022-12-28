@@ -14,4 +14,12 @@ export const QueryKeys = {
   /** 사용자 프로필 정보 */
   userProfile: ['user', 'profile'],
   user: 'user',
+  /** Board 게시글 */
+  Article: 'article',
+  /** Board 게시글 리스트 ['article', 'list', {category}]*/
+  ArticleList: ['article', 'list'],
+  /** Board 게시글 상세 정보 ['article', {id}]*/
+  ArticleDetail: 'article',
+  /** Board 댓글 리스트 ['article', 'comments', {postId}] */
+  ArticleComments: ['article', 'comments'],
 } as const;

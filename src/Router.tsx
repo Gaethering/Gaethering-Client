@@ -5,6 +5,8 @@ import AddPet from './components/Profile/AddPet';
 import AddPetForm from './components/Profile/AddPetForm';
 import EditProfile from './components/Profile/EditProfile';
 import User from './components/Profile/User';
+import ArticleDetail from './components/Community/ArticleDetail';
+import PostEditer from './components/Community/PostEditer';
 import Chat from './pages/Chat';
 import Community from './pages/Community';
 import Profile, { EditPet, Pet } from './pages/Profile';
@@ -22,7 +24,15 @@ const router = createBrowserRouter([
     children: [
       { path: 'chat', element: <Chat /> },
       { path: 'chat/:roomKey', element: <ChatRoom /> },
-      { path: 'community', element: <Community /> },
+      {
+        path: 'community',
+        element: <Community />,
+        children: [
+          { path: 'editer', element: <PostEditer /> },
+          { path: ':postId', element: <ArticleDetail /> },
+        ],
+      },
+      { path: 'profile', element: <Profile /> },
       { path: 'sns', element: <SNS /> },
       {
         path: '/profile',

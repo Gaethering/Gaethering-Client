@@ -1,33 +1,30 @@
 import styled from 'styled-components';
-import StyledButton from '../Form/Button.style';
 
-export const StyledArticleList = styled.div`
-  margin: 0 auto;
+export const ArticleOverlay = styled.div`
+  position: fixed;
+  top: ${({ theme: { size } }) => size.navHeight};
+  left: 0;
 
-  width: 80vw;
-  height: calc(100vh - 20rem);
-  min-width: calc(390px);
+  width: 100vw;
+  height: calc(100% - ${({ theme: { size } }) => size.navHeight});
+  background-color: ${({ theme: { color } }) => color.white};
 
   overflow-y: scroll;
+
+  z-index: 100;
 `;
 
-export const Blank = styled.div`
-  height: 10rem;
-`;
-
-export const ArticleLayout = styled.article`
+const StyledWrapper = styled.article`
   display: flex;
   flex-direction: column;
+  width: calc(80vw - 6rem);
 
-  margin: 2rem auto;
-  width: 90%;
+  margin: 4rem auto;
+  padding: 2rem;
 
-  box-shadow: 0 0 1.4rem 0 rgba(100, 100, 100, 0.1);
   border-radius: 1.6rem;
-
-  * {
-    text-decoration: none;
-  }
+  background-color: ${({ theme: { color } }) => color.white};
+  box-shadow: 0 0 1rem 0 rgba(100, 100, 100, 0.16);
 `;
 
 export const CategoryTag = styled.span`
@@ -35,7 +32,7 @@ export const CategoryTag = styled.span`
   align-items: center;
   justify-content: center;
 
-  padding: 0 0.8rem;
+  width: 5rem;
 
   color: ${(prop) => prop.theme.color.white};
   background-color: ${(prop) => prop.theme.color.main};
@@ -45,23 +42,13 @@ export const CategoryTag = styled.span`
   font-weight: 600;
 `;
 
-export const Title = styled.div`
-  margin: 2rem 3.5rem 0;
-  height: 2.4rem;
-
+const Title = styled.h2`
+  margin: 2rem 1rem 0;
   display: flex;
   align-items: center;
   gap: 1rem;
 
   h3 {
-    white-space: normal;
-    line-break: strict;
-    word-break: keep-all;
-    text-overflow: ellipsis;
-    overflow-x: hidden;
-
-    /* height: 2.4rem; */
-
     font-size: 2rem;
     font-weight: 600;
   }
@@ -70,10 +57,9 @@ export const Title = styled.div`
 export const Contents = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1rem 2.5rem;
+  margin: 1rem 1rem;
 
   .contents-body {
-    max-height: 12rem;
     margin: 0 1rem;
 
     word-break: break-all;
@@ -84,22 +70,27 @@ export const Contents = styled.div`
   }
 
   .time {
-    margin: 0 2rem;
+    margin: 0 1rem;
     text-align: right;
     color: ${(prop) => prop.theme.color.gray2};
   }
 `;
 
-export const Image = styled.div`
+export const Images = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
   align-items: center;
   justify-content: center;
 
-  margin: 1rem 0;
+  width: calc(100% - 4rem);
+  margin: 4rem 2rem;
 
   img {
-    height: 20rem;
+    max-width: calc(100% - 4rem);
+    max-height: 25rem;
     border-radius: 1.6rem;
+    box-shadow: 0 0 1rem 0 rgba(100, 100, 100, 0.2);
   }
 `;
 
@@ -108,7 +99,6 @@ export const More = styled.button`
   align-items: center;
   justify-content: center;
 
-  width: 100%;
   margin: 1rem 0;
 
   font-weight: 600;
@@ -125,7 +115,7 @@ export const Bottom = styled.div`
   display: flex;
   align-items: center;
   margin-top: 1rem;
-  padding: 0.3rem 2.5rem;
+  padding: 0.3rem 0.6rem;
   height: 4rem;
   border-top: 1px solid ${(prop) => prop.theme.color.gray3};
 
@@ -153,16 +143,4 @@ export const Button = styled.button`
   }
 `;
 
-export const MoreArticle = styled(StyledButton)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  height: 3rem;
-  padding: 0;
-
-  border-radius: 0.8rem;
-
-  font-size: 1.4rem;
-`;
+export { StyledWrapper, Title };

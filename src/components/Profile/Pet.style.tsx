@@ -5,6 +5,10 @@ export const StyledPet = styled.div`
   min-width: 390px;
   margin: 0 auto;
 
+  h1 {
+    margin: 7vh 2rem -2vh;
+  }
+
   .title_section {
     margin: 10vh 2rem 0;
     display: flex;
@@ -182,4 +186,16 @@ export const StyledEditForm = styled.div`
       }
     }
   }
+
+  .buttons {
+      margin: 3rem 2rem;
+      display: flex;
+      gap: 1rem;
+      .btn_cancel,
+      .btn_save {
+        font-size: 1.5rem;
+        width: 49%;
+        padding: 0.5rem;
+      }
+    }
 `;

@@ -1,7 +1,11 @@
 export const enum ProfileApiUrl {
   PROFILE_MYPAGE = '/mypage',
 
-  PET = '/pets'
+  PROFILE_EDIT = '/mypage/nickname',
+
+  PET = '/pets',
+
+  ADD_PET = `/pets/register`
 }
 
 export interface ProfileResponse {
@@ -18,6 +22,7 @@ export interface ProfileResponse {
       {
         id: number;
         name: string;
+        imageUrl: string;
         representative: boolean;
       }
     ];
@@ -33,4 +38,8 @@ export interface PetResponse {
   isNeutered: boolean;
   description: string;
   imageUrl: string;
+}
+
+export interface ProfileEditResponse {
+  nickname: string;
 }

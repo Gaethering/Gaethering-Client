@@ -1,143 +1,89 @@
 import PetImage from './PetImage';
-import { StyledPet } from './Pet.style';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../Form/Button';
 import Input from '../Form/Input';
-import SelectInput from '../Form/SelectInput';
-import { StyledEditForm } from './Pet.style';
+import { StyledUser, StyledUserProfile } from './User.style';
+import { Form, useNavigate } from 'react-router-dom';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { patchProfile, getUserProfile } from '../../api/profileAPI';
+import { QueryKeys } from '../../api/QueryKeys';
 
-interface EditPetType {
-  petName: string;
-  petAge: number;
-  breed: string;
-  petWeight: number;
-  petDescription: string;
-  petGender: string;
-  neutralization: string;
+interface EditProfileType {
+  nickname: string;
 }
 
 function EditProfile() {
-  //임시 데이터
-  const petData = {
-    name: '해삐',
-    age: 6,
-    gender: '남아',
-    breed: '말티즈',
-    weight: 5.5,
-    isNeutered: true,
-    description: '말을 잘들어요',
-    imageUrl:
-      'https://images.pexels.com/photos/13215915/pexels-photo-13215915.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-  };
+  const queryClient = useQueryClient();
+  const {data, isLoading} = useQuery(QueryKeys.userProfile, getUserProfile)
+  const nameMutation = useMutation(patchProfile, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QueryKeys.user)
+    }
+  });
+  console.log('pp', nameMutation)
 
-  const defaultValues = {
-    petName: `${petData.name}`,
-    petAge: petData.age,
-    breed: `${petData.breed}`,
-    petWeight: petData.weight,
-    petDescription: `${petData.description}`,
-    petGender: `${petData.gender}`,
-    neutralization: petData.isNeutered === true ? '완료' : '미완료',
-  };
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
-  } = useForm<EditPetType>({ defaultValues });
+  } = useForm<EditProfileType>();
 
-  const onSubmit: SubmitHandler<EditPetType> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<EditProfileType> = (data) => {
+    console.log('onsub',data);
+    nameMutation.mutate(data);
+    // goBack()
+  };
+
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
   };
 
   return (
-    <StyledPet>
-      <StyledEditForm onSubmit={handleSubmit(onSubmit)}>
-        <div className="title_section">
-          <PetImage
-            src={petData.imageUrl}
-            id={petData.name}
-            className="pet_img"
-          />
-          <div className="name_input">
-            <Input
-              name="petName"
-              register={register}
-              label=""
-              plHolder="2자 이상 8자 이하"
-              options={{}}
-            />
-            <div className="button_section">
-              <Button btnTheme="sub" type="button" className="btn_cancel">
-                취소
-              </Button>
-              <Button btnTheme="main" type="submit" className="btn_save">
-                저장
-              </Button>
+    <StyledUser>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <StyledUserProfile>
+          <div className="user_profile_container">
+            {/* <PetImage src={petImg} name={userName} className="user_img" /> */}
+            <div className="user_profile_detail">
+              <div className="user_info">
+                <Input
+                  name="nickname"
+                  register={register}
+                  label="이름"
+                  plHolder="실명을 입력해주세요"
+                  options={{
+                    required: '이름을 입력해주세요',
+                    minLength: {
+                      value: 2,
+                      message: '이름은 2자 이상으로 입력해주세요',
+                    },
+                    maxLength: {
+                      value: 8,
+                      message: '이름은 8자 이하로 입력해주세요',
+                    },
+                  }}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="profile_section">
-          <div className="age_input input_row">
-            <Input
-              name="petAge"
-              register={register}
-              label="나이"
-              plHolder="숫자만 입력해주세요"
-              options={{}}
-            />
+          <div className="button_container">
+            <Button
+              btnTheme="sub"
+              type="button"
+              className="cancel"
+              onClick={goBack}
+            >
+              취소
+            </Button>
+            <Button btnTheme="main" type="submit" className="save">
+              저장
+            </Button>
           </div>
-
-          <div className="one_row">
-            <div className="breed_input input_row">
-              <Input
-                name="breed"
-                register={register}
-                label="견종"
-                plHolder="견종을 알려주세요(필수 아님)"
-                options={{}}
-              />
-            </div>
-            <div className="weight_input input_row">
-              <Input
-                name="petWeight"
-                register={register}
-                label="몸무게"
-                plHolder="숫자만 입력해주세요"
-                options={{}}
-              />
-            </div>
-          </div>
-          <div className="description_input column">
-            <Input
-              name="petDescription"
-              register={register}
-              label="소개"
-              plHolder="100자 이하"
-              options={{}}
-            />
-          </div>
-          <div className="one_row">
-            <div className="select_gender select column">
-              <SelectInput
-                name="petGender"
-                label="성별"
-                register={register}
-                values={['여아', '남아']}
-              />
-            </div>
-            <div className="select_neutralization select column">
-              <SelectInput
-                name="neutralization"
-                label="중성화 여부"
-                register={register}
-                values={['완료', '미완료']}
-              />
-            </div>
-          </div>
-        </div>
-      </StyledEditForm>
-    </StyledPet>
+        </StyledUserProfile>
+      </Form>
+    </StyledUser>
   );
 }
 

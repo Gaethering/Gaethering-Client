@@ -1,9 +1,13 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, useParams } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import ChatRoom from './components/ChatRoom/ChatRoom';
+import AddPet from './components/Profile/AddPet';
+import AddPetForm from './components/Profile/AddPetForm';
+import EditProfile from './components/Profile/EditProfile';
+import User from './components/Profile/User';
 import Chat from './pages/Chat';
 import Community from './pages/Community';
-import Profile from './pages/Profile';
+import Profile, { EditPet, Pet } from './pages/Profile';
 import Root from './pages/Root';
 import SignUp from './pages/SignUp';
 import { SignStart, SignProfile, SignPet, SignEnd } from './pages/SignUpPages';
@@ -19,8 +23,17 @@ const router = createBrowserRouter([
       { path: 'chat', element: <Chat /> },
       { path: 'chat/:roomKey', element: <ChatRoom /> },
       { path: 'community', element: <Community /> },
-      { path: 'profile', element: <Profile /> },
       { path: 'sns', element: <SNS /> },
+      {
+        path: '/profile',
+        element: <Profile />,
+        children: [
+        ],
+      },
+      { path: 'profile/edit', element: <EditProfile /> },
+      { path: 'profile/pet/:petID', element: <Pet /> },
+      { path: 'profile/addPet', element: <AddPet /> },
+      { path: 'profile/pet/:petID/editpet', element: <EditPet /> },
     ],
   },
   {

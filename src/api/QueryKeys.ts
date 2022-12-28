@@ -11,4 +11,7 @@ export const QueryKeys = {
   auth: 'auth',
   /** NavBar 유저 정보 */
   navInfo: ['user', 'navBar'],
+  /** 사용자 프로필 정보 */
+  userProfile: ['user', 'profile'],
+  user: 'user',
 } as const;

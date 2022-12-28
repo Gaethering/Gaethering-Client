@@ -1,4 +1,4 @@
-import User from '../../../copy3/User';
+import User from '../components/Profile/User';
 import Pet from '../components/Profile/Pet';
 import EditPet from '../components/Profile/EditPet';
 import UserPetList from '../components/Profile/UserPetList';
@@ -12,9 +12,15 @@ import { useQuery } from 'react-query';
 import { useEffect } from 'react';
 import { useSetServiceName } from './Root';
 
+//! Mock API
+import { worker } from '../mocks/browser';
+import { QueryKeys } from '../api/QueryKeys';
+worker.stop();
+////
+
 function Profile() {
-  const userData = useQuery('@getUserProfile', getUserProfile);
-  console.log('tt', userData.data);
+  const {data, isLoading} = useQuery(QueryKeys.userProfile, getUserProfile);
+  console.log('tt', data);
 
   const setNav = useSetServiceName();
 
@@ -22,15 +28,16 @@ function Profile() {
     setNav('프로필');
   }, [setNav]);
 
-
   return (
     <StyledUser>
       <UserProfile
-        userName={userData.data?.nickname}
+        userName={data?.nickname}
         petImg={
-          userData.data?.pets.filter((pet) => pet.representative === true)[0].imageUrl}
+          data?.pets.filter((pet) => pet.representative === true)[0]
+            .imageUrl
+        }
       />
-      <UserPetList petList={userData.data?.pets} />
+      <UserPetList petList={data?.pets} />
     </StyledUser>
   );
 }

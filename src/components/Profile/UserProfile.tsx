@@ -2,7 +2,7 @@ import { StyledUserProfile } from './User.style';
 import Button from '../Form/Button';
 import PetImage from './PetImage';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import UserName from './UserName';
 import EditName from './EditName';
 import { useMutation } from 'react-query';
@@ -17,66 +17,41 @@ interface EditProfileType {
   nickname: string;
 }
 
-
 function UserProfile({ userName, petImg }: UserProp) {
   console.log('userName', userName);
 
-  const {
-    register,
-    formState: { errors, isValid },
-    handleSubmit,
-  } = useForm<EditProfileType>();
-
   const nameMutation = useMutation(patchProfile);
-  console.log('pp', nameMutation)
-  
+  console.log('pp', nameMutation);
+
+  const [nameState, setNameState] = useState('');
   const [nameInput, setNameInput] = useState(true);
   const handleChange = () => {
     console.log('change', nameInput);
     setNameInput(!nameInput);
   };
-  const onSubmit: SubmitHandler<EditProfileType> = (nickname) => {
-    console.log('submit', nickname);
-    setNameInput(!nameInput)
-    nameMutation.mutate(nickname);
-  };
 
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
+  useEffect(() => {
+    setNameState(userName);
+  });
 
   return (
-    <StyledUserProfile onSubmit={handleSubmit(onSubmit)}>
+    <StyledUserProfile>
       <div className="user_profile_container">
-        <PetImage src={petImg} name={userName} className="user_img" />
-        {/* <div className="user_profile_detail">
+        <PetImage src={petImg} name={nameState} className="user_img" />
+        <div className="user_profile_detail">
           <div className="user_info">
-            <h2 className="user_name">{userName}</h2>
+            <h2 className="user_name">{nameState}</h2>
           </div>
-        </div> */}
-        {nameInput === true ? <UserName name={userName} /> : <EditName />}
-        {/* // <UserName name={userName}/> */}
+        </div>
       </div>
       <div className="button_container">
-        {nameInput === true ? (
-          <Link to="/myBoard" className="link">
-            <Button btnTheme="sub" type="button" className="go_my_article">
-              내가 쓴 게시물
-            </Button>
-          </Link>
-        ) : (
-          <Button
-            btnTheme="sub"
-            type="button"
-            className="cancel"
-            onClick={handleChange}
-          >
-            취소
+        <Link to="/myBoard" className="link">
+          <Button btnTheme="sub" type="button" className="go_my_article">
+            내가 쓴 게시물
           </Button>
-        )}
-        {/* <Link to="edit" className="link"> */}
-        {nameInput === true ? (
+        </Link>
+
+        <Link to="edit" className="link">
           <Button
             btnTheme="main"
             type="button"
@@ -85,17 +60,7 @@ function UserProfile({ userName, petImg }: UserProp) {
           >
             닉네임 수정
           </Button>
-        ) : (
-          <Button
-            btnTheme="main"
-            type="submit"
-            className="save"
-            // onClick={handleChange}
-      >
-            저장
-          </Button>
-        )}
-        {/* </Link> */}
+        </Link>
       </div>
     </StyledUserProfile>
   );

@@ -7,14 +7,15 @@ import SelectInput from '../Form/SelectInput';
 import { StyledEditForm } from './Pet.style';
 import { EditPetForm } from './Profile.type';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import { getPetProfile } from '../../api/profileAPI';
+import { useMutation, useQuery } from 'react-query';
+import { getPetProfile, patchPetProfile } from '../../api/profileAPI';
 import validDate from '../../util/validDate';
 
 function EditPet() {
   const { petID } = useParams();
   const petData = useQuery(['pets', petID], () => getPetProfile(petID));
   console.log('ee', petData.data);
+  // const editPetMutation = useMutation(patchPetProfile)
 
 
   const defaultValues = {
@@ -36,6 +37,7 @@ function EditPet() {
 
   const onSubmit: SubmitHandler<EditPetForm> = (data) => {
     console.log(data);
+    // editPetMutation.mutate(data)
   };
 
   const navigate = useNavigate();

@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useMutation } from 'react-query';
+import { ChatQueryKeys } from '../../api/QueryKeys';
 import { StyledChatInput } from './ChatInput.style';
 
 function ChatInput() {
   const [chat, setChat] = useState('');
+  const {mutate} = useMutation()
   return (
     <StyledChatInput>
       <input

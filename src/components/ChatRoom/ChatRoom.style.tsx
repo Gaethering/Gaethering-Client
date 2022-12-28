@@ -4,6 +4,13 @@ export const Blank = styled.div`
   height: 6rem;
 `;
 
+export const Chats = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: start;
+  justify-content: end;
+`;
+
 const StyledChatRoom = styled.div`
   display: flex;
   flex-direction: column;

@@ -5,7 +5,7 @@ import ChatRoomTalk from './ChatRoomTalk';
 import ChatRoomTitle from './ChatRoomTitle';
 import { useQuery, useQueryClient } from 'react-query';
 import Spinner from '../widgets/Spinner';
-import { Blank, StyledChatRoom } from './ChatRoom.style';
+import { Blank, Chats, StyledChatRoom } from './ChatRoom.style';
 import { ChatQueryKeys, QueryKeys } from '../../api/QueryKeys';
 import { getChatHistory, getChatroom } from '../../api/chatroomAPI';
 import { NavInfoResponse } from '../../api/authAPI.type';
@@ -61,15 +61,15 @@ function ChatRoom() {
         <Spinner />
       ) : (
         <>
-          {history
-            ?.sort((x, y) => Date.parse(x.createdAt) - Date.parse(y.createdAt))
-            ?.map((talk) =>
+          <Chats>
+            {history?.map((talk) =>
               talk.memberId === (userId ?? 0) ? (
                 <ChatRoomMyTalk key={talk.createdAt} {...talk} />
               ) : (
                 <ChatRoomTalk key={talk.createdAt} {...info} {...talk} />
               )
             )}
+          </Chats>
           <ChatInput />
           <Blank />
         </>

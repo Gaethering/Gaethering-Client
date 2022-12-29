@@ -8,10 +8,9 @@ import { getPetProfile } from '../../api/profileAPI';
 import { QueryKeys } from '../../api/QueryKeys';
 
 function Pet() {
-  const { petID } = useParams();
+  const { petID:petIDString } = useParams();
+  const petID = parseInt(petIDString??'')
   const petData = useQuery([QueryKeys.petProfile, petID], () => getPetProfile(petID));
-  console.log('gg', petData.data);
-  console.log('gg2', petData);
 
   return (
     <StyledPet>

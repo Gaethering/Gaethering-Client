@@ -3,9 +3,6 @@ import EditPet from '../components/Profile/EditPet';
 import UserPetList from '../components/Profile/UserPetList';
 import UserProfile from '../components/Profile/UserProfile';
 import { StyledUser } from '../components/Profile/User.style';
-import { useState } from 'react';
-import PetImageDefault from '../assets/PetImageDefault.svg';
-import { ProfileResponse } from '../api/profileAPI.typs';
 import { getUserProfile } from '../api/profileAPI';
 import { useQuery } from 'react-query';
 import { useEffect } from 'react';
@@ -21,13 +18,13 @@ function Profile() {
   useEffect(() => {
     setNav('프로필');
   }, [setNav]);
-
+  
   return (
     <StyledUser>
       <UserProfile
-        userName={data?.nickname}
+        userName={data?.data.nickname}
         petImg={
-          data?.pets.filter((pet) => pet.representative === true)[0]
+          data?.data.pets.filter((pet) => pet.representative === true)[0]
             .imageUrl
         }
       />

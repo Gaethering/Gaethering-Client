@@ -11,6 +11,9 @@ export const QueryKeys = {
   auth: 'auth',
   /** NavBar 유저 정보 */
   navInfo: ['user', 'navBar'],
+  /** 사용자 프로필 정보 */
+  userProfile: ['user', 'profile'],
+  user: 'user',
   /** Board 게시글 */
   Article: 'article',
   /** Board 게시글 리스트 ['article', 'list', {category}]*/
@@ -19,6 +22,9 @@ export const QueryKeys = {
   ArticleDetail: 'article',
   /** Board 댓글 리스트 ['article', 'comments', {postId}] */
   ArticleComments: ['article', 'comments'],
+  /** 반려동물 프로필 */
+  petProfile: ['pet', 'profile', 'petID', 'addPet'],
+  pet: 'pet',
 } as const;
 
 export const ChatQueryKeys = {

@@ -19,8 +19,21 @@ export const UserPetListStyle = styled.div`
   }
 `
 
+export const Title = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .link {
+    button {
+      font-size: 1.5rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 1.2rem;
+    }
+  }
+`
+
 interface StyledUserPetProp {
-  isDelegate: boolean;
+  representative: boolean;
 }
 
 export const StyledUserPet = styled.div<StyledUserPetProp>`
@@ -35,8 +48,8 @@ export const StyledUserPet = styled.div<StyledUserPetProp>`
     font-weight: 700;
   }
 
-  ${({ isDelegate }) =>
-    isDelegate &&
+  ${({ representative }) =>
+    representative &&
     css`
       .container {
         border-radius: 50%;
@@ -58,7 +71,7 @@ export const StyledUserPet = styled.div<StyledUserPetProp>`
       &::after {
         content: '✓';
         position: absolute;
-        top: 63%;
+        top: 59%;
         left: 81%;
         width: 2rem;
         height: 2rem;
@@ -111,11 +124,6 @@ export const StyledUserProfile = styled.div`
         .user_name {
           font-size: 3rem;
         }
-
-        .user_local {
-          font-size: 1.7rem;
-          color: ${(prop) => prop.theme.color.gray2};
-        }
       }
 
       .user_temp {
@@ -130,11 +138,19 @@ export const StyledUserProfile = styled.div`
     justify-content: space-between;
     gap: 1rem;
     margin: 3rem 0;
-    .go_my_article,
-    .edit_profile {
-      width: 45%;
+    a {
+      display: inline-flex;
+      text-decoration: none;
+      margin: 0;
+      padding: 0;
+      width: 48%;
       min-width: 140px;
+    }
+    button {
+      box-sizing: content-box;
+      padding: 0.8rem;
       font-size: 1.7rem;
+      width: 100%;
     }
   }
 `;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { postEmailAuth } from '../../api/signUpAPI';
 import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import StyledInput from '../../components/Form/Input.style';
@@ -16,10 +17,12 @@ function SignUpStart() {
       isValid,
       dirtyFields: { email: emailDirty },
     },
+    setError,
     setValue,
     getValues,
   } = useSignUpForm();
   const [emailAuth, setEmailAuth] = useState(false);
+  const [emailAuthCode, setEmailAuthCode] = useState('');
   const [isEmailChecked, setIsEmailChecked] = useState(false);
   const canEmailAuth = emailDirty && !errors.email;
 
@@ -44,39 +47,55 @@ function SignUpStart() {
           <Button
             className="form-btn"
             btnTheme="sub"
+            disabled={isEmailChecked}
             onClick={() => {
               resetField('email');
               setEmailAuth(false);
             }}
           >
-            이메일 재인증
+            {isEmailChecked ? '이메일 인증 완료!' : '이메일 재인증'}
           </Button>
         ) : (
           <Button
             className="form-btn"
-            disabled={!canEmailAuth}
-            onClick={() => canEmailAuth && setEmailAuth(true)}
+            disabled={!canEmailAuth || isEmailChecked}
+            onClick={async () => {
+              if (canEmailAuth) {
+                await postEmailAuth(getValues('email'));
+                setEmailAuth(true);
+              }
+            }}
           >
             이메일 인증
           </Button>
         )}
       </div>
-      {emailAuth && (
+      {emailAuth && !isEmailChecked && (
         <div className="email-area">
           <StyledInput className="input-container">
             <label>
               이메일을 발송했습니다
-              <input placeholder="인증 코드를 입력해주세요" required={true} />
+              <input
+                value={emailAuthCode}
+                onChange={({ currentTarget }) =>
+                  setEmailAuthCode(currentTarget.value)
+                }
+                placeholder="인증 코드를 입력해주세요"
+                required={true}
+              />
             </label>
           </StyledInput>
           <Button
             btnTheme="main"
             type="button"
             className="form-btn"
-            onClick={() => {
-              if (emailAuthCheck()) {
+            onClick={async () => {
+              const confirm = await emailAuthCheck(emailAuthCode);
+              if (confirm) {
                 setIsEmailChecked(true);
                 setValue('isEmailAuth', true);
+              } else {
+                setError('email', { message: '인증코드가 잘못되었습니다.' });
               }
             }}
           >

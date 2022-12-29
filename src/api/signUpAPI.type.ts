@@ -11,3 +11,15 @@ export interface SignUpResponse {
   petName: string;
   imageUrl: string;
 }
+
+export interface EmailAuthConfirmRequest {
+  code: string;
+}
+
+export interface EmailAuthConfirmResponse {
+  isEmailAuth: boolean;
+}
+
+export interface EmailAuthRequest {
+  email: string;
+}

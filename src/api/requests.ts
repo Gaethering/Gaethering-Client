@@ -26,7 +26,6 @@ const postRequest = async <T, D>(
     } else {
       console.info(String(error));
     }
-    return error;
   }
 };
 

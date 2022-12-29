@@ -10,7 +10,7 @@ import { useSetServiceName } from './Root';
 import { QueryKeys } from '../api/QueryKeys';
 
 function Profile() {
-  const {data, isLoading} = useQuery(QueryKeys.userProfile, getUserProfile);
+  const { data, isLoading } = useQuery(QueryKeys.userProfile, getUserProfile);
   console.log('tt', data);
 
   const setNav = useSetServiceName();
@@ -18,17 +18,16 @@ function Profile() {
   useEffect(() => {
     setNav('프로필');
   }, [setNav]);
-  
+
   return (
     <StyledUser>
       <UserProfile
-        userName={data?.data.nickname??''}
+        userName={data?.nickname ?? ''}
         petImg={
-          data?.data.pets.filter((pet) => pet.representative === true)[0]
-            .imageUrl
+          data?.pets.filter((pet) => pet.representative === true)[0].imageUrl
         }
       />
-      <UserPetList petList={data?.data.pets??[]} />
+      <UserPetList petList={data?.pets ?? []} />
     </StyledUser>
   );
 }

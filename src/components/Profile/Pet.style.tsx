@@ -97,7 +97,7 @@ export const StyledPetProfile = styled.div`
   }
 `;
 
-export const StyledEditForm = styled.div`
+export const StyledEditForm = styled.form`
   *:not(button) {
     box-sizing: border-box;
   }

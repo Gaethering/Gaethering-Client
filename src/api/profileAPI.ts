@@ -1,9 +1,10 @@
 import axios, { AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios';
 import { API_BASE_URL } from '../data/API_ENV';
+import { getAccessToken } from './axiosUtils';
 import {
   ProfileApiUrl,
   ProfileResponse,
-  PetResponse,
+  PetResponse, 
   ProfileEditResponse,
 } from './profileAPI.typs';
 import { getRequest, patchRequest, postRequest } from './requests';
@@ -20,26 +21,37 @@ export const getPetProfile = async (petID: number) => {
   return response;
 };
 
+export const getMyArticle = async () => {
+  const response = await getRequest<MyArticleResponse>(ProfileApiUrl.MY_ARTICLE);
+  return response;
+};
+
 export const patchProfile = async (data: ProfileEditResponse) => {
   const response = await patchRequest<ProfileEditResponse, ProfileEditResponse>(
-    ProfileApiUrl.PROFILE_EDIT, data
+    ProfileApiUrl.PROFILE_EDIT,
+    data
   );
   return response;
 };
 
 export const patchPetProfile = async (petID: number, data: PetResponse) => {
   const response = await patchRequest<PetResponse, PetResponse>(
-    `mypage/pets/${petID}`, data
+    `mypage/pets/${petID}`,
+    data,
   );
   return response;
 };
 
-export const postPet =async (data:PetResponse) => {
-  const response = await postRequest<PetResponse, PetResponse>(
-    ProfileApiUrl.ADD_PET, data, {
+export const postPet = async (data: FormData) => {
+  const response = await axios.post<PetResponse, AxiosResponse<PetResponse, FormData> ,FormData>(
+    ProfileApiUrl.ADD_PET,
+    data,
+    {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    },
-  )
-}
+      baseURL: API_BASE_URL,
+    }
+  );
+  return response.data;
+};

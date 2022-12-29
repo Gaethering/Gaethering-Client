@@ -43,7 +43,7 @@ function UserProfile({ userName, petImg }: UserProp) {
         </div>
       </div>
       <div className="button_container">
-        <Link to="/myBoard" className="link">
+        <Link to="myBoard" className="link">
           <Button btnTheme="sub" type="button" className="go_my_article">
             내가 쓴 게시물
           </Button>

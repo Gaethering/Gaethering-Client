@@ -15,41 +15,45 @@ import {
 } from '../../api/profileAPI';
 import validDate from '../../util/validDate';
 import { QueryKeys } from '../../api/QueryKeys';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PicturesInput from './PicturesInput';
 import { AxiosError } from 'axios';
 import showAxiosError from '../../api/showAxiosError';
 
 interface AddPetType {
-  name: string;
-  birth: string;
-  gender: string;
+  petName: string;
+  petBirth: string;
+  petGender: string;
   breed: string;
   weight: number;
   isNeutered: boolean;
   description: string;
-  imageUrl: string;
+  // imageUrl: string; 
 }
 
-//! Mock API
-import { worker } from '../../mocks/browser';
-
-worker.stop();
-////
-
 function AddPet() {
+  useEffect(() => {
+    //! Mock API
+    import('../../mocks/browser').then((msw) => {
+      msw.worker.context.isMockingEnabled && msw.worker.stop();
+    });
+    ////
+  }, []);
+
+
   const queryClient = useQueryClient();
   // const { data, isLoading } = useQuery(QueryKeys.userProfile, getUserProfile);
+
   const { mutate, isLoading } = useMutation<AddPetType, AxiosError, FormData>(
     postPet,
     {
       onSuccess: () => {
         queryClient.invalidateQueries(QueryKeys.user);
-        setImages([]);
-        navigate('../');
+        setImages(null);
+        // navigate('../');
       },
       onError: (error) => showAxiosError(error),
-    },
+    }
   );
 
   const {
@@ -58,22 +62,26 @@ function AddPet() {
     handleSubmit,
   } = useForm<AddPetType>();
 
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<File>();
 
-  
-  const onSubmit:SubmitHandler<AddPetType> = (data) => {
-  // const onSubmit: SubmitHandler<AddPetType> = (data) => {
+  const onSubmit: SubmitHandler<AddPetType> = (data) => {
     console.log('onsubmit')
     const formData = new FormData();
     const jsonData = JSON.stringify(data);
     const blob = new Blob([jsonData], { type: 'application/json' });
 
-    images[0] ?? formData.append('images', new Blob());
-    images.forEach((img) => formData.append('images', img));
+    if(!images) {
+      return
+    }
+    formData.append('image', images);
     formData.append('data', blob);
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
 
-    console.log('da',data);
-    console.log('fo',formData);
+    console.log('da', data);
+    formData.forEach(value => console.log(value))
+    console.log('fo', formData.entries());
     mutate(formData);
   };
 
@@ -84,14 +92,13 @@ function AddPet() {
 
   return (
     <StyledPet>
-      <StyledEditForm>
-        {/* <StyledEditForm onSubmit={handleSubmit(onSubmit)}> */}
+      <StyledEditForm onSubmit={handleSubmit(onSubmit)}>
         <h1>반려동물 추가</h1>
         <div className="title_section">
-          <PicturesInput disabled={isLoading} />
+          <PicturesInput setImages={setImages} disabled={isLoading} />
           <div className="name_input">
             <Input
-              name="name"
+              name="petName"
               register={register}
               label="이름"
               plHolder="8자 이하"
@@ -109,7 +116,7 @@ function AddPet() {
         <div className="profile_section">
           <div className="age_input input_row">
             <Input
-              name="birth"
+              name="petBirth"
               register={register}
               label="생일"
               type="date"
@@ -177,7 +184,7 @@ function AddPet() {
           <div className="one_row">
             <div className="select_gender select column">
               <SelectInput<AddPetType, AddPetType['gender']>
-                name="gender"
+                name="petGender"
                 label="성별"
                 register={register}
                 values={['FEMALE', 'MALE']}
@@ -194,8 +201,11 @@ function AddPet() {
                 label="중성화 여부"
                 register={register}
                 values={[true, false]}
-                valueLabels={['했음', '안 했음']}
-                options={{ required: '중성화 여부를 입력해주세요', disabled: isLoading, }}
+                valueLabels={['완료', '미완료']}
+                options={{
+                  required: '중성화 여부를 입력해주세요',
+                  disabled: isLoading,
+                }}
               />
             </div>
           </div>
@@ -231,7 +241,6 @@ function AddPet() {
             type="submit"
             disabled={!isValid || isLoading}
             className="btn_save"
-            onClick={onSubmit}
           >
             저장
           </Button>

@@ -1,29 +1,36 @@
 import PetImage from './PetImage';
 import { StyledPet } from './Pet.style';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { set, SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../Form/Button';
 import Input from '../Form/Input';
 import SelectInput from '../Form/SelectInput';
 import { StyledEditForm } from './Pet.style';
 import { EditPetForm } from './Profile.type';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, redirect } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getPetProfile, patchPetProfile } from '../../api/profileAPI';
 import validDate from '../../util/validDate';
 import { QueryKeys } from '../../api/QueryKeys';
+import StyledButton from '../Form/Button.style';
+import { useState, useEffect } from 'react';
 
-//! Mock API
-import { worker } from '../../mocks/browser';
-worker.stop();
-////
 
 function EditPet() {
+  useEffect(() => {
+    //! Mock API
+    import('../../mocks/browser').then((msw) => {
+      msw.worker.context.isMockingEnabled && msw.worker.stop();
+    });
+    ////
+  }, []);
+
   const queryClient = useQueryClient();
   const { petID } = useParams();
   const petData = useQuery([QueryKeys.petProfile, petID], () =>
     getPetProfile(petID)
   );
-  const petMutation = useMutation(patchPetProfile, {
+  const fetch = (data) => patchPetProfile(petID, data)
+  const petMutation = useMutation(fetch, {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKeys.pet);
     },
@@ -31,26 +38,30 @@ function EditPet() {
   console.log('ee', petData.data);
   // const editPetMutation = useMutation(patchPetProfile)
 
-  const defaultValues = {
-    name: `${petData.data?.name}`,
-    birth: `${petData.data?.birth}`,
+  const initValues = {
+    name: petData.data?.name,
+    birth: petData.data?.birth,
     gender: petData.data?.gender,
-    breed: `${petData.data?.breed}`,
+    breed: petData.data?.breed,
     weight: petData.data?.weight,
     description: `${petData.data?.description}`,
     isNeutered: petData.data?.isNeutered,
     imageUrl: petData.data?.imageUrl,
   };
 
+  const [values, setValues] = useState(initValues);
+
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm<EditPetForm>({ defaultValues });
+  } = useForm<EditPetForm>({ defaultValues: values });
 
   const onSubmit: SubmitHandler<EditPetForm> = (data) => {
     console.log('epsub', data);
     petMutation.mutate(data);
+    setValues(data)
+    // goBack()
   };
 
   const navigate = useNavigate();
@@ -71,7 +82,7 @@ function EditPet() {
             <Input
               name="name"
               register={register}
-              label=""
+              label="이름"
               plHolder="2자 이상 8자 이하"
               options={{}}
             />
@@ -84,14 +95,13 @@ function EditPet() {
               >
                 취소
               </Button>
-              <Button
+              <StyledButton
                 btnTheme="main"
                 type="submit"
                 className="btn_save"
-                onClick={onSubmit}
               >
                 저장
-              </Button>
+              </StyledButton>
             </div>
           </div>
         </div>

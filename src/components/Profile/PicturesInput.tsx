@@ -4,16 +4,15 @@ import camera from '../../assets/camera.svg';
 import defaultProfilePicture from '../../assets/defaultProfilePicture.svg';
 
 interface Props {
-  images?: File[];
-  setImages?: React.Dispatch<React.SetStateAction<File[]>>;
-  disabled?: boolean;
+  setImages: React.Dispatch<React.SetStateAction<File | undefined>>;
+  disabled: boolean;
 }
 
 const CameraImg = () => (
   <img src={camera} alt="프로필 사진 등록" className="camera-img" />
 );
 
-function PicturesInput({ images, setImages, disabled }: Props) {
+function PicturesInput({ setImages, disabled }: Props) {
   const [showImg, setShowImg] = useState(defaultProfilePicture);
 
   const handleFile: ChangeEventHandler<HTMLInputElement> = ({
@@ -23,6 +22,7 @@ function PicturesInput({ images, setImages, disabled }: Props) {
       return;
     }
     const file = target.files[0];
+    setImages(file);
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -31,7 +31,6 @@ function PicturesInput({ images, setImages, disabled }: Props) {
       console.log('load success');
       const img = e.target?.result as string;
       setShowImg(img);
-      // setImages([file]);
     };
   };
 

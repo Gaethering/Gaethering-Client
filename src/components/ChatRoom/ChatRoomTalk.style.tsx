@@ -54,7 +54,7 @@ const TalkArea = styled.div`
 
     margin: 0 0.6rem;
 
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 400;
   }
 `;

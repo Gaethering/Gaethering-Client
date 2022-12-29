@@ -1,26 +1,35 @@
-import getTime from '../../util/getTime';
-import { ChatTalkType } from './ChatRoom.type';
+import { ChatTalkType, GetChatroomResponse } from '../../api/chatroomAPI.type';
+import getTime from '../../util/getChatTime';
 import { ChatBox, NameArea, StyledTalk, TalkArea } from './ChatRoomTalk.style';
 import SpeechBubble from './SpeechBubble';
+import defaultProfilePicture from '../../assets/defaultProfilePicture.svg';
+import { useQuery } from 'react-query';
+import { getMemberProfile } from '../../api/chatroomAPI';
 
 function ChatRoomTalk({
-  profileImg,
-  petName,
-  userName,
-  talk,
-  timestamp,
-}: ChatTalkType) {
+  content,
+  createdAt,
+  memberId,
+  chatRoomMemberInfos,
+}: ChatTalkType & GetChatroomResponse) {
+  const { data } = useQuery(['member', 'profile', memberId], () =>
+    getMemberProfile(memberId)
+  );
+
   return (
     <StyledTalk>
-      <img src={profileImg} alt={petName} />
+      <img
+        src={data?.pets[0].imageUrl ?? defaultProfilePicture}
+        alt={data?.nickname}
+      />
       <ChatBox>
         <NameArea>
-          <span className="chat-pet-name">{petName}</span>
-          <span className="chat-user-name">{userName}</span>
+          <span className="chat-pet-name">{data?.nickname}</span>
+          {/* <span className="chat-user-name">{userName}</span> */}
         </NameArea>
         <TalkArea>
-          <SpeechBubble color="white">{talk}</SpeechBubble>
-          <span className="chat-timestamp">{getTime(timestamp)}</span>
+          <SpeechBubble color="white">{content}</SpeechBubble>
+          <span className="chat-timestamp">{getTime(createdAt)}</span>
         </TalkArea>
       </ChatBox>
     </StyledTalk>

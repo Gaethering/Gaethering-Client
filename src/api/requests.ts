@@ -50,7 +50,6 @@ const getRequest = async <T>(
     } else {
       console.error(String(error));
     }
-    return error;
   }
 };
 

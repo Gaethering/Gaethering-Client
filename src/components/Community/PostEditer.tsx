@@ -15,13 +15,6 @@ import PicturesInput from './PicturesInput';
 import * as S from './PostEditer.style';
 
 function PostEditer() {
-  useEffect(() => {
-    //! Mock API
-    import('../../mocks/browser').then((msw) => {
-      msw.worker.context.isMockingEnabled && msw.worker.stop();
-    });
-    ////
-  }, []);
 
   const {
     handleSubmit,

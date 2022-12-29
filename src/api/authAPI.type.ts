@@ -27,6 +27,7 @@ export interface NavInfoResponse {
   petName: string;
   imageUrl: string;
   nickname: string;
+  memberId: number;
 }
 
 export interface ReTokenRequest {

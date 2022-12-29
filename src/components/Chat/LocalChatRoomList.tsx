@@ -1,16 +1,14 @@
 import { useQuery } from 'react-query';
-import { getRequest } from '../../api/requests';
-import { ChatRoomInfo } from './Chat.type';
+import { getChatroomList } from '../../api/chatroomAPI';
+import { ChatQueryKeys } from '../../api/QueryKeys';
 import LocalChatRoom from './LocalChatRoom';
 import LocalChatRoomSkeleton from './LocalChatRoomSkeleton';
 
 function LocalChatRoomList() {
-  //! Mock API
-  const getChatrooms = () =>
-    getRequest<ChatRoomInfo[]>('http://localhost:5173/chatrooms');
-  ////
-
-  const { data: chatRooms, isLoading } = useQuery('chatrooms', getChatrooms);
+  const { data: chatRooms, isLoading } = useQuery(
+    ChatQueryKeys.chatRoomList,
+    getChatroomList
+  );
 
   return (
     <>
@@ -22,7 +20,7 @@ function LocalChatRoomList() {
         </>
       ) : (
         <div>
-          {chatRooms?.map((room) => (
+          {chatRooms?.chatRooms.map((room) => (
             <LocalChatRoom {...room} key={room.roomKey} />
           ))}
         </div>

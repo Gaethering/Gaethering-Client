@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "../copy3/User.tsx"],
+  "include": ["src", "../copy3/User.tsx", "../copy4/UserName.tsx", "../copy4/AddPet copy.tsx", "../copy4/PetPicture.tsx", "../copy4/PetSignUpPicture.tsx", "../copy4/AddPetForm.tsx", "../copy4/PetImage.style.tsx", "../copy4/User copy.tsx", "../copy4/MyArticleLayout.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

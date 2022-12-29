@@ -12,6 +12,7 @@ const StyledRoot = styled.div`
 
 export const Container = styled.div`
   overflow-x: hidden;
+  overflow-y: scroll;
 `;
 
 export default StyledRoot;

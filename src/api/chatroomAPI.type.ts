@@ -36,7 +36,7 @@ interface PostChatroomResponse {
 
 interface GetChatroomResponse extends ChatRoom {
   roomKey: string;
-  walkingTimesInfos: {
+  walkingTimeInfos: {
     dayOfWeek: string;
     time: string;
   }[];
@@ -49,7 +49,7 @@ interface GetChatroomResponse extends ChatRoom {
 
 interface ListChatRoomInfo extends ChatRoom {
   roomKey: string;
-  walkingTimesInfos: {
+  walkingTimeInfos: {
     dayOfWeek: string;
     time: string;
   }[];

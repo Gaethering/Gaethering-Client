@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import ChatSearchBar from '../widgets/SearchBar';
+// import React, { useState } from 'react';
+// import ChatSearchBar from '../widgets/SearchBar';
 import MyChatRoomList from './MyChatRoomList';
 
-// type Props = {};
-
 function MyChatSection() {
-  const [searchWord, setSearchWord] = useState('');
+  // const [searchWord, setSearchWord] = useState('');
   return (
     <section>
-      <ChatSearchBar searchWord={searchWord} setSearchWord={setSearchWord} />
+      {/* <ChatSearchBar searchWord={searchWord} setSearchWord={setSearchWord} /> */}
       <MyChatRoomList />
     </section>
   );

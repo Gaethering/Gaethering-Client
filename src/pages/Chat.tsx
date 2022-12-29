@@ -8,6 +8,7 @@ import FindChatSection from '../components/Chat/FindChatSection';
 import MyChatSection from '../components/Chat/MyChatSection';
 import MakeRoomButton from '../components/Community/PostButton';
 import { useSetServiceName } from './Root';
+import { Container } from './Root.style';
 
 export type ChatState = 'findChat' | 'myChat';
 
@@ -30,7 +31,9 @@ function Chat() {
   return (
     <div>
       <ChatNav chatState={chatState} setChatState={setChatState} />
-      {chatState === 'findChat' ? <FindChatSection /> : <MyChatSection />}
+      <Container>
+        {chatState === 'findChat' ? <FindChatSection /> : <MyChatSection />}
+      </Container>
       <MakeRoomButton to={'makeRoom'}>채팅방 만들기</MakeRoomButton>
     </div>
   );

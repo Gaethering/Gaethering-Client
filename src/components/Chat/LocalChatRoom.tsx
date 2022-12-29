@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { ListChatRoomInfo } from '../../api/chatroomAPI.type';
-import useRelativeTime from '../../Hooks/useRelativeTime';
 import Button from '../Form/Button.style';
 import { Bottom, Info, StyledLocalChatRoom } from './LocalChatRoom.style';
 
@@ -10,8 +9,9 @@ function LocalChatRoom({
   name,
   nowParticipant,
   roomKey,
-  walkingTimesInfos,
+  walkingTimeInfos,
 }: ListChatRoomInfo) {
+  console.log(walkingTimeInfos);
   return (
     <StyledLocalChatRoom>
       <h2 className="chatroom-title">{name}</h2>
@@ -26,8 +26,10 @@ function LocalChatRoom({
 
       <Bottom>
         <p className="chatroom-walking-time">
-          {walkingTimesInfos?.map((elem) => (
-            <span key={elem.dayOfWeek}>{elem.time}</span>
+          {walkingTimeInfos?.map((elem) => (
+            <span key={elem.dayOfWeek}>
+              {elem.dayOfWeek}요일: {elem.time}
+            </span>
           ))}
         </p>
         <Link to={roomKey}>

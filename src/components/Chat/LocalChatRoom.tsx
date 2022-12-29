@@ -6,7 +6,7 @@ import { Bottom, Info, StyledLocalChatRoom } from './LocalChatRoom.style';
 
 function LocalChatRoom({
   description,
-  maxParticipantCount,
+  maxParticipant,
   name,
   nowParticipant,
   roomKey,
@@ -19,7 +19,7 @@ function LocalChatRoom({
 
       <Info>
         <div className="chatroom-participants">
-          참여: {nowParticipant} / {maxParticipantCount}
+          참여: {nowParticipant} / {maxParticipant}
         </div>
         {/* <span>{useRelativeTime(lastChatTime)}</span> */}
       </Info>

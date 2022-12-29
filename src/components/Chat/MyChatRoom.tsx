@@ -8,7 +8,6 @@ import { Left, Right, StyledMyChatRoom, Unread } from './MyChatRoom.style';
 
 function MyChatRoom({
   description,
-  maxParticipantCount,
   name,
   walkingTimesInfos,
   roomKey,

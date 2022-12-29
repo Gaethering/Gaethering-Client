@@ -13,7 +13,7 @@ interface EditPetType {
   petWeight: number;
   petDescription: string;
   petGender: string;
-  neutralization: string;
+  neutralization: boolean;
 }
 
 function EditPet() {
@@ -36,15 +36,15 @@ function EditPet() {
     breed: `${petData.breed}`,
     petWeight: petData.weight,
     petDescription: `${petData.description}`,
-    petGender: `${petData.gender}`,
-    neutralization: petData.isNeutered === true ? '완료' : '미완료',
+    petGender: 'MALE',
+    neutralization: petData.isNeutered === true ? true : false,
   };
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<EditPetType>({ defaultValues });
+  } = useForm<EditPetType>();
 
   const onSubmit: SubmitHandler<EditPetType> = (data) => {
     console.log(data);
@@ -123,7 +123,8 @@ function EditPet() {
                 name="petGender"
                 label="성별"
                 register={register}
-                values={['여아', '남아']}
+                values={['FEMALE', 'MALE']}
+                valueLabels={['여아', '남아']}
               />
             </div>
             <div className="select_neutralization select column">
@@ -131,7 +132,8 @@ function EditPet() {
                 name="neutralization"
                 label="중성화 여부"
                 register={register}
-                values={['완료', '미완료']}
+                values={[true, false]}
+                valueLabels={['완료', '미완료']}
               />
             </div>
           </div>

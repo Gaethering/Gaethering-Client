@@ -53,7 +53,7 @@ interface ListChatRoomInfo extends ChatRoom {
     dayOfWeek: string;
     time: string;
   }[];
-  nowParticipant: 0;
+  nowParticipant: number;
 }
 
 interface GetChatroomListResponse {

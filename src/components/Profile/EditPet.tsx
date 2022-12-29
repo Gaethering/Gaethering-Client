@@ -13,23 +13,24 @@ import validDate from '../../util/validDate';
 import { QueryKeys } from '../../api/QueryKeys';
 import StyledButton from '../Form/Button.style';
 import { useState, useEffect } from 'react';
+import { PetResponse } from '../../api/profileAPI.typs';
 
 
 function EditPet() {
 
 
   const queryClient = useQueryClient();
-  const { petID } = useParams();
+  const { petID:petIDString } = useParams();
+  const petID = parseInt(petIDString??'');
   const petData = useQuery([QueryKeys.petProfile, petID], () =>
     getPetProfile(petID)
   );
-  const fetch = (data) => patchPetProfile(petID, data)
+  const fetch = (data:PetResponse) => patchPetProfile(petID, data)
   const petMutation = useMutation(fetch, {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKeys.pet);
     },
   });
-  console.log('ee', petData.data);
   // const editPetMutation = useMutation(patchPetProfile)
 
   const initValues = {
@@ -52,7 +53,6 @@ function EditPet() {
   } = useForm<EditPetForm>({ defaultValues: values });
 
   const onSubmit: SubmitHandler<EditPetForm> = (data) => {
-    console.log('epsub', data);
     petMutation.mutate(data);
     setValues(data)
     // goBack()
@@ -151,8 +151,6 @@ function EditPet() {
                 name="gender"
                 label="성별"
                 register={register}
-                values={['FEMALE', 'MALE']}
-                valueLabels={['여아', '남아']}
                 values={['FEMALE', 'MALE']}
                 valueLabels={['여아', '남아']}
               />

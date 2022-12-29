@@ -33,7 +33,7 @@ export interface ProfileResponse {
 export interface PetResponse {
   name: string;
   birth: string;
-  gender: string;
+  gender: 'MALE' | 'FEMALE';
   breed: string;
   weight: number;
   isNeutered: boolean;

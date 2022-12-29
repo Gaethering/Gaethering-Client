@@ -1,35 +1,38 @@
+import { Link } from 'react-router-dom';
+import { ListChatRoomInfo } from '../../api/chatroomAPI.type';
 import useRelativeTime from '../../Hooks/useRelativeTime';
 import Button from '../Form/Button.style';
-import { ChatRoomInfo } from './Chat.type';
 import { Bottom, Info, StyledLocalChatRoom } from './LocalChatRoom.style';
 
 function LocalChatRoom({
-  roomName,
   description,
-  lastChatTime,
-  participants,
-  maxParticipants,
-  walkingTime,
-}: ChatRoomInfo) {
+  maxParticipant,
+  name,
+  nowParticipant,
+  roomKey,
+  walkingTimesInfos,
+}: ListChatRoomInfo) {
   return (
     <StyledLocalChatRoom>
-      <h2 className="chatroom-title">{roomName}</h2>
+      <h2 className="chatroom-title">{name}</h2>
       <p className="chatroom-description">{description}</p>
 
       <Info>
         <div className="chatroom-participants">
-          참여: {participants} / {maxParticipants}
+          참여: {nowParticipant} / {maxParticipant}
         </div>
-        <span>{useRelativeTime(lastChatTime)}</span>
+        {/* <span>{useRelativeTime(lastChatTime)}</span> */}
       </Info>
 
       <Bottom>
         <p className="chatroom-walking-time">
-          {walkingTime.map((elem) => (
-            <span key={elem}>{elem}</span>
+          {walkingTimesInfos?.map((elem) => (
+            <span key={elem.dayOfWeek}>{elem.time}</span>
           ))}
         </p>
-        <Button btnTheme="main">참여</Button>
+        <Link to={roomKey}>
+          <Button btnTheme="main">참여</Button>
+        </Link>
       </Bottom>
     </StyledLocalChatRoom>
   );

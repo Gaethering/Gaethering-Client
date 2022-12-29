@@ -1,25 +1,47 @@
-import { Link } from 'react-router-dom';
-import { ChatRoomInfo } from '../Chat/Chat.type';
+import { Link, useNavigate } from 'react-router-dom';
 import infoMark from '../../assets/infoMark.svg';
 import { InfoMark, Title } from './ChatRoomTitle.style';
+import { GetChatroomResponse } from '../../api/chatroomAPI.type';
+import { Client } from '@stomp/stompjs';
+
+interface ChatRoomInfo extends GetChatroomResponse {
+  client: Client;
+}
 
 function ChatRoomTitle({
-  roomName,
-  participants,
-  maxParticipants,
+  description,
+  maxParticipant,
+  name,
+  chatRoomMemberInfos,
+  client,
+  walkingTimesInfos,
 }: ChatRoomInfo) {
   const handleInfoClick = () => {
-    alert('info');
+    alert(
+      '채팅방 설명: ' +
+        description +
+        '\n' +
+        '산책 시간: ' +
+        (walkingTimesInfos ?? '산책 안 함')
+    );
+  };
+  const navigate = useNavigate();
+  const handleBack = async () => {
+    if (!confirm('채팅방을 나가시겠습니까?')) {
+      return;
+    }
+    await client.deactivate();
+    navigate('./../');
   };
 
   return (
     <Title>
-      <Link to="./../" className="chatroom-back">
+      <button onClick={handleBack} className="chatroom-back">
         {'<'}
-      </Link>
+      </button>
       <h2>
-        {roomName}
-        <div>{`${participants} / ${maxParticipants}`}</div>
+        {name}
+        <div>{`${maxParticipant}`}</div>
       </h2>
       <InfoMark type="button" onClick={handleInfoClick}>
         <img src={infoMark} alt="채팅방 정보" />

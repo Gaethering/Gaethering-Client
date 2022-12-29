@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 
 const Title = styled.header`
-  position: sticky;
-  top: 0rem;
+  position: fixed;
+  top: ${({ theme: { size } }) => size.navHeight};
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  width: 100%;
+  min-width: 390px;
+  width: 80vw;
   padding: 0.6rem 0;
 
   box-shadow: 0 0 1rem 0.4rem rgba(100, 100, 100, 0.1);

@@ -7,10 +7,11 @@ import LocalChatRoomList from './LocalChatRoomList';
 
 function FindChatSection() {
   const [searchWord, setSearchWord] = useState('');
+
   return (
     <section>
-      <DaySelectFilter />
-      <ChatSearchBar searchWord={searchWord} setSearchWord={setSearchWord} />
+      {/* <DaySelectFilter /> */}
+      {/* <ChatSearchBar searchWord={searchWord} setSearchWord={setSearchWord} /> */}
       <LocalChatRoomList />
     </section>
   );

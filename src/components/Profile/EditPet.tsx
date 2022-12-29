@@ -159,6 +159,8 @@ function EditPet() {
                 register={register}
                 values={['FEMALE', 'MALE']}
                 valueLabels={['여아', '남아']}
+                values={['FEMALE', 'MALE']}
+                valueLabels={['여아', '남아']}
               />
             </div>
             <div className="select_neutralization select column">

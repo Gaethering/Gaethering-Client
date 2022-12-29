@@ -26,3 +26,14 @@ export const QueryKeys = {
   petProfile: ['pet', 'profile', 'petID', 'addPet'],
   pet: 'pet',
 } as const;
+
+export const ChatQueryKeys = {
+  /** 채팅방 리스트 */
+  chatRoomList: ['chatroom', 'list'],
+  /** 내 채팅방 리스트 */
+  chatRoomMyList: ['chatroom', 'my', 'list'],
+  /** 채팅 기록 ['chat', 'history', {roomKey}] */
+  chatHistory: ['chat', 'history'],
+  /** 채팅방 정보 ['chatroom', 'info', {roomKey}] */
+  chatRoomInfo: ['chatroom', 'info'],
+} as const;

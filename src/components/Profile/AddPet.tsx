@@ -1,4 +1,3 @@
-import PetImage from './PetImage';
 import { StyledPet } from './Pet.style';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../Form/Button';
@@ -7,9 +6,19 @@ import SelectInput from '../Form/SelectInput';
 import { StyledEditForm } from './Pet.style';
 import { EditPetForm } from './Profile.type';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
-import { postPet, getPetProfile, patchPetProfile } from '../../api/profileAPI';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import {
+  postPet,
+  getPetProfile,
+  patchPetProfile,
+  getUserProfile,
+} from '../../api/profileAPI';
 import validDate from '../../util/validDate';
+import { QueryKeys } from '../../api/QueryKeys';
+import { useState } from 'react';
+import PicturesInput from './PicturesInput';
+import { AxiosError } from 'axios';
+import showAxiosError from '../../api/showAxiosError';
 
 interface AddPetType {
   name: string;
@@ -22,22 +31,51 @@ interface AddPetType {
   imageUrl: string;
 }
 
+//! Mock API
+import { worker } from '../../mocks/browser';
+
+worker.stop();
+////
+
 function AddPet() {
-  // const { petID } = useParams();
-  // const petData = useQuery(['newPet'], (data) => (data));
-  // console.log('add', petData.data);
-  // const editPetMutation = useMutation(patchPetProfile)
+  const queryClient = useQueryClient();
+  // const { data, isLoading } = useQuery(QueryKeys.userProfile, getUserProfile);
+  const { mutate, isLoading } = useMutation<AddPetType, AxiosError, FormData>(
+    postPet,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(QueryKeys.user);
+        setImages([]);
+        navigate('../');
+      },
+      onError: (error) => showAxiosError(error),
+    },
+  );
 
   const {
     register,
     formState: { errors, isValid },
-    // handleSubmit,
+    handleSubmit,
   } = useForm<AddPetType>();
 
+  const [images, setImages] = useState<File[]>([]);
+
+  
+  const onSubmit:SubmitHandler<AddPetType> = (data) => {
   // const onSubmit: SubmitHandler<AddPetType> = (data) => {
-  //   console.log(data);
-  //   // editPetMutation.mutate(data)
-  // };
+    console.log('onsubmit')
+    const formData = new FormData();
+    const jsonData = JSON.stringify(data);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+
+    images[0] ?? formData.append('images', new Blob());
+    images.forEach((img) => formData.append('images', img));
+    formData.append('data', blob);
+
+    console.log('da',data);
+    console.log('fo',formData);
+    mutate(formData);
+  };
 
   const navigate = useNavigate();
   const goBack = () => {
@@ -50,11 +88,7 @@ function AddPet() {
         {/* <StyledEditForm onSubmit={handleSubmit(onSubmit)}> */}
         <h1>반려동물 추가</h1>
         <div className="title_section">
-          {/* <PetImage
-            src={petData.data?.imageUrl}
-            name={petData.data?.name}
-            className="pet_img"
-          /> */}
+          <PicturesInput disabled={isLoading} />
           <div className="name_input">
             <Input
               name="name"
@@ -67,6 +101,7 @@ function AddPet() {
                   value: 8,
                   message: '이름은 8자 이하로 입력해주세요',
                 },
+                disabled: isLoading,
               }}
             />
           </div>
@@ -79,6 +114,7 @@ function AddPet() {
               label="생일"
               type="date"
               options={{
+                disabled: isLoading,
                 required: '생일을 입력해주세요',
                 validate: (value) =>
                   validDate(value.toString(), 1980) || '생일이 잘못되었습니다',
@@ -98,6 +134,7 @@ function AddPet() {
                     value: 10,
                     message: '견종은 10자 이하로 입력해주세요',
                   },
+                  disabled: isLoading,
                 }}
               />
             </div>
@@ -116,6 +153,7 @@ function AddPet() {
                     value: 200,
                     message: '몸무게가 잘못되었습니다',
                   },
+                  disabled: isLoading,
                 }}
               />
             </div>
@@ -132,6 +170,7 @@ function AddPet() {
                   value: 100,
                   message: '소개를 100자 이하로 입력해주세요',
                 },
+                disabled: isLoading,
               }}
             />
           </div>
@@ -145,6 +184,7 @@ function AddPet() {
                 valueLabels={['여아', '남아']}
                 options={{
                   required: '성별을 입력해주세요',
+                  disabled: isLoading,
                 }}
               />
             </div>
@@ -155,7 +195,7 @@ function AddPet() {
                 register={register}
                 values={[true, false]}
                 valueLabels={['했음', '안 했음']}
-                options={{ required: '중성화 여부를 입력해주세요' }}
+                options={{ required: '중성화 여부를 입력해주세요', disabled: isLoading, }}
               />
             </div>
           </div>
@@ -189,8 +229,9 @@ function AddPet() {
           <Button
             btnTheme="main"
             type="submit"
-            disabled={!isValid}
+            disabled={!isValid || isLoading}
             className="btn_save"
+            onClick={onSubmit}
           >
             저장
           </Button>

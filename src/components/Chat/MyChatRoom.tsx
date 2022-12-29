@@ -1,15 +1,11 @@
 import { Link } from 'react-router-dom';
-import {
-  GetChatroomListResponse,
-  ListChatRoomInfo,
-} from '../../api/chatroomAPI.type';
-import useRelativeTime from '../../Hooks/useRelativeTime';
-import { Left, Right, StyledMyChatRoom, Unread } from './MyChatRoom.style';
+import { ListChatRoomInfo } from '../../api/chatroomAPI.type';
+// import useRelativeTime from '../../Hooks/useRelativeTime';
+import { Left, Right, StyledMyChatRoom } from './MyChatRoom.style';
 
 function MyChatRoom({
   description,
   name,
-  walkingTimesInfos,
   roomKey,
   nowParticipant,
 }: ListChatRoomInfo) {

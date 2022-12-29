@@ -1,4 +1,4 @@
-import { Children, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import PetImage from './PetImage';
 import { StyledUserPet } from './User.style';
@@ -12,7 +12,14 @@ interface UserPetProp {
   representative: boolean;
 }
 
-function UserPet({ src, petID, name, className, representative, children }: UserPetProp) {
+function UserPet({
+  src,
+  petID,
+  name,
+  className,
+  representative,
+  children,
+}: UserPetProp) {
   return (
     <StyledUserPet representative={representative}>
       <Link to={`/profile/pet/${petID}`} className="link">

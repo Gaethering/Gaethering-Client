@@ -10,7 +10,7 @@ import { useSetServiceName } from './Root';
 import { QueryKeys } from '../api/QueryKeys';
 
 function Profile() {
-  const { data, isLoading } = useQuery(QueryKeys.userProfile, getUserProfile);
+  const { data } = useQuery(QueryKeys.userProfile, getUserProfile);
   console.log('tt', data);
 
   const setNav = useSetServiceName();

@@ -1,6 +1,6 @@
 import { ChangeEventHandler, useState } from 'react';
 import styled from 'styled-components';
-import camera from '../../assets/camera.svg';
+// import camera from '../../assets/camera.svg';
 import defaultProfilePicture from '../../assets/defaultProfilePicture.svg';
 
 interface Props {
@@ -8,9 +8,9 @@ interface Props {
   disabled: boolean;
 }
 
-const CameraImg = () => (
-  <img src={camera} alt="프로필 사진 등록" className="camera-img" />
-);
+// const CameraImg = () => (
+//   <img src={camera} alt="프로필 사진 등록" className="camera-img" />
+// );
 
 function PicturesInput({ setImages, disabled }: Props) {
   const [showImg, setShowImg] = useState(defaultProfilePicture);

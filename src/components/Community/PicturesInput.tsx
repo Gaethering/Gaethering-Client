@@ -7,7 +7,7 @@ interface Props {
   disabled: boolean;
 }
 
-function PicturesInput({ images, setImages, disabled }: Props) {
+function PicturesInput({ setImages, disabled }: Props) {
   const [showImg, setShowImg] = useState([] as string[]);
 
   const handleFile: ChangeEventHandler<HTMLInputElement> = ({

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import infoMark from '../../assets/infoMark.svg';
 import { InfoMark, Title } from './ChatRoomTitle.style';
 import { GetChatroomResponse } from '../../api/chatroomAPI.type';
@@ -12,17 +12,18 @@ function ChatRoomTitle({
   description,
   maxParticipant,
   name,
-  chatRoomMemberInfos,
   client,
-  walkingTimesInfos,
+  walkingTimeInfos,
 }: ChatRoomInfo) {
   const handleInfoClick = () => {
     alert(
       '채팅방 설명: ' +
         description +
         '\n' +
-        '산책 시간: ' +
-        (walkingTimesInfos ?? '산책 안 함')
+        '산책 시간: \n' +
+        (walkingTimeInfos.map(
+          (elem) => `${elem.dayOfWeek}요일: ${elem.time}\n`
+        ) ?? '산책 안 함')
     );
   };
   const navigate = useNavigate();

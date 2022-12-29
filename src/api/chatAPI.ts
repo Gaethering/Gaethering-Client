@@ -1,4 +1,4 @@
-import { Client, Message } from '@stomp/stompjs';
+import { Client } from '@stomp/stompjs';
 import { WEBSOCKET_BASE_URL } from '../data/API_ENV';
 import { JWTToken } from './authAPI.type';
 

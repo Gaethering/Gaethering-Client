@@ -1,5 +1,4 @@
 import { PropsWithChildren } from 'react';
-import { useMutation } from 'react-query';
 import { Link } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { BoardArticleList, CommunityCategory } from '../../api/boardAPI.type';
@@ -32,8 +31,6 @@ function ArticleLayout({
     content += ' ...';
   }
   const contentsArr = content.split('\n');
-
-  // const heart = useMutation()
 
   const DetailLink = ({ children }: PropsWithChildren) => (
     <Link to={postId.toString()}>{children}</Link>

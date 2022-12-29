@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useOutlet, useOutletContext } from 'react-router-dom';
+import { Outlet, useOutletContext } from 'react-router-dom';
 import { CommunityCategory } from '../api/boardAPI.type';
 import ArticleList from '../components/Community/ArticleList';
 import CommunityNav from '../components/Community/CommunityNav';

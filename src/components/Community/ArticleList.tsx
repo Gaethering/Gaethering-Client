@@ -1,7 +1,7 @@
 import ArticleLayout from './ArticleLayout';
 import { Blank, MoreArticle, StyledArticleList } from './Article.style';
-import { CategoryID, CommunityCategory } from '../../api/boardAPI.type';
-import { useInfiniteQuery, useQuery } from 'react-query';
+import { CommunityCategory } from '../../api/boardAPI.type';
+import { useInfiniteQuery } from 'react-query';
 import { QueryKeys } from '../../api/QueryKeys';
 import { getArticles } from '../../api/boardAPI';
 

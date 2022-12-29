@@ -6,26 +6,23 @@ import Input from '../Form/Input';
 import SelectInput from '../Form/SelectInput';
 import { StyledEditForm } from './Pet.style';
 import { EditPetForm } from './Profile.type';
-import { useParams, useNavigate, redirect } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getPetProfile, patchPetProfile } from '../../api/profileAPI';
 import validDate from '../../util/validDate';
 import { QueryKeys } from '../../api/QueryKeys';
 import StyledButton from '../Form/Button.style';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { PetResponse } from '../../api/profileAPI.typs';
 
-
 function EditPet() {
-
-
   const queryClient = useQueryClient();
-  const { petID:petIDString } = useParams();
-  const petID = parseInt(petIDString??'');
+  const { petID: petIDString } = useParams();
+  const petID = parseInt(petIDString ?? '');
   const petData = useQuery([QueryKeys.petProfile, petID], () =>
     getPetProfile(petID)
   );
-  const fetch = (data:PetResponse) => patchPetProfile(petID, data)
+  const fetch = (data: PetResponse) => patchPetProfile(petID, data);
   const petMutation = useMutation(fetch, {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKeys.pet);
@@ -46,15 +43,13 @@ function EditPet() {
 
   const [values, setValues] = useState(initValues);
 
-  const {
-    register,
-    formState: { errors, isValid },
-    handleSubmit,
-  } = useForm<EditPetForm>({ defaultValues: values });
+  const { register, handleSubmit } = useForm<EditPetForm>({
+    defaultValues: values,
+  });
 
   const onSubmit: SubmitHandler<EditPetForm> = (data) => {
     petMutation.mutate(data);
-    setValues(data)
+    setValues(data);
     // goBack()
   };
 
@@ -89,11 +84,7 @@ function EditPet() {
               >
                 취소
               </Button>
-              <StyledButton
-                btnTheme="main"
-                type="submit"
-                className="btn_save"
-              >
+              <StyledButton btnTheme="main" type="submit" className="btn_save">
                 저장
               </StyledButton>
             </div>

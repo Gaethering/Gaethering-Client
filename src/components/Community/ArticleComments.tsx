@@ -1,9 +1,9 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useInfiniteQuery, useQuery, useQueryClient } from 'react-query';
+import { useInfiniteQuery, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { getComments, postComment } from '../../api/boardAPI';
-import { BoardApiUrl, PostCommentRequest } from '../../api/boardAPI.type';
+import { PostCommentRequest } from '../../api/boardAPI.type';
 import { QueryKeys } from '../../api/QueryKeys';
 import Button from '../Form/Button';
 import StyledButton from '../Form/Button.style';

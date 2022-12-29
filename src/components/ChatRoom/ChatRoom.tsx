@@ -12,7 +12,7 @@ import { NavInfoResponse } from '../../api/authAPI.type';
 import { useEffect } from 'react';
 import chatStart from '../../api/chatAPI';
 import { getAccessToken } from '../../api/axiosUtils';
-import { ChatTalkType } from '../../api/chatroomAPI.type';
+// import { ChatTalkType } from '../../api/chatroomAPI.type';
 
 function ChatRoom() {
   const { roomKey } = useParams<'roomKey'>();
@@ -41,21 +41,19 @@ function ChatRoom() {
   console.log('chat', chatService, chatService.connected);
 
   chatService.onConnect = (frame) => {
-    const count = 1;
     console.warn('STOMP CONNECTED', frame);
 
     chatService.subscribe(`/exchange/chat.exchange/room.${roomKey}`, (data) => {
       console.warn('STOMP SUBSCRIBE');
       console.log('BODY', data.body);
-      queryClient.setQueryData<ChatTalkType[]>(
-        [...ChatQueryKeys.chatHistory, roomKey],
-        (prev) => {
-          console.log('first', prev);
-          return [JSON.parse(data.body), ...(prev ?? [])];
-          // return [JSON.parse(data.body), ...(prev ?? [])];
-        }
-      );
-      // queryClient.invalidateQueries([...ChatQueryKeys.chatHistory, roomKey]);
+      // queryClient.setQueryData<ChatTalkType[]>(
+      //   [...ChatQueryKeys.chatHistory, roomKey],
+      //   (prev) => {
+      //     console.log('first', prev);
+      //     return [JSON.parse(data.body), ...(prev ?? [])];
+      //   }
+      //   );
+      queryClient.invalidateQueries([...ChatQueryKeys.chatHistory, roomKey]);
     });
   };
 

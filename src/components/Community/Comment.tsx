@@ -3,12 +3,12 @@ import { ListComment } from '../../api/boardAPI.type';
 import useRelativeTime from '../../Hooks/useRelativeTime';
 
 function Comment({
-  commentId,
-  memberId,
+  // commentId,
+  // memberId,
   content,
   nickname,
   createdAt,
-  isOwner,
+  // isOwner,
 }: ListComment) {
   const date = Date.parse(createdAt).toString();
   const relTime = useRelativeTime(date, 'ko-KR', 'short');

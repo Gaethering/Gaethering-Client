@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
 import chatStart from '../api/chatAPI';
-import { ChatQueryKeys } from '../api/QueryKeys';
 import ChatNav from '../components/Chat/ChatNav';
 import FindChatSection from '../components/Chat/FindChatSection';
 import MyChatSection from '../components/Chat/MyChatSection';

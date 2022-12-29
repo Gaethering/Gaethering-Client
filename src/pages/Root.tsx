@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   Outlet,

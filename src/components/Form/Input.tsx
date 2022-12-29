@@ -2,7 +2,6 @@ import { HTMLInputTypeAttribute } from 'react';
 import {
   FieldPath,
   FieldValues,
-  Path,
   RegisterOptions,
   UseFormRegister,
 } from 'react-hook-form';

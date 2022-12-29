@@ -1,11 +1,10 @@
-import PetImage from './PetImage';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../Form/Button';
 import Input from '../Form/Input';
 import { StyledUser, StyledUserProfile } from './User.style';
 import { Form, useNavigate } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { patchProfile, getUserProfile } from '../../api/profileAPI';
+import { useMutation, useQueryClient } from 'react-query';
+import { patchProfile } from '../../api/profileAPI';
 import { QueryKeys } from '../../api/QueryKeys';
 
 interface EditProfileType {
@@ -14,7 +13,7 @@ interface EditProfileType {
 
 function EditProfile() {
   const queryClient = useQueryClient();
-  const { data, isLoading } = useQuery(QueryKeys.userProfile, getUserProfile);
+  // const { data, isLoading } = useQuery(QueryKeys.userProfile, getUserProfile);
   const nameMutation = useMutation(patchProfile, {
     onSuccess: () => {
       queryClient.invalidateQueries(QueryKeys.user);
@@ -22,11 +21,7 @@ function EditProfile() {
   });
   console.log('pp', nameMutation);
 
-  const {
-    register,
-    formState: { errors, isValid },
-    handleSubmit,
-  } = useForm<EditProfileType>();
+  const { register, handleSubmit } = useForm<EditProfileType>();
 
   const onSubmit: SubmitHandler<EditProfileType> = (data) => {
     console.log('onsub', data);

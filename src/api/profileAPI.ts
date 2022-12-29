@@ -1,12 +1,12 @@
-import axios, { AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { API_BASE_URL } from '../data/API_ENV';
 import {
   ProfileApiUrl,
   ProfileResponse,
-  PetResponse, 
+  PetResponse,
   ProfileEditResponse,
 } from './profileAPI.typs';
-import { getRequest, patchRequest, postRequest } from './requests';
+import { getRequest, patchRequest } from './requests';
 
 export const getUserProfile = async () => {
   const response = await getRequest<ProfileResponse>(
@@ -31,21 +31,21 @@ export const patchProfile = async (data: ProfileEditResponse) => {
 export const patchPetProfile = async (petID: number, data: PetResponse) => {
   const response = await patchRequest<PetResponse, PetResponse>(
     `mypage/pets/${petID}`,
-    data,
+    data
   );
   return response;
 };
 
 export const postPet = async (data: FormData) => {
-  const response = await axios.post<PetResponse, AxiosResponse<PetResponse, FormData> ,FormData>(
-    ProfileApiUrl.ADD_PET,
-    data,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      baseURL: API_BASE_URL,
-    }
-  );
+  const response = await axios.post<
+    PetResponse,
+    AxiosResponse<PetResponse, FormData>,
+    FormData
+  >(ProfileApiUrl.ADD_PET, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    baseURL: API_BASE_URL,
+  });
   return response.data;
 };

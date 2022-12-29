@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +15,6 @@ import PicturesInput from './PicturesInput';
 import * as S from './PostEditer.style';
 
 function PostEditer() {
-
   const {
     handleSubmit,
     formState: { errors, isValid },

@@ -3,20 +3,19 @@ import Button from '../Form/Button';
 import PetImage from './PetImage';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
-import { patchProfile } from '../../api/profileAPI';
+// import { useMutation } from 'react-query';
+// import { patchProfile } from '../../api/profileAPI';
 
 interface UserProp {
   userName: string;
   petImg: string | undefined;
 }
-interface EditProfileType {
-  nickname: string;
-}
+// interface EditProfileType {
+//   nickname: string;
+// }
 
 function UserProfile({ userName, petImg }: UserProp) {
-
-  const nameMutation = useMutation(patchProfile);
+  // const nameMutation = useMutation(patchProfile);
 
   const [nameState, setNameState] = useState('');
   const [nameInput, setNameInput] = useState(true);

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import ChatSearchBar from '../widgets/SearchBar';
-import DaySelectFilter from './DaySelectFilter';
+// import  { useState } from 'react';
+// import ChatSearchBar from '../widgets/SearchBar';
+// import DaySelectFilter from './DaySelectFilter';
 import LocalChatRoomList from './LocalChatRoomList';
 
 // type Props = {}
 
 function FindChatSection() {
-  const [searchWord, setSearchWord] = useState('');
+  // const [searchWord, setSearchWord] = useState('');
 
   return (
     <section>

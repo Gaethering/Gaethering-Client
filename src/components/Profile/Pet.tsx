@@ -4,10 +4,7 @@ import { StyledPet } from './Pet.style';
 import Button from '../Form/Button';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { useEffect } from 'react';
-import { useSetServiceName } from '../../pages/Root';
 import { getPetProfile } from '../../api/profileAPI';
-import { PetResponse } from '../../api/profileAPI.typs';
 import { QueryKeys } from '../../api/QueryKeys';
 
 function Pet() {

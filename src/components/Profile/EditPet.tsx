@@ -1,6 +1,6 @@
 import PetImage from './PetImage';
 import { StyledPet } from './Pet.style';
-import { set, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../Form/Button';
 import Input from '../Form/Input';
 import SelectInput from '../Form/SelectInput';

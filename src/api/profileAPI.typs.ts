@@ -7,7 +7,6 @@ export const enum ProfileApiUrl {
 
   ADD_PET = `/pets/register`,
 
-  MY_ARTICLE = `/mypage/posts`
 }
 
 export interface ProfileResponse {
@@ -44,8 +43,4 @@ export interface PetResponse {
 
 export interface ProfileEditResponse {
   nickname: string;
-}
-
-export interface MyArticleResponse {
-  
 }

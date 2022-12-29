@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios';
 import { API_BASE_URL } from '../data/API_ENV';
-import { getAccessToken } from './axiosUtils';
 import {
   ProfileApiUrl,
   ProfileResponse,

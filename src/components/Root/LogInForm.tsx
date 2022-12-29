@@ -17,16 +17,17 @@ import { setAuthToken } from '../../util/setAuthToken';
 function LogInForm({ setAuth }: { setAuth: SetAuthType }) {
   const {
     register,
+    setError,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<LogInRequest>({ mode: 'onTouched' });
 
-  const login = useMutation((loginData: LogInRequest) => postLogIn(loginData), {
+  const login = useMutation(postLogIn, {
     onSuccess: (response) => {
       if (!response) {
         return;
       }
-      setAuthToken(response.data);
+      setAuthToken(response);
 
       setAuth(true);
     },

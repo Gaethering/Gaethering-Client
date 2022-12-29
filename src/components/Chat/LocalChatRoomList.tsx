@@ -22,7 +22,7 @@ function LocalChatRoomList() {
         </>
       ) : (
         <div>
-          {chatRooms?.data?.map((room) => (
+          {chatRooms?.map((room) => (
             <LocalChatRoom {...room} key={room.roomKey} />
           ))}
         </div>

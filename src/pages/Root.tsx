@@ -1,7 +1,14 @@
+import axios from 'axios';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { Outlet, useOutletContext, useNavigate } from 'react-router-dom';
-import { postReToken } from '../api/authAPI';
-import { setAxiosDefaultsBaseURL } from '../api/axiosConfig';
+import {
+  Outlet,
+  useOutletContext,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
+import { postLogOut, postReToken } from '../api/authAPI';
+import { getAccessToken, setAxiosDefaultsConfig } from '../api/axiosUtils';
+import { QueryKeys } from '../api/QueryKeys';
 import NavBar from '../components/NavBar';
 import { ServiceType } from '../components/NavBar/NavBar.type';
 import LogInForm from '../components/Root/LogInForm';
@@ -15,22 +22,42 @@ function Root() {
 
   const [serviceName, setServiceName] = useState<ServiceType>('개모임');
 
+  const logOut = () => {
+    const accessToken = getAccessToken();
+    const refreshToken = localStorage.getItem(QueryKeys.refreshToken);
+
+    localStorage.removeItem(QueryKeys.refreshToken);
+    setInit(false);
+    setAuth(false);
+
+    if (!accessToken || !refreshToken) {
+      alert('잘못된 로그아웃 요청입니다');
+      return;
+    }
+
+    postLogOut({
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    });
+  };
+
   const navigate = useNavigate();
+  const location = useLocation().pathname;
 
   useEffect(() => {
-    setAxiosDefaultsBaseURL();
+    setAxiosDefaultsConfig();
     postReToken()
       .then((res) => setAuth(res))
       .then(() => setInit(true));
-  }, []);
+  }, [init]);
 
   useEffect(() => {
-    if (auth && init) {
+    if (auth && init && location === '/') {
       navigate('/chat');
-    } else if (!auth) {
+    } else if (!auth && init) {
       navigate('/');
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth, init]);
 
   if (!init) {
@@ -41,12 +68,16 @@ function Root() {
     <StyledRoot>
       {auth ? (
         <>
-          <NavBar serviceName={serviceName} setServiceName={setServiceName} />
-          <Outlet context={setServiceName} />
-          {/* <MockLogout /> */}
+          <NavBar
+            serviceName={serviceName}
+            setServiceName={setServiceName}
+            logOut={logOut}
+          />
+          <main>
+            <Outlet context={setServiceName} />
+          </main>
         </>
       ) : (
-        // <LogInForm getAuth={getAuth} />
         <LogInForm setAuth={setAuth} />
       )}
     </StyledRoot>

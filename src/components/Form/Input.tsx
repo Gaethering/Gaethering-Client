@@ -1,5 +1,6 @@
 import { HTMLInputTypeAttribute } from 'react';
 import {
+  FieldPath,
   FieldValues,
   Path,
   RegisterOptions,
@@ -12,9 +13,9 @@ type InputProp<T extends FieldValues> = {
   required?: boolean | undefined;
   label?: string | undefined;
   plHolder?: string | undefined;
-  name: Path<UnPackAsyncDefaultValues<T>>;
+  name: FieldPath<T>;
   register: UseFormRegister<T>;
-  options?: RegisterOptions<T, Path<UnPackAsyncDefaultValues<T>>>;
+  options?: RegisterOptions<T, FieldPath<T>>;
 };
 
 function Input<T extends FieldValues>({

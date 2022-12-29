@@ -1,4 +1,5 @@
 import {
+  FieldPath,
   FieldValues,
   Path,
   RegisterOptions,
@@ -7,12 +8,12 @@ import {
 import { SelectButton, StyledSelectInput } from './SelectInput.style';
 
 type SelectInputProp<T extends FieldValues, UValueType = string> = {
-  name: Path<UnPackAsyncDefaultValues<T>>;
+  name: FieldPath<T>;
   label: string;
   values: UValueType[];
   valueLabels: string[];
   register: UseFormRegister<T>;
-  options?: RegisterOptions<T, Path<UnPackAsyncDefaultValues<T>>>;
+  options?: RegisterOptions<T, FieldPath<T>>;
 };
 
 function SelectInput<T extends FieldValues, UValueType = string>({

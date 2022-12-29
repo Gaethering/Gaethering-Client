@@ -12,11 +12,6 @@ import { useEffect } from 'react';
 import { useSetServiceName } from './Root';
 import { QueryKeys } from '../api/QueryKeys';
 
-//! Mock API
-import { worker } from '../mocks/browser';
-worker.stop();
-////
-
 function Profile() {
   const {data, isLoading} = useQuery(QueryKeys.userProfile, getUserProfile);
   console.log('tt', data);

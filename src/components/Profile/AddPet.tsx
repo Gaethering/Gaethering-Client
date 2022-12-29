@@ -29,13 +29,6 @@ interface AddPetType {
 }
 
 function AddPet() {
-  useEffect(() => {
-    //! Mock API
-    import('../../mocks/browser').then((msw) => {
-      msw.worker.context.isMockingEnabled && msw.worker.stop();
-    });
-    ////
-  }, []);
 
 
   const queryClient = useQueryClient();

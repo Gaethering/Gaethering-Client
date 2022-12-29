@@ -16,13 +16,7 @@ import { useState, useEffect } from 'react';
 
 
 function EditPet() {
-  useEffect(() => {
-    //! Mock API
-    import('../../mocks/browser').then((msw) => {
-      msw.worker.context.isMockingEnabled && msw.worker.stop();
-    });
-    ////
-  }, []);
+
 
   const queryClient = useQueryClient();
   const { petID } = useParams();

@@ -7,16 +7,29 @@ import SelectInput from '../Form/SelectInput';
 import { StyledEditForm } from './Pet.style';
 import { EditPetForm } from './Profile.type';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getPetProfile, patchPetProfile } from '../../api/profileAPI';
 import validDate from '../../util/validDate';
+import { QueryKeys } from '../../api/QueryKeys';
+
+//! Mock API
+import { worker } from '../../mocks/browser';
+worker.stop();
+////
 
 function EditPet() {
+  const queryClient = useQueryClient();
   const { petID } = useParams();
-  const petData = useQuery(['pets', petID], () => getPetProfile(petID));
+  const petData = useQuery([QueryKeys.petProfile, petID], () =>
+    getPetProfile(petID)
+  );
+  const petMutation = useMutation(patchPetProfile, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QueryKeys.pet);
+    },
+  });
   console.log('ee', petData.data);
   // const editPetMutation = useMutation(patchPetProfile)
-
 
   const defaultValues = {
     name: `${petData.data?.name}`,
@@ -36,8 +49,8 @@ function EditPet() {
   } = useForm<EditPetForm>({ defaultValues });
 
   const onSubmit: SubmitHandler<EditPetForm> = (data) => {
-    console.log(data);
-    // editPetMutation.mutate(data)
+    console.log('epsub', data);
+    petMutation.mutate(data);
   };
 
   const navigate = useNavigate();
@@ -63,10 +76,20 @@ function EditPet() {
               options={{}}
             />
             <div className="button_section">
-              <Button btnTheme="sub" type="button" className="btn_cancel" onClick={goBack}>
+              <Button
+                btnTheme="sub"
+                type="button"
+                className="btn_cancel"
+                onClick={goBack}
+              >
                 취소
               </Button>
-              <Button btnTheme="main" type="submit" className="btn_save">
+              <Button
+                btnTheme="main"
+                type="submit"
+                className="btn_save"
+                onClick={onSubmit}
+              >
                 저장
               </Button>
             </div>

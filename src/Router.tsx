@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider, useParams } from 'react-router-dom
 import { ThemeProvider } from 'styled-components';
 import ChatRoom from './components/ChatRoom/ChatRoom';
 import AddPet from './components/Profile/AddPet';
-import AddPetForm from '../../copy4/AddPetForm';
 import EditProfile from './components/Profile/EditProfile';
 import ArticleDetail from './components/Community/ArticleDetail';
 import PostEditer from './components/Community/PostEditer';

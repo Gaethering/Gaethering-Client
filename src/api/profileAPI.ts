@@ -20,11 +20,6 @@ export const getPetProfile = async (petID: number) => {
   return response;
 };
 
-export const getMyArticle = async () => {
-  const response = await getRequest<MyArticleResponse>(ProfileApiUrl.MY_ARTICLE);
-  return response;
-};
-
 export const patchProfile = async (data: ProfileEditResponse) => {
   const response = await patchRequest<ProfileEditResponse, ProfileEditResponse>(
     ProfileApiUrl.PROFILE_EDIT,

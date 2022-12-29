@@ -9,9 +9,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   postPet,
-  getPetProfile,
-  patchPetProfile,
-  getUserProfile,
 } from '../../api/profileAPI';
 import validDate from '../../util/validDate';
 import { QueryKeys } from '../../api/QueryKeys';
@@ -49,7 +46,7 @@ function AddPet() {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(QueryKeys.user);
-        setImages(null);
+        // setImages(null);
         // navigate('../');
       },
       onError: (error) => showAxiosError(error),
@@ -183,7 +180,7 @@ function AddPet() {
           </div>
           <div className="one_row">
             <div className="select_gender select column">
-              <SelectInput<AddPetType, AddPetType['gender']>
+              <SelectInput<AddPetType, AddPetType['petGender']>
                 name="petGender"
                 label="성별"
                 register={register}
@@ -211,8 +208,8 @@ function AddPet() {
           </div>
         </div>
 
-        {errors.name && <p className="signup-error">{errors.name.message}</p>}
-        {errors.birth && <p className="signup-error">{errors.birth.message}</p>}
+        {errors.petName && <p className="signup-error">{errors.petName.message}</p>}
+        {errors.petBirth && <p className="signup-error">{errors.petBirth.message}</p>}
         {errors.breed && <p className="signup-error">{errors.breed.message}</p>}
         {errors.weight && (
           <p className="signup-error">{errors.weight.message}</p>
@@ -220,8 +217,8 @@ function AddPet() {
         {errors.description && (
           <p className="signup-error">{errors.description.message}</p>
         )}
-        {errors.gender && (
-          <p className="signup-error">{errors.gender.message}</p>
+        {errors.petGender && (
+          <p className="signup-error">{errors.petGender.message}</p>
         )}
         {errors.isNeutered && (
           <p className="signup-error">{errors.isNeutered.message}</p>

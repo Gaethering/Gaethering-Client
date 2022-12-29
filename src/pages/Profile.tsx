@@ -1,4 +1,3 @@
-import User from '../components/Profile/User';
 import Pet from '../components/Profile/Pet';
 import EditPet from '../components/Profile/EditPet';
 import UserPetList from '../components/Profile/UserPetList';

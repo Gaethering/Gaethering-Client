@@ -12,9 +12,9 @@ type InputProp<T extends FieldValues> = {
   required?: boolean | undefined;
   label?: string | undefined;
   plHolder?: string | undefined;
-  name: Path<T>;
+  name: Path<UnPackAsyncDefaultValues<T>>;
   register: UseFormRegister<T>;
-  options?: RegisterOptions<T, Path<T>>;
+  options?: RegisterOptions<T, Path<UnPackAsyncDefaultValues<T>>>;
 };
 
 function Input<T extends FieldValues>({

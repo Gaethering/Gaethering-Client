@@ -9,7 +9,7 @@ interface PetImageProp {
 function PetImage({ src, name, className }: PetImageProp) {
   return (
     <StyledPetImage>
-      <img src={src} name={name} className={className}></img>
+      <img src={src} id={name} className={className}></img>
     </StyledPetImage>
   );
 }

@@ -4,18 +4,16 @@ import Button from '../Form/Button';
 import Input from '../Form/Input';
 import SelectInput from '../Form/SelectInput';
 import { StyledEditForm } from './Pet.style';
-import { EditPetForm } from './Profile.type';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import {
-  postPet,
-} from '../../api/profileAPI';
+import { postPet } from '../../api/profileAPI';
 import validDate from '../../util/validDate';
 import { QueryKeys } from '../../api/QueryKeys';
 import { useState, useEffect } from 'react';
 import PicturesInput from './PicturesInput';
 import { AxiosError } from 'axios';
 import showAxiosError from '../../api/showAxiosError';
+import { PetResponse } from '../../api/profileAPI.typs';
 
 interface AddPetType {
   petName: string;
@@ -25,16 +23,13 @@ interface AddPetType {
   weight: number;
   isNeutered: boolean;
   description: string;
-  // imageUrl: string; 
+  // imageUrl: string;
 }
 
 function AddPet() {
-
-
   const queryClient = useQueryClient();
-  // const { data, isLoading } = useQuery(QueryKeys.userProfile, getUserProfile);
 
-  const { mutate, isLoading } = useMutation<AddPetType, AxiosError, FormData>(
+  const { mutate, isLoading } = useMutation<PetResponse, AxiosError, FormData>(
     postPet,
     {
       onSuccess: () => {
@@ -55,13 +50,13 @@ function AddPet() {
   const [images, setImages] = useState<File>();
 
   const onSubmit: SubmitHandler<AddPetType> = (data) => {
-    console.log('onsubmit')
+    console.log('onsubmit');
     const formData = new FormData();
     const jsonData = JSON.stringify(data);
     const blob = new Blob([jsonData], { type: 'application/json' });
 
-    if(!images) {
-      return
+    if (!images) {
+      return;
     }
     formData.append('image', images);
     formData.append('data', blob);
@@ -70,7 +65,7 @@ function AddPet() {
     }
 
     console.log('da', data);
-    formData.forEach(value => console.log(value))
+    formData.forEach((value) => console.log(value));
     console.log('fo', formData.entries());
     mutate(formData);
   };
@@ -201,8 +196,12 @@ function AddPet() {
           </div>
         </div>
 
-        {errors.petName && <p className="signup-error">{errors.petName.message}</p>}
-        {errors.petBirth && <p className="signup-error">{errors.petBirth.message}</p>}
+        {errors.petName && (
+          <p className="signup-error">{errors.petName.message}</p>
+        )}
+        {errors.petBirth && (
+          <p className="signup-error">{errors.petBirth.message}</p>
+        )}
         {errors.breed && <p className="signup-error">{errors.breed.message}</p>}
         {errors.weight && (
           <p className="signup-error">{errors.weight.message}</p>

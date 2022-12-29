@@ -3,8 +3,6 @@ import Button from '../Form/Button';
 import PetImage from './PetImage';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import UserName from './UserName';
-import EditName from './EditName';
 import { useMutation } from 'react-query';
 import { patchProfile } from '../../api/profileAPI';
 import { SubmitHandler, useForm } from 'react-hook-form';

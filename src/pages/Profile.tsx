@@ -11,10 +11,10 @@ import { getUserProfile } from '../api/profileAPI';
 import { useQuery } from 'react-query';
 import { useEffect } from 'react';
 import { useSetServiceName } from './Root';
+import { QueryKeys } from '../api/QueryKeys';
 
 //! Mock API
 import { worker } from '../mocks/browser';
-import { QueryKeys } from '../api/QueryKeys';
 worker.stop();
 ////
 

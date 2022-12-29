@@ -6,7 +6,7 @@ export const StyledPet = styled.div`
   margin: 0 auto;
 
   h1 {
-    margin: 7vh 2rem -2vh;
+    margin: 7vh 2rem -10rem;
   }
 
   .title_section {

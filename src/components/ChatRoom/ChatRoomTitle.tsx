@@ -1,15 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import infoMark from '../../assets/infoMark.svg';
 import { InfoMark, Title } from './ChatRoomTitle.style';
 import { GetChatroomResponse } from '../../api/chatroomAPI.type';
+import { Client } from '@stomp/stompjs';
 
-type ChatRoomInfo = GetChatroomResponse;
+interface ChatRoomInfo extends GetChatroomResponse {
+  client: Client;
+}
 
 function ChatRoomTitle({
   description,
   maxParticipant,
   name,
   chatRoomMemberInfos,
+  client,
   walkingTimesInfos,
 }: ChatRoomInfo) {
   const handleInfoClick = () => {
@@ -21,12 +25,20 @@ function ChatRoomTitle({
         (walkingTimesInfos ?? '산책 안 함')
     );
   };
+  const navigate = useNavigate();
+  const handleBack = async () => {
+    if (!confirm('채팅방을 나가시겠습니까?')) {
+      return;
+    }
+    await client.deactivate();
+    navigate('./../');
+  };
 
   return (
     <Title>
-      <Link to="./../" className="chatroom-back">
+      <button onClick={handleBack} className="chatroom-back">
         {'<'}
-      </Link>
+      </button>
       <h2>
         {name}
         <div>{`${maxParticipant}`}</div>

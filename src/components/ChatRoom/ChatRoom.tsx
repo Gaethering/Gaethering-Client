@@ -12,10 +12,7 @@ import { NavInfoResponse } from '../../api/authAPI.type';
 import { useEffect } from 'react';
 import chatStart from '../../api/chatAPI';
 import { getAccessToken } from '../../api/axiosUtils';
-import {
-  ChatTalkType,
-  GetChatHistoryResponse,
-} from '../../api/chatroomAPI.type';
+import { ChatTalkType } from '../../api/chatroomAPI.type';
 
 function ChatRoom() {
   const { roomKey } = useParams<'roomKey'>();
@@ -35,31 +32,38 @@ function ChatRoom() {
     () => getChatroom(roomKey ?? '')
   );
 
-  if (!chatService.connected) {
-    chatService.activate();
-  }
+  useEffect(() => {
+    if (!chatService.connected) {
+      chatService.activate();
+    }
+  }, [chatService]);
+
   console.log('chat', chatService, chatService.connected);
 
   chatService.onConnect = (frame) => {
-    // Do something, all subscribes must be done is this callback
-    // This is needed because this will be executed after a (re)connect
+    const count = 1;
     console.warn('STOMP CONNECTED', frame);
 
-    chatService?.subscribe(
-      `/exchange/chat.exchange/room.${roomKey}`,
-      (data) => {
-        console.log('STOMP SUBSCRIBE');
-        console.log('BODY', data.body);
-        queryClient.invalidateQueries([...ChatQueryKeys.chatHistory, roomKey]);
-      }
-    );
+    chatService.subscribe(`/exchange/chat.exchange/room.${roomKey}`, (data) => {
+      console.warn('STOMP SUBSCRIBE');
+      console.log('BODY', data.body);
+      queryClient.setQueryData<ChatTalkType[]>(
+        [...ChatQueryKeys.chatHistory, roomKey],
+        (prev) => {
+          console.log('first', prev);
+          return [JSON.parse(data.body), ...(prev ?? [])];
+          // return [JSON.parse(data.body), ...(prev ?? [])];
+        }
+      );
+      // queryClient.invalidateQueries([...ChatQueryKeys.chatHistory, roomKey]);
+    });
   };
 
   document.title = info?.name ?? '채팅방';
 
   return (
     <StyledChatRoom>
-      {info && <ChatRoomTitle {...info} />}
+      {info && <ChatRoomTitle {...info} client={chatService} />}
       <Blank />
 
       {historyLoading || !info ? (
@@ -80,8 +84,8 @@ function ChatRoom() {
           </Chats>
           <ChatInput
             chatService={chatService}
-            roomKey={roomKey}
-            userId={userId}
+            roomKey={roomKey ?? ''}
+            userId={userId ?? 0}
           />
           <Blank />
         </>

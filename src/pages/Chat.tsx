@@ -22,58 +22,59 @@ function Chat() {
   console.log('chat', chatService);
   ////TEST
 
-  useEffect(() => {
-    if (!chatService.connected) {
-      chatService.activate();
-    }
-  }, [chatService]);
+  // useEffect(() => {
+  //   if (!chatService.connected) {
+  //     chatService.activate();
+  //   }
+  // }, [chatService]);
 
-  const onClick = () => {
-    chatService.publish({
-      destination: '/app/chat.enter.2649a7e6-9c19-4ae7-a52a-b70bbf8a18d4',
-      body: JSON.stringify({ memberId: '2', content: '입장' }),
-    });
-    chatService.publish({
-      destination: '/app/chat.send.2649a7e6-9c19-4ae7-a52a-b70bbf8a18d4',
-      body: JSON.stringify({ memberId: '2', content: 'Hello!!!' }),
-    });
-  };
+  // const onClick = () => {
+  //   chatService.publish({
+  //     destination: '/app/chat.enter.2649a7e6-9c19-4ae7-a52a-b70bbf8a18d4',
+  //     body: JSON.stringify({ memberId: '2', content: '입장' }),
+  //   });
+  //   chatService.publish({
+  //     destination: '/app/chat.send.2649a7e6-9c19-4ae7-a52a-b70bbf8a18d4',
+  //     body: JSON.stringify({ memberId: '2', content: 'Hello!!!' }),
+  //   });
+  // };
 
-  const onClick2 = async () => {
-    const res = await axios.get(
-      '/chat/room/2649a7e6-9c19-4ae7-a52a-b70bbf8a18d4'
-    );
+  // const onClick2 = async () => {
+  //   const res = await axios.get(
+  //     '/chat/room/2649a7e6-9c19-4ae7-a52a-b70bbf8a18d4'
+  //   );
 
-    console.log('REQ', res.request);
-    console.log('chatRes', res.config);
-    console.log('chatRes', res.data);
-  };
-  const onClick3 = async () => {
-    const res = await axios.post('/chat/room', {
-      name: 'name',
-      maxParticipantCount: 10,
-      description: '설명',
-      walkingTimes: [
-        {
-          dayOfWeek: '월',
-          time: '1, 2, 3, 4',
-        },
-        {
-          dayOfWeek: '화',
-          time: '2020-11-20 11:30 ~ 2020-11-20 13:30',
-        },
-      ],
-    });
+  //   console.log('REQ', res.request);
+  //   console.log('chatRes', res.config);
+  //   console.log('chatRes', res.data);
+  // };
+  // const onClick3 = async () => {
+  //   const res = await axios.post('/chat/room', {
+  //     name: 'name',
+  //     maxParticipantCount: 10,
+  //     description: '설명',
+  //     walkingTimes: [
+  //       {
+  //         dayOfWeek: '월',
+  //         time: '1, 2, 3, 4',
+  //       },
+  //       {
+  //         dayOfWeek: '화',
+  //         time: '2020-11-20 11:30 ~ 2020-11-20 13:30',
+  //       },
+  //     ],
+  //   });
 
-    console.log('REQ', res.request);
-    console.log('chatRes', res.config);
-    console.log('chatRes', res.data);
-  };
+  //   console.log('REQ', res.request);
+  //   console.log('chatRes', res.config);
+  //   console.log('chatRes', res.data);
+  // };
 
   const setNav = useSetServiceName();
 
   useEffect(() => {
     setNav('개모임');
+    
   }, [setNav]);
 
   return (

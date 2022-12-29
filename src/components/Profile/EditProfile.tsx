@@ -14,14 +14,13 @@ interface EditProfileType {
 
 function EditProfile() {
   const queryClient = useQueryClient();
-  const {data, isLoading} = useQuery(QueryKeys.userProfile, getUserProfile)
+  const { data, isLoading } = useQuery(QueryKeys.userProfile, getUserProfile);
   const nameMutation = useMutation(patchProfile, {
     onSuccess: () => {
-      queryClient.invalidateQueries(QueryKeys.user)
-    }
+      queryClient.invalidateQueries(QueryKeys.user);
+    },
   });
-  console.log('pp', nameMutation)
-
+  console.log('pp', nameMutation);
 
   const {
     register,
@@ -30,9 +29,9 @@ function EditProfile() {
   } = useForm<EditProfileType>();
 
   const onSubmit: SubmitHandler<EditProfileType> = (data) => {
-    console.log('onsub',data);
+    console.log('onsub', data);
     nameMutation.mutate(data);
-    // goBack()
+    goBack();
   };
 
   const navigate = useNavigate();

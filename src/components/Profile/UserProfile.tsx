@@ -1,34 +1,54 @@
 import { StyledUserProfile } from './User.style';
 import Button from '../Form/Button';
 import PetImage from './PetImage';
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useMutation } from 'react-query';
+import { patchProfile } from '../../api/profileAPI';
 
 interface UserProp {
   userName: string;
-  userLocal: string;
-  userTemp: number;
-  petImg: string;
+  petImg: string | undefined;
+}
+interface EditProfileType {
+  nickname: string;
 }
 
-function UserProfile({ userName, userLocal, userTemp, petImg }: UserProp) {
+function UserProfile({ userName, petImg }: UserProp) {
+
+  const nameMutation = useMutation(patchProfile);
+
+  const [nameState, setNameState] = useState('');
+  const [nameInput, setNameInput] = useState(true);
+  const handleChange = () => {
+    setNameInput(!nameInput);
+  };
+
+  useEffect(() => {
+    setNameState(userName);
+  });
+
   return (
     <StyledUserProfile>
       <div className="user_profile_container">
-        <PetImage src={petImg} id="pet" className="user_img" />
+        <PetImage src={petImg} name={nameState} className="user_img" />
         <div className="user_profile_detail">
           <div className="user_info">
-            <h2 className="user_name">{userName}</h2>
-            <p className="user_local">{userLocal}</p>
+            <h2 className="user_name">{nameState}</h2>
           </div>
-          <p className="user_temp">산책 매너 온도 {userTemp}℃</p>
         </div>
       </div>
       <div className="button_container">
-        <Button btnTheme="sub" type="button" className="go_my_article">
-          내가 쓴 게시물
-        </Button>
-        <Button btnTheme="main" type="button" className="edit_profile">
-          프로필 수정
-        </Button>
+        <Link to="edit" className="link">
+          <Button
+            btnTheme="main"
+            type="button"
+            className="edit_profile"
+            onClick={handleChange}
+          >
+            닉네임 수정
+          </Button>
+        </Link>
       </div>
     </StyledUserProfile>
   );

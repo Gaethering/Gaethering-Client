@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import main from '../../themes/theme';
 
 interface StyledUserPetProp {
-  isDelegate: boolean;
+  representative: boolean;
 }
 
 const StyledUserPet = styled.div<StyledUserPetProp>`
@@ -14,8 +14,8 @@ const StyledUserPet = styled.div<StyledUserPetProp>`
   font-size: 1.5rem;
   font-weight: 700;
 
-  ${({ isDelegate }) =>
-    isDelegate &&
+  ${({ representative }) =>
+    representative &&
     css`
       .container {
         border-radius: 50%;

@@ -1,9 +1,10 @@
 import { Client, Message } from '@stomp/stompjs';
+import { WEBSOCKET_BASE_URL } from '../data/API_ENV';
 import { JWTToken } from './authAPI.type';
 
 export function chatStart(token: JWTToken) {
   const stompClient = new Client({
-    brokerURL: 'ws://localhost:8080/ws-connect',
+    brokerURL: WEBSOCKET_BASE_URL + '/ws-connect',
     discardWebsocketOnCommFailure: true,
     connectHeaders: {
       Authorization: token,

@@ -10,7 +10,7 @@ async function postMakeChatroom(data: T.PostChatroomRequest) {
   const response = axios.post<Res, A<Res, Req>, Req>(Api.PostChatroom, data);
 
   const res = await response;
-  return res.data;
+  return res;
 }
 
 async function getChatroom(roomKey: string) {

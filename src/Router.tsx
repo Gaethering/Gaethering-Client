@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, useParams } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import ChatRoom from './components/ChatRoom/ChatRoom';
 import AddPet from './components/Profile/AddPet';
@@ -14,6 +14,7 @@ import { SignStart, SignProfile, SignPet, SignEnd } from './pages/SignUpPages';
 import SNS from './pages/SNS';
 import GlobalStyle from './themes/GlobalStyle.style';
 import mainTheme from './themes/theme';
+import ChatRoomEditer from './components/Chat/ChatRoomEditer';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
     children: [
       { path: 'chat', element: <Chat /> },
       { path: 'chat/:roomKey', element: <ChatRoom /> },
+      { path: 'chat/makeRoom', element: <ChatRoomEditer /> },
       {
         path: 'community',
         element: <Community />,
@@ -35,8 +37,7 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: <Profile />,
-        children: [
-        ],
+        children: [],
       },
       { path: 'profile/edit', element: <EditProfile /> },
       { path: 'profile/pet/:petID', element: <Pet /> },

@@ -8,22 +8,19 @@ import { patchProfile } from '../../api/profileAPI';
 
 interface UserProp {
   userName: string;
-  petImg: string;
+  petImg: string | undefined;
 }
 interface EditProfileType {
   nickname: string;
 }
 
 function UserProfile({ userName, petImg }: UserProp) {
-  console.log('userName', userName);
 
   const nameMutation = useMutation(patchProfile);
-  console.log('pp', nameMutation);
 
   const [nameState, setNameState] = useState('');
   const [nameInput, setNameInput] = useState(true);
   const handleChange = () => {
-    console.log('change', nameInput);
     setNameInput(!nameInput);
   };
 

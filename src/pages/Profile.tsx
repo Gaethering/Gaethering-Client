@@ -22,13 +22,13 @@ function Profile() {
   return (
     <StyledUser>
       <UserProfile
-        userName={data?.data.nickname}
+        userName={data?.data.nickname??''}
         petImg={
           data?.data.pets.filter((pet) => pet.representative === true)[0]
             .imageUrl
         }
       />
-      <UserPetList petList={data?.pets} />
+      <UserPetList petList={data?.data.pets??[]} />
     </StyledUser>
   );
 }

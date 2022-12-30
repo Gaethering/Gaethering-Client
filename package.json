@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "aws s3 sync ./dist s3://gaethering-client --profile=geathering"
+    "deploy": "aws s3 sync ./dist s3://gaethering.com --profile=gaethering"
   },
   "dependencies": {
     "@stomp/stompjs": "^6.1.2",
